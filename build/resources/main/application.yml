@@ -22,9 +22,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mung_db
-    username: mung
-    password:
+    url: jdbc:postgresql://megabooks.cn9h0errreou.ap-northeast-2.rds.amazonaws.com:5432/postgres
+    username: postgres
+    password: hhs2684021dd
     driver-class-name: org.postgresql.Driver
 
   jpa:
