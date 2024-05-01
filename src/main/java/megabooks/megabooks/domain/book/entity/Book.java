@@ -15,7 +15,7 @@ public class Book extends BaseEntity {
     private String bookTitle;
     private String bookAuthor;
     private String bookPublisher;
-    private long bookPrice;
+    private int bookPrice;
     private String bookImg;
 
     @Enumerated(value = EnumType.STRING)

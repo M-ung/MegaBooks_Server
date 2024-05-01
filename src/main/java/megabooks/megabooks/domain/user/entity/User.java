@@ -24,6 +24,7 @@ public class User extends BaseEntity {
     private String userPassword;
     private String userName;
     private String userImg;
+    private int userMileage = 0;
 
 
 
