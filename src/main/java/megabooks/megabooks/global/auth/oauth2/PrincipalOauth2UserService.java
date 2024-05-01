@@ -30,7 +30,10 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         Oauth2UserInfo oAuth2UserInfo = null;
         if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
             oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
-        }  else {
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("kako")) {
+            oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+        }
+        else {
             log.info("구글 로그인만 제공한다.");
         }
 
