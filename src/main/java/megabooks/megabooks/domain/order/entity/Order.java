@@ -7,6 +7,7 @@ import megabooks.megabooks.global.common.BaseEntity;
 
 @Entity
 @Getter
+@Table(name = "orders")
 public class Order extends BaseEntity {
     @Id
     @GeneratedValue

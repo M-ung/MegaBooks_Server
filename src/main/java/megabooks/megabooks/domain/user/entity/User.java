@@ -27,7 +27,6 @@ public class User extends BaseEntity {
     private int userMileage = 0;
 
 
-
     /** ======================== 메소드 ======================== **/
     public List<String> getRoleList() {
         if (this.role.length() > 0) {
@@ -50,13 +49,13 @@ public class User extends BaseEntity {
         this.userImg = userImg;
     }
 
-    public User(BaseEntityBuilder<?, ?> b, Long id, String role, String userEmail, String userPassword, String userName, String userImg) {
-        super(b);
+    public User(Long id, String role, String userEmail, String userPassword, String userName, String userImg, int userMileage) {
         this.id = id;
         this.role = role;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userName = userName;
         this.userImg = userImg;
+        this.userMileage = userMileage;
     }
 }
