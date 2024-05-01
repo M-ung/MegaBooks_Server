@@ -6,6 +6,7 @@ import megabooks.megabooks.domain.user.entity.User;
 import megabooks.megabooks.domain.user.repository.UserRepository;
 import megabooks.megabooks.global.auth.PrincipalDetails;
 import megabooks.megabooks.global.auth.oauth2.provider.GoogleUserInfo;
+import megabooks.megabooks.global.auth.oauth2.provider.KakaoUserInfo;
 import megabooks.megabooks.global.auth.oauth2.provider.Oauth2UserInfo;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -21,20 +22,24 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        log.info("[loadUser] 입장");
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
         return processOAuth2User(userRequest, oAuth2User);
     }
 
     private OAuth2User processOAuth2User(OAuth2UserRequest userRequest, OAuth2User oAuth2User) {
+        log.info("[processOAuth2User] 입장");
         Oauth2UserInfo oAuth2UserInfo = null;
         if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
+            log.info("[PrincipalOauth2UserService] 구글 소셜 로그인 시도");
             oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
-        } else if (userRequest.getClientRegistration().getRegistrationId().equals("kako")) {
-            oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
+            log.info("[PrincipalOauth2UserService] 카카오 소셜 로그인 시도");
+            oAuth2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
         }
         else {
-            log.info("구글 로그인만 제공한다.");
+            log.info("[PrincipalOauth2UserService] 제공하지 않는 소셜 로그인 입니다.");
         }
 
         String userInfoEmail = oAuth2UserInfo.getEmail();

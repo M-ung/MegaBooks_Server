@@ -18,7 +18,6 @@ import java.util.Map;
 @Component
 @RequiredArgsConstructor
 public class Oauth2LoginFailureHandler implements AuthenticationFailureHandler {
-
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         log.error("OAuth2 Login 실패: {}", exception.getMessage());

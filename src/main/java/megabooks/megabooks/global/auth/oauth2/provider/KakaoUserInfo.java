@@ -4,36 +4,41 @@ import java.util.Map;
 
 public class KakaoUserInfo implements Oauth2UserInfo {
     private Map<String, Object> attributes;
-    private Map<String, Object> kakaoAccountAttributes;
-    private Map<String, Object> profileAttributes;
+    private Map<String, Object> attributesAccount;
+    private Map<String, Object> attributesProfile;
 
     public KakaoUserInfo(Map<String, Object> attributes) {
         this.attributes = attributes;
-        this.kakaoAccountAttributes = (Map<String, Object>) attributes.get("kakao_account");
-        this.profileAttributes = (Map<String, Object>) attributes.get("profile");
+        this.attributesAccount = (Map<String, Object>) attributes.get("kakao_account");
+        this.attributesProfile = (Map<String, Object>) attributesAccount.get("profile");
+    }
 
+    public Map<String, Object> getAttributes() {
+        return attributes;
     }
 
     @Override
     public String getProviderId() {
-        return (String) attributes.get("sub");
+        return attributes.get("id").toString();
     }
 
     @Override
-    public String getName() {
-        return kakaoAccountAttributes.get("nickname").toString();
+    public String getProvider() {
+        return "Kakao";
     }
 
     @Override
     public String getEmail() {
-        return kakaoAccountAttributes.get("email").toString();
+        return attributesAccount.get("email").toString();
     }
 
     @Override
-    public String getImg() { return (String) attributes.get("profile_image"); }
+    public String getName() {
+        return attributesProfile.get("nickname").toString();
+    }
 
     @Override
-    public String getProvider() {
-        return "kakao";
+    public String getImg() {
+        return attributesProfile.get("profile_image_url").toString();
     }
 }

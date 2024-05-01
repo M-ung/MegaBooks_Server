@@ -26,6 +26,7 @@ public class User extends BaseEntity {
     private String userImg;
 
 
+
     /** ======================== 메소드 ======================== **/
     public List<String> getRoleList() {
         if (this.role.length() > 0) {
@@ -35,5 +36,26 @@ public class User extends BaseEntity {
     }
 
     /** ======================== 생성자 ======================== **/
+    public User() {
 
+    }
+
+    public User(Long id, String role, String userEmail, String userPassword, String userName, String userImg) {
+        this.id = id;
+        this.role = role;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userImg = userImg;
+    }
+
+    public User(BaseEntityBuilder<?, ?> b, Long id, String role, String userEmail, String userPassword, String userName, String userImg) {
+        super(b);
+        this.id = id;
+        this.role = role;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userImg = userImg;
+    }
 }
