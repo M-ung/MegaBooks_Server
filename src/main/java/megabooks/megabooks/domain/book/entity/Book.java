@@ -9,7 +9,7 @@ import megabooks.megabooks.global.common.BaseEntity;
 public class Book extends BaseEntity {
     @Id
     @GeneratedValue
-    @Column(name = "member_id")
+    @Column(name = "book_id")
     private Long id;
 
     private String bookTitle;
