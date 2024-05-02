@@ -20,12 +20,11 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public void logout(String authHeader) {
         try {
-            log.info("[TokenServiceImpl] logout");
+            log.error("[TokenServiceImpl] logout");
             Optional<String> optionalToken = extractToken(authHeader);
             if (optionalToken.isPresent()) {
                 String token = optionalToken.get();
                 blacklistToken(token);
-                log.error("Logout 성공");
             } else {
                 throw new CustomException(ErrorCode.INVALID_REFRESH_TOKEN);
             }
@@ -33,7 +32,7 @@ public class TokenServiceImpl implements TokenService {
             log.info("[CustomException] TokenServiceImpl logout");
             throw ce;
         } catch (Exception e) {
-            throw new CustomException(ErrorCode.SERVER_ERROR, "TokenServiceImpl logout : " + e.getMessage());
+            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] TokenServiceImpl logout : " + e.getMessage());
         }
     }
     public void blacklistToken(String token) {
