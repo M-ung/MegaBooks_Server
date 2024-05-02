@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/member/user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserApiController {
@@ -29,7 +29,7 @@ public class UserApiController {
             String userEmail = getUserEmail();
             log.info("[UserApiController] userEmail" + userEmail);
             UserResponseDTO.UserFindOneDTO result = userService.findOne(userEmail);
-            return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "user findOne success", result));
+            return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] UserApiController findOne", result));
         }  catch (Exception500 e) {
             log.info("[Exception500] UserApiController findOne");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
