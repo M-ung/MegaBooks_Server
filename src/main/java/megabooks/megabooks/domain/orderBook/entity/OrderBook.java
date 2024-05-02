@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.order_book.entity;
+package megabooks.megabooks.domain.orderBook.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

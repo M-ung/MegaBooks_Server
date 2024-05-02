@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.order_book.entity;
+package megabooks.megabooks.domain.orderBook.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
