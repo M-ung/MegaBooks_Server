@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QOrderBook extends EntityPathBase<OrderBook> {
 
-    private static final long serialVersionUID = 460926946L;
+    private static final long serialVersionUID = 589925793L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
