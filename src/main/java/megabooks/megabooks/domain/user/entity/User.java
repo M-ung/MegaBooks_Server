@@ -3,6 +3,7 @@ package megabooks.megabooks.domain.user.entity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import megabooks.megabooks.domain.user.dto.UserRequestDTO;
 import megabooks.megabooks.global.common.BaseEntity;
 
 import java.util.ArrayList;
@@ -33,6 +34,11 @@ public class User extends BaseEntity {
             return Arrays.asList(this.role.split(","));
         }
         return new ArrayList<>();
+    }
+
+    public void userUpdate(UserRequestDTO.UserUpdateDTO userUpdateDTO) {
+        this.userName = userUpdateDTO.getUserName();
+        this.userImg = userUpdateDTO.getUserImg();
     }
 
     /** ======================== 생성자 ======================== **/
