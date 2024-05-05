@@ -8,7 +8,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import megabooks.megabooks.domain.token.service.TokenServiceImpl;
+import megabooks.megabooks.domain.token.service.token.TokenServiceImpl;
 import megabooks.megabooks.domain.user.entity.User;
 import megabooks.megabooks.domain.user.repository.UserRepository;
 import megabooks.megabooks.global.auth.PrincipalDetails;

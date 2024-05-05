@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.token.service;
+package megabooks.megabooks.domain.token.service.refreshToken;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import lombok.RequiredArgsConstructor;

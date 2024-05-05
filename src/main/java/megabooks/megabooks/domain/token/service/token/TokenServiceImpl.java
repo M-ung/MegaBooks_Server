@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.token.service;
+package megabooks.megabooks.domain.token.service.token;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

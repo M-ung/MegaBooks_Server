@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.token.service;
+package megabooks.megabooks.domain.token.service.refreshToken;
 
 import megabooks.megabooks.domain.token.dto.RefreshTokenRequestDTO;
 import megabooks.megabooks.domain.token.dto.RefreshTokenResponseDTO;

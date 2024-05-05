@@ -2,7 +2,7 @@ package megabooks.megabooks.global.auth.config;
 
 import lombok.RequiredArgsConstructor;
 import megabooks.megabooks.domain.token.repository.RefreshTokenRepository;
-import megabooks.megabooks.domain.token.service.TokenServiceImpl;
+import megabooks.megabooks.domain.token.service.token.TokenServiceImpl;
 import megabooks.megabooks.domain.user.repository.UserRepository;
 import megabooks.megabooks.global.auth.jwt.filter.JwtAuthenticationFilter;
 import megabooks.megabooks.global.auth.jwt.filter.JwtAuthorizationFilter;
