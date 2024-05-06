@@ -9,6 +9,7 @@ import megabooks.megabooks.domain.user.repository.UserRepository;
 import megabooks.megabooks.global.common.CommonMethod;
 import megabooks.megabooks.global.common.exception.CustomException;
 import megabooks.megabooks.global.common.reponse.ErrorCode;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,31 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CommonMethod commonMethod;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Override
+    @Transactional
+    public UserResponseDTO.UserJoinDTO join(UserRequestDTO.UserJoinDTO userJoinDTO) {
+        try {
+            log.info("[UserServiceImpl] join");
+            if (userRepository.existsByUserEmail(userJoinDTO.getUserEmail())) {
+                throw new CustomException(ErrorCode.USER_EXIST);
+            }
+
+            userJoinDTO.setUserPassword(bCryptPasswordEncoder.encode(userJoinDTO.getUserPassword()));
+
+            User user = userJoinDTO.toEntity();
+            userRepository.save(user);
+            return new UserResponseDTO.UserJoinDTO(user);
+        } catch (CustomException ce){
+            log.info("[CustomException] UserServiceImpl join");
+            throw ce;
+        } catch (Exception e){
+            log.info("[Exception500] UserServiceImpl join");
+            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] UserServiceImpl join : " + e.getMessage());
+        }
+    }
+
     @Override
     public UserResponseDTO.UserFindOneDTO findOne(String userEmail) {
         try {
