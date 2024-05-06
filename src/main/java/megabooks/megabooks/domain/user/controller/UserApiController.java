@@ -24,6 +24,18 @@ public class UserApiController {
     // login
     // http://localhost:8080/oauth2/authorization/kakao
 
+    // 회원 가입
+    @PostMapping("/join")
+    public ResponseEntity<?> join(@RequestBody UserRequestDTO.UserJoinDTO userJoinDTO) {
+        try {
+            log.info("[UserApiController] join");
+            UserResponseDTO.UserJoinDTO result = userService.join(userJoinDTO);
+            return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] UserApiController join", result));
+        }  catch (Exception500 e) {
+            log.info("[Exception500] UserApiController join");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
+        }
+    }
     @GetMapping("/findOne")
     public ResponseEntity<?> findOne() {
         try {
