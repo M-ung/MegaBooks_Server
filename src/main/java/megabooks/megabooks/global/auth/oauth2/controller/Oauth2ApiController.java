@@ -3,16 +3,12 @@ package megabooks.megabooks.global.auth.oauth2.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import megabooks.megabooks.domain.user.dto.UserResponseDTO;
 import megabooks.megabooks.global.auth.oauth2.dto.Oauth2ResponseDTO;
 import megabooks.megabooks.global.auth.oauth2.service.Oauth2ServiceImpl;
-import megabooks.megabooks.global.common.exception.Exception500;
 import megabooks.megabooks.global.common.reponse.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,7 +25,7 @@ public class Oauth2ApiController {
             String accessToken = (String) request.getSession().getAttribute("accessToken");
             String refreshToken = (String) request.getSession().getAttribute("refreshToken");
 
-            Oauth2ResponseDTO.Oauth2TokenResponseDTO result = oauth2Service.getToken(accessToken, refreshToken);
+            Oauth2ResponseDTO.Oauth2TokenResponseDTO result = oauth2Service.createOauth2Token(accessToken, refreshToken);
             log.info("Result: {}", result);
 
             // 세션에서 토큰 정보 제거
