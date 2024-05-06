@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.token.dto;
+package megabooks.megabooks.domain.token.dto.refreshToken;
 
 import lombok.Data;
 import lombok.Getter;

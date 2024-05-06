@@ -70,6 +70,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/token/getAccessToken").permitAll()
                                 .requestMatchers("/api/healthCheck").permitAll()
                                 .requestMatchers("/api/v1/member/user/join").permitAll()
+                                .requestMatchers("/login/oauth2/success").permitAll()
                                 .requestMatchers("/api/v1/member/**")
                                 .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
                                 .requestMatchers("/api/v1/manager/**")

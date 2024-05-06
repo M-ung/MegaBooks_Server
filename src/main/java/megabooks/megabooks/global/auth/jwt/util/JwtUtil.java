@@ -5,10 +5,12 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import megabooks.megabooks.domain.token.dto.token.TokenResponseDTO;
 import megabooks.megabooks.domain.token.entity.RefreshToken;
 import megabooks.megabooks.domain.token.repository.RefreshTokenRepository;
 import megabooks.megabooks.global.auth.PrincipalDetails;
 import megabooks.megabooks.global.auth.jwt.JwtProperties;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,25 +19,25 @@ import java.util.Map;
 @Slf4j
 public class JwtUtil {
 
-    public static void generateAndSendToken(HttpServletResponse response, PrincipalDetails principalDetails, RefreshTokenRepository tokenRepository, String secretKey) throws IOException {
+    public static TokenResponseDTO generateAndSendToken(HttpServletResponse response, PrincipalDetails principalDetails, RefreshTokenRepository tokenRepository, String secretKey) throws IOException {
         String accessToken = createToken("accessToken", JwtProperties.ACCESS_EXPIRATION_TIME, principalDetails, secretKey);
         String refreshToken = createToken("refreshToken", JwtProperties.REFRESH_EXPIRATION_TIME, principalDetails, secretKey);
 
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + accessToken);
         tokenRepository.save(new RefreshToken(refreshToken, principalDetails.getUser().getId()));
 
-        Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("accessToken", accessToken);
-        tokenMap.put("refreshToken", refreshToken);
-        response.setContentType("application/json");
+        TokenResponseDTO tokenResponseDTO = new TokenResponseDTO(accessToken, refreshToken);
+//        Map<String, String> tokenMap = new HashMap<>();
+//        tokenMap.put("accessToken", accessToken);
+//        tokenMap.put("refreshToken", refreshToken);
+//        response.setContentType("application/json");
+//
+//        new ObjectMapper().writeValue(response.getOutputStream(), tokenMap);
 
-//        log.info("Access Token : " + accessToken);
-//        log.info("Refresh Token : " + refreshToken);
-
-        new ObjectMapper().writeValue(response.getOutputStream(), tokenMap);
+        return tokenResponseDTO;
     }
 
-    private static String createToken(String type, long expirationTime, PrincipalDetails principalDetails, String secretKey) {
+    public static String createToken(String type, long expirationTime, PrincipalDetails principalDetails, String secretKey) {
         String token = JWT.create()
                 .withSubject(type)  // subject 변경
                 .withExpiresAt(new Date(System.currentTimeMillis() + expirationTime)) // 만료 시간 변경
