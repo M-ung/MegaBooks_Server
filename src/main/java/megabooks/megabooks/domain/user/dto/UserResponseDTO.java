@@ -39,7 +39,6 @@ public class UserResponseDTO {
         private String userImg;
         private String role;
         private int userMileage;
-
         public UserFindOneDTO(Long id, String userEmail, String userName, String userImg, String role, int userMileage) {
             this.id = id;
             this.userEmail = userEmail;
