@@ -29,21 +29,12 @@ public class Oauth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         TokenResponseDTO tokenResponseDTO = JwtUtil.generateAndSendToken(response, principalDetails, tokenRepository, secretKey);// 토큰 생성
 
-//        log.info("OAuth2 Login 성공!");
-//        // PrincipalDetails 얻기
-//        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-//
-//        // 액세스 토큰과 리프레시 토큰 생성
-//        String accessToken = JwtUtil.createToken("accessToken", JwtProperties.ACCESS_EXPIRATION_TIME, principalDetails, secretKey);
-//        String refreshToken = JwtUtil.createToken("refreshToken", JwtProperties.REFRESH_EXPIRATION_TIME, principalDetails, secretKey);
-//
-//        // Redirecting to controller
-//        request.getSession().setAttribute("accessToken", accessToken);
-//        request.getSession().setAttribute("refreshToken", refreshToken);
 
         // 세션에 토큰 정보 저장
         request.getSession().setAttribute("accessToken", tokenResponseDTO.getAccessToken());
         request.getSession().setAttribute("refreshToken", tokenResponseDTO.getRefreshToken());
+        request.getSession().setAttribute("userEmail", tokenResponseDTO.getUserEmail());
+        request.getSession().setAttribute("userName", tokenResponseDTO.getUserName());
 
         response.sendRedirect("/login/oauth2/success");
     }

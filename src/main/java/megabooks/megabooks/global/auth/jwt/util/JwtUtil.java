@@ -26,7 +26,7 @@ public class JwtUtil {
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + accessToken);
         tokenRepository.save(new RefreshToken(refreshToken, principalDetails.getUser().getId()));
 
-        TokenResponseDTO tokenResponseDTO = new TokenResponseDTO(accessToken, refreshToken);
+        TokenResponseDTO tokenResponseDTO = new TokenResponseDTO(accessToken, refreshToken, principalDetails);
 //        Map<String, String> tokenMap = new HashMap<>();
 //        tokenMap.put("accessToken", accessToken);
 //        tokenMap.put("refreshToken", refreshToken);

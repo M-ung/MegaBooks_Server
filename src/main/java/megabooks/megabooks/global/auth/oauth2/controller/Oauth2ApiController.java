@@ -21,16 +21,7 @@ public class Oauth2ApiController {
         try {
             log.info("[Oauth2ApiController] oauth2Success");
 
-            // 세션에서 토큰 가져오기
-            String accessToken = (String) request.getSession().getAttribute("accessToken");
-            String refreshToken = (String) request.getSession().getAttribute("refreshToken");
-
-            Oauth2ResponseDTO.Oauth2TokenResponseDTO result = oauth2Service.createOauth2Token(accessToken, refreshToken);
-            log.info("Result: {}", result);
-
-            // 세션에서 토큰 정보 제거
-            request.getSession().removeAttribute("accessToken");
-            request.getSession().removeAttribute("refreshToken");
+            Oauth2ResponseDTO.Oauth2TokenResponseDTO result = oauth2Service.createOauth2Token(request);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] Oauth2ApiController oauth2Success", result));
         } catch (Exception e) {
