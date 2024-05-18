@@ -18,18 +18,23 @@ public class BookResponseDTO {
         private int bookPrice;
         private String bookImg;
         private Genre bookGenre;
-        public BookFindOneDTO(Book book) {
-            this.id = book.getId();
-            this.bookTitle = book.getBookTitle();
-            this.bookAuthor = book.getBookAuthor();
-            this.bookPublisher = book.getBookPublisher();
-            this.bookPrice = book.getBookPrice();
-            this.bookImg = book.getBookImg();
-            this.bookGenre = book.getBookGenre();
+
+        public BookFindOneDTO(Long id, String bookTitle, String bookAuthor, String bookPublisher, int bookPrice, String bookImg, Genre bookGenre) {
+            this.id = id;
+            this.bookTitle = bookTitle;
+            this.bookAuthor = bookAuthor;
+            this.bookPublisher = bookPublisher;
+            this.bookPrice = bookPrice;
+            this.bookImg = bookImg;
+            this.bookGenre = bookGenre;
         }
     }
     @Data
     public static class BookFindAllDTO {
         private List<BookFindOneDTO> bookList;
+
+        public BookFindAllDTO(List<BookFindOneDTO> bookList) {
+            this.bookList = bookList;
+        }
     }
 }

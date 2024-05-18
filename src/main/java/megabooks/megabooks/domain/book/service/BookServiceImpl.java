@@ -23,8 +23,7 @@ public class BookServiceImpl implements BookService {
     public BookResponseDTO.BookFindOneDTO findOne(Long bookId) {
         try {
             log.info("[BookServiceImpl] findOne");
-            Book findBook = commonMethod.getBook_Id(bookId);
-            return new BookResponseDTO.BookFindOneDTO(findBook);
+            return bookRepository.findOne(bookId);
         } catch (CustomException ce){
             log.info("[CustomException] BookServiceImpl findOne");
             throw ce;
@@ -36,6 +35,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookResponseDTO.BookFindAllDTO findAll() {
-        return null;
+        try {
+            log.info("[BookServiceImpl] findAll");
+            return bookRepository.findAll();
+        } catch (CustomException ce){
+            log.info("[CustomException] BookServiceImpl findAll");
+            throw ce;
+        } catch (Exception e) {
+            log.info("[Exception500] BookServiceImpl findAll");
+            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] BookServiceImpl findAll : " + e.getMessage());
+        }
     }
 }
