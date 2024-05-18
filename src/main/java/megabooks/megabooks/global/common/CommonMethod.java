@@ -2,6 +2,8 @@ package megabooks.megabooks.global.common;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import megabooks.megabooks.domain.book.entity.Book;
+import megabooks.megabooks.domain.book.repository.BookRepository;
 import megabooks.megabooks.domain.token.entity.RefreshToken;
 import megabooks.megabooks.domain.token.repository.RefreshTokenRepository;
 import megabooks.megabooks.domain.user.entity.User;
@@ -19,10 +21,7 @@ import java.util.Optional;
 public class CommonMethod {
     private final UserRepository userRepository;
     private final RefreshTokenRepository refreshTokenRepository;
-//    private final ChatRoomRepository chatRoomRepository;
-//    private final ChatRoomRelationRepository chatRoomRelationRepository;
-//    private final MessageRepository messageRepository;
-//    public final FriendRepository friendRepository;
+    private final BookRepository bookRepository;
 //
     /** User Method **/
     public User getUser(String identifier, Object value) throws CustomException {
@@ -48,15 +47,15 @@ public class CommonMethod {
         }
         return findRefreshToken.get();
     }
-//
-//    /** Message Method **/
-//    public Message getMessage_Id(Long messageId) throws CustomException {
-//        Optional<Message> findMessage = messageRepository.findById(messageId);
-//        if(!findMessage.isPresent()) {
-//            throw new CustomException(MESSAGE_NOT_FOUND);
-//        }
-//        return findMessage.get();
-//    }
+
+    /** Book Method **/
+    public Book getBook_Id(Long bookId) throws CustomException {
+        Optional<Book> findBook = bookRepository.findById(bookId);
+        if(!findBook.isPresent()) {
+            throw new CustomException(ErrorCode.Book_NOT_FOUND);
+        }
+        return findBook.get();
+    }
 //
 //    /** ChatRoom Method **/
 //    public ChatRoom getChatRoom_Id(Long chatRoomId) throws CustomException {
