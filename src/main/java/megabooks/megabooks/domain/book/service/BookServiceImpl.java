@@ -3,7 +3,6 @@ package megabooks.megabooks.domain.book.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
-import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.book.repository.BookRepository;
 import megabooks.megabooks.global.common.CommonMethod;
 import megabooks.megabooks.global.common.exception.CustomException;
@@ -34,10 +33,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookResponseDTO.BookFindAllDTO findAll() {
+    public BookResponseDTO.BookFindAllDTO findAllBook() {
         try {
             log.info("[BookServiceImpl] findAll");
-            return bookRepository.findAll();
+            return bookRepository.findAllBook();
         } catch (CustomException ce){
             log.info("[CustomException] BookServiceImpl findAll");
             throw ce;

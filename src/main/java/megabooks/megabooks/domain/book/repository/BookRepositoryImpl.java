@@ -41,7 +41,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
     }
 
     @Override
-    public BookResponseDTO.BookFindAllDTO findAll() {
+    public BookResponseDTO.BookFindAllDTO findAllBook() {
         List<BookResponseDTO.BookFindOneDTO> books = queryFactory
                 .select(Projections.constructor(BookResponseDTO.BookFindOneDTO.class,
                         book.id,
