@@ -32,6 +32,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
                                 book.bookPublisher,
                                 book.bookPrice,
                                 book.bookImg,
+                                book.bookRate,
                                 book.bookGenre
                         ))
                         .from(book)
@@ -50,6 +51,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
                         book.bookPublisher,
                         book.bookPrice,
                         book.bookImg,
+                        book.bookRate,
                         book.bookGenre
                 ))
                 .from(book)
