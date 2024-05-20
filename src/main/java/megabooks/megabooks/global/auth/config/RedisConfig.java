@@ -1,4 +1,4 @@
-package megabooks.megabooks.global.auth.jwt.config;
+package megabooks.megabooks.global.auth.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

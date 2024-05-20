@@ -1,5 +1,6 @@
 package megabooks.megabooks.global.auth.oauth2.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.global.auth.oauth2.dto.Oauth2ResponseDTO;
@@ -14,10 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class Oauth2ServiceImpl implements Oauth2Service {
     @Override
-    public Oauth2ResponseDTO.Oauth2TokenResponseDTO createOauth2Token(String accessToken, String refreshToken) {
+    public Oauth2ResponseDTO.Oauth2TokenResponseDTO createOauth2Token(HttpServletRequest request) {
         try {
             log.info("[Oauth2ServiceImpl] getToken");
-            return new Oauth2ResponseDTO.Oauth2TokenResponseDTO(accessToken, refreshToken);
+            // 세션에서 토큰 가져오기
+            String accessToken = (String) request.getSession().getAttribute("accessToken");
+            String refreshToken = (String) request.getSession().getAttribute("refreshToken");
+            String userEmail = (String) request.getSession().getAttribute("userEmail");
+            String userName = (String) request.getSession().getAttribute("userName");
+
+            // 세션에서 토큰 정보 제거
+            request.getSession().removeAttribute("accessToken");
+            request.getSession().removeAttribute("refreshToken");
+            request.getSession().removeAttribute("userEmail");
+            request.getSession().removeAttribute("userName");
+
+            return new Oauth2ResponseDTO.Oauth2TokenResponseDTO(accessToken, refreshToken, userEmail, userName);
         } catch (CustomException ce){
             log.info("[CustomException] Oauth2ServiceImpl getToken");
             throw ce;

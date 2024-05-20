@@ -18,7 +18,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     }
     @Override
     public UserResponseDTO.UserFindOneDTO findOne(String userEmail) {
-        log.info("[UserRepositoryImpl] findOne");
+        log.info("[BookRepositoryImpl] findOne");
         log.info(userEmail);
         return Optional.ofNullable(queryFactory
                         .select(Projections.constructor(UserResponseDTO.UserFindOneDTO.class,
