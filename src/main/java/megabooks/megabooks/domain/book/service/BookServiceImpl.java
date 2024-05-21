@@ -35,6 +35,8 @@ public class BookServiceImpl implements BookService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
+    @Value("${cloud.aws.s3.imgFolder}")
+    private String imgFolder;
     @Override
     @Transactional
     public BookResponseDTO.BookUploadDTO upload(BookRequestDTO.BookUploadDTO bookUploadDTO) {
@@ -47,7 +49,6 @@ public class BookServiceImpl implements BookService {
             if (bookImgList != null && !bookImgList.isEmpty()) {
                 for (MultipartFile imageFile : bookImgList) {
                     if (imageFile != null && !imageFile.isEmpty()) {
-                        log.info("[BookServiceImpl] Uploading image: {}", imageFile.getOriginalFilename());
                         String imgUrl = upload(imageFile);
                         bookUrlList.add(imgUrl);
                         Image image = new Image(imgUrl, book);
@@ -68,14 +69,15 @@ public class BookServiceImpl implements BookService {
 
     private String upload(MultipartFile diaryImg) throws IOException {
         String originalFilename = diaryImg.getOriginalFilename();
+        String filePath = imgFolder + "/" + originalFilename;
 
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(diaryImg.getSize());
         metadata.setContentType(diaryImg.getContentType());
 
-        amazonS3.putObject(bucket, originalFilename, diaryImg.getInputStream(), metadata);
-        String imgURl = amazonS3.getUrl(bucket, originalFilename).toString();
-        return imgURl;
+        amazonS3.putObject(bucket, filePath, diaryImg.getInputStream(), metadata);
+        String imgUrl = amazonS3.getUrl(bucket, filePath).toString();
+        return imgUrl;
     }
 
     @Override
