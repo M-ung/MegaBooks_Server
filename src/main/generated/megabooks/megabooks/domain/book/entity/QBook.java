@@ -25,8 +25,6 @@ public class QBook extends EntityPathBase<Book> {
 
     public final EnumPath<Genre> bookGenre = createEnum("bookGenre", Genre.class);
 
-    public final StringPath bookImg = createString("bookImg");
-
     public final NumberPath<Integer> bookPrice = createNumber("bookPrice", Integer.class);
 
     public final StringPath bookPublisher = createString("bookPublisher");

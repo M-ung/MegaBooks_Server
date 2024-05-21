@@ -40,7 +40,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String jwtHeader = request.getHeader(JwtProperties.HEADER_STRING);
-
         if (jwtHeader == null || !jwtHeader.startsWith(JwtProperties.TOKEN_PREFIX)) {
             chain.doFilter(request, response);
             return;
@@ -80,8 +79,3 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         response.getOutputStream().write(errorMessage.getBytes("UTF-8"));
     }
 }
-// {
-//    "code": 409,
-//    "message": "CustomException : 이미 가입된 이메일입니다.",
-//    "status": "FAIL"
-//}
