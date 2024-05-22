@@ -13,8 +13,8 @@ public class OrderBook extends BaseEntity {
     @GeneratedValue
     @Column(name = "order_book_id")
     private Long id;
-    private int totalPrice;
-    private int mileage;
+    private int totalPrice; // 총 결제 금액
+    private int usingMileage; // 사용 마일리지
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
