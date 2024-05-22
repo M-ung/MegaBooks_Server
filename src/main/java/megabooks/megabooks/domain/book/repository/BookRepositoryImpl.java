@@ -1,12 +1,16 @@
 package megabooks.megabooks.domain.book.repository;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
 import megabooks.megabooks.domain.book.entity.Book;
-import java.util.List;
-import java.util.stream.Collectors;
+import megabooks.megabooks.global.common.exception.CustomException;
+import megabooks.megabooks.global.common.reponse.ErrorCode;
 
+import java.util.*;
+import java.util.stream.Collectors;
 import static megabooks.megabooks.domain.Image.entity.QImage.image;
 import static megabooks.megabooks.domain.book.entity.QBook.book;
 
@@ -18,37 +22,51 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
     }
     @Override
     public BookResponseDTO.BookFindOneDTO findOne(Long bookId) {
-        List<String> imageUrlList = queryFactory
-                .select(image.imageUrl)
-                .from(image)
-                .where(image.book.id.eq(bookId))
+        List<Tuple> result = queryFactory
+                .select(book, image.imageUrl)
+                .from(book)
+                .leftJoin(image).on(image.book.id.eq(bookId))
+                .where(book.id.eq(bookId))
                 .fetch();
 
-        Book findBook = queryFactory
-                .selectFrom(book)
-                .where(book.id.eq(bookId))
-                .fetchOne();
+        BookResponseDTO.BookDetailDTO bookDetail = result.stream()
+                .findFirst()
+                .map(tuple -> new BookResponseDTO.BookDetailDTO(tuple.get(book)))
+                .orElseThrow(() -> new CustomException(ErrorCode.Book_NOT_FOUND));
 
-        return new BookResponseDTO.BookFindOneDTO(findBook, imageUrlList);
+        List<String> imageUrlList = result.stream()
+                .map(tuple -> tuple.get(image.imageUrl))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        return new BookResponseDTO.BookFindOneDTO(bookDetail, imageUrlList);
     }
 
     @Override
     public BookResponseDTO.BookFindAllDTO findAllBook() {
-        // 여기 채워줘
-        List<Book> bookList = queryFactory
-                .selectFrom(book)
+        List<Tuple> result = queryFactory
+                .select(book, image.imageUrl)
+                .from(book)
+                .leftJoin(image).on(image.book.id.eq(book.id))
+                .orderBy(book.id.asc())
                 .fetch();
 
-        List<BookResponseDTO.BookFindOneDTO> bookFindOneList = bookList.stream().map(b -> {
-            List<String> imageUrlList = queryFactory
-                    .select(image.imageUrl)
-                    .from(image)
-                    .where(image.book.id.eq(b.getId()))
-                    .fetch();
+        Map<Long, BookResponseDTO.BookFindOneDTO> bookMap = new LinkedHashMap<>();
 
-            return new BookResponseDTO.BookFindOneDTO(b, imageUrlList);
-        }).collect(Collectors.toList());
+        for (Tuple tuple : result) {
+            BookResponseDTO.BookDetailDTO bookDetail = new BookResponseDTO.BookDetailDTO(tuple.get(book));
+            String imageUrl = tuple.get(image.imageUrl);
+            Long bookId = bookDetail.getId();
 
-        return new BookResponseDTO.BookFindAllDTO(bookFindOneList);
+            BookResponseDTO.BookFindOneDTO bookFindOneDTO = bookMap.computeIfAbsent(bookId, id ->
+                    new BookResponseDTO.BookFindOneDTO(bookDetail, new ArrayList<>())
+            );
+
+            Optional.ofNullable(imageUrl).ifPresent(url -> bookFindOneDTO.getBookUrlList().add(url));
+        }
+
+        List<BookResponseDTO.BookFindOneDTO> bookList = new ArrayList<>(bookMap.values());
+        return new BookResponseDTO.BookFindAllDTO(bookList);
     }
+
 }

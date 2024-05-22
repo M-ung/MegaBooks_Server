@@ -84,7 +84,6 @@ public class BookServiceImpl implements BookService {
     public BookResponseDTO.BookFindOneDTO findOne(Long bookId) {
         try {
             log.info("[BookServiceImpl] findOne");
-            commonMethod.getBook_Id(bookId);
             return bookRepository.findOne(bookId);
         } catch (CustomException ce){
             log.info("[CustomException] BookServiceImpl findOne");

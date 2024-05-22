@@ -19,9 +19,9 @@ public class Book extends BaseEntity {
 
     @Enumerated(value = EnumType.STRING)
     private Genre bookGenre;
+    protected Book() {
 
-    private Book() {}
-
+    }
     public Book(String bookTitle, String bookAuthor, String bookPublisher, int bookPrice, double bookRate, Genre bookGenre) {
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
