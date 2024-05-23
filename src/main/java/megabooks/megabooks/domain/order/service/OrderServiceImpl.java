@@ -42,6 +42,8 @@ public class OrderServiceImpl implements OrderService {
 
             commonMethod.existingMyBook(findUser, findBook);
 
+            getMyBook(findUser, findBook);
+
             Order order = getOrder(findUser);
 
             int totalPrice = orderCreateDTO.getTotalPrice();
@@ -57,6 +59,11 @@ public class OrderServiceImpl implements OrderService {
             log.info("[Exception500] OrderServiceImpl create");
             throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl create : " + e.getMessage());
         }
+    }
+
+    private void getMyBook(User findUser, Book findBook) {
+        MyBook myBook = new MyBook(findUser, findBook);
+        myBookRepository.save(myBook);
     }
 
     @Override
