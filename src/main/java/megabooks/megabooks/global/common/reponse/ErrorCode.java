@@ -21,10 +21,7 @@ public enum ErrorCode {
     Book_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 책입니다."),
 
     USER_EXIST(409, HttpStatus.CONFLICT, "이미 가입된 이메일입니다."),
-    FRIEND_EXIST(409, HttpStatus.CONFLICT, "이미 친구입니다."),
-
-    CHAT_UNAVAILABLE(400, HttpStatus.BAD_REQUEST, "본인에게 채팅은 불가합니다."),
-    FRIEND_UNAVAILABLE(400, HttpStatus.BAD_REQUEST, "본인에게 친구 추가 불가합니다."),
+    MY_BOOK_EXIST(409, HttpStatus.CONFLICT, "이미 소유한 책입니다."),
     AUTHENTICATION_FAILED(401, HttpStatus.UNAUTHORIZED, "아이디 또는 비밀번호가 옳지 않습니다."),
 
     /** Exception500 **/

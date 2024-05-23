@@ -3,6 +3,8 @@ package megabooks.megabooks.domain.order.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.entity.Book;
+import megabooks.megabooks.domain.myBook.entity.MyBook;
+import megabooks.megabooks.domain.myBook.repository.MyBookRepository;
 import megabooks.megabooks.domain.order.dto.OrderRequestDTO;
 import megabooks.megabooks.domain.order.dto.OrderResponseDTO;
 import megabooks.megabooks.domain.order.entity.Order;
@@ -18,6 +20,8 @@ import megabooks.megabooks.global.common.reponse.ErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -25,25 +29,27 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderBookRepository orderBookRepository;
+    private final MyBookRepository myBookRepository;
     private final CommonMethod commonMethod;
 
     @Override
     @Transactional
-    public OrderResponseDTO.OrderCreateDTO create(OrderRequestDTO.OrderCreateDTO orderCreateDTO) {
+    public OrderResponseDTO.OrderCreateDTO create(String userEmail, OrderRequestDTO.OrderCreateDTO orderCreateDTO) {
         try {
             log.info("[OrderServiceImpl] create");
-            User findUser = commonMethod.getUser("id", orderCreateDTO.getUserId());
+            User findUser = commonMethod.getUser("email", userEmail);
             Book findBook = commonMethod.getBook_Id(orderCreateDTO.getBookId());
-            Order order = new Order(OrderStatus.FINISH, findUser);
-            orderRepository.save(order);
+
+            commonMethod.existingMyBook(findUser, findBook);
+
+            Order order = getOrder(findUser);
 
             int totalPrice = orderCreateDTO.getTotalPrice();
             int usingMileage = orderCreateDTO.getUsingMileage();
 
-            OrderBook orderBook = new OrderBook(totalPrice, usingMileage, OrderBookStatus.NOT_OPEN, order, findBook);
-            orderBookRepository.save(orderBook);
+            OrderBook orderBook = getOrderBook(findBook, order, totalPrice, usingMileage);
 
-            return null;
+            return new OrderResponseDTO.OrderCreateDTO(order, orderBook);
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl create");
             throw ce;
@@ -109,5 +115,18 @@ public class OrderServiceImpl implements OrderService {
             log.info("[Exception500] OrderServiceImpl confirmed");
             throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl confirmed : " + e.getMessage());
         }
+    }
+
+    /** ================== 추가 메서드 ================== **/
+    private OrderBook getOrderBook(Book findBook, Order order, int totalPrice, int usingMileage) {
+        OrderBook orderBook = new OrderBook(totalPrice, usingMileage, OrderBookStatus.NOT_OPEN, order, findBook);
+        orderBookRepository.save(orderBook);
+        return orderBook;
+    }
+
+    private Order getOrder(User findUser) {
+        Order order = new Order(OrderStatus.FINISH, findUser);
+        orderRepository.save(order);
+        return order;
     }
 }

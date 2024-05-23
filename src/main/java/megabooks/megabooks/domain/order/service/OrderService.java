@@ -5,7 +5,7 @@ import megabooks.megabooks.domain.order.dto.OrderResponseDTO;
 
 public interface OrderService {
     // 주문 생성
-    OrderResponseDTO.OrderCreateDTO create(OrderRequestDTO.OrderCreateDTO orderCreateDTO);
+    OrderResponseDTO.OrderCreateDTO create(String userEmail, OrderRequestDTO.OrderCreateDTO orderCreateDTO);
     // 주문 조회
     OrderResponseDTO.OrderFindOneDTO findOne(Long orderId);
     // 주문 전체 조회

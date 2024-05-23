@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.orderBook.entity;
+package megabooks.megabooks.domain.myBook.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QOrderBook is a Querydsl query type for OrderBook
+ * QMyBook is a Querydsl query type for MyBook
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QOrderBook extends EntityPathBase<OrderBook> {
+public class QMyBook extends EntityPathBase<MyBook> {
 
-    private static final long serialVersionUID = 589925793L;
+    private static final long serialVersionUID = -571609275L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QOrderBook orderBook = new QOrderBook("orderBook");
+    public static final QMyBook myBook = new QMyBook("myBook");
 
     public final megabooks.megabooks.global.common.QBaseEntity _super = new megabooks.megabooks.global.common.QBaseEntity(this);
 
@@ -31,37 +31,31 @@ public class QOrderBook extends EntityPathBase<OrderBook> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final megabooks.megabooks.domain.order.entity.QOrder order;
-
-    public final EnumPath<OrderBookStatus> orderBookStatus = createEnum("orderBookStatus", OrderBookStatus.class);
-
-    public final NumberPath<Integer> totalPrice = createNumber("totalPrice", Integer.class);
-
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;
 
-    public final NumberPath<Integer> usingMileage = createNumber("usingMileage", Integer.class);
+    public final megabooks.megabooks.domain.user.entity.QUser user;
 
-    public QOrderBook(String variable) {
-        this(OrderBook.class, forVariable(variable), INITS);
+    public QMyBook(String variable) {
+        this(MyBook.class, forVariable(variable), INITS);
     }
 
-    public QOrderBook(Path<? extends OrderBook> path) {
+    public QMyBook(Path<? extends MyBook> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QOrderBook(PathMetadata metadata) {
+    public QMyBook(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QOrderBook(PathMetadata metadata, PathInits inits) {
-        this(OrderBook.class, metadata, inits);
+    public QMyBook(PathMetadata metadata, PathInits inits) {
+        this(MyBook.class, metadata, inits);
     }
 
-    public QOrderBook(Class<? extends OrderBook> type, PathMetadata metadata, PathInits inits) {
+    public QMyBook(Class<? extends MyBook> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.book = inits.isInitialized("book") ? new megabooks.megabooks.domain.book.entity.QBook(forProperty("book")) : null;
-        this.order = inits.isInitialized("order") ? new megabooks.megabooks.domain.order.entity.QOrder(forProperty("order"), inits.get("order")) : null;
+        this.user = inits.isInitialized("user") ? new megabooks.megabooks.domain.user.entity.QUser(forProperty("user")) : null;
     }
 
 }

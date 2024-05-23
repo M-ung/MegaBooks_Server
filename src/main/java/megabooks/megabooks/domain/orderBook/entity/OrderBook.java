@@ -15,6 +15,8 @@ public class OrderBook extends BaseEntity {
     private Long id;
     private int totalPrice; // 총 결제 금액
     private int usingMileage; // 사용 마일리지
+
+    @Enumerated(value = EnumType.STRING)
     private OrderBookStatus orderBookStatus; // 열람 상태 확인
 
     @ManyToOne(fetch = FetchType.LAZY)

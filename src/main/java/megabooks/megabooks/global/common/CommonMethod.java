@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.book.repository.BookRepository;
+import megabooks.megabooks.domain.myBook.entity.MyBook;
+import megabooks.megabooks.domain.myBook.repository.MyBookRepository;
 import megabooks.megabooks.domain.token.entity.RefreshToken;
 import megabooks.megabooks.domain.token.repository.RefreshTokenRepository;
 import megabooks.megabooks.domain.user.entity.User;
@@ -22,6 +24,7 @@ public class CommonMethod {
     private final UserRepository userRepository;
     private final RefreshTokenRepository refreshTokenRepository;
     private final BookRepository bookRepository;
+    private final MyBookRepository myBookRepository;
 //
     /** User Method **/
     public User getUser(String identifier, Object value) throws CustomException {
@@ -56,32 +59,12 @@ public class CommonMethod {
         }
         return findBook.get();
     }
-//
-//    /** ChatRoom Method **/
-//    public ChatRoom getChatRoom_Id(Long chatRoomId) throws CustomException {
-//        Optional<ChatRoom> findChatRoom = chatRoomRepository.findById(chatRoomId);
-//        if(!findChatRoom.isPresent()) {
-//            throw new CustomException(ErrorCode.CHATROOM_NOT_FOUND);
-//        }
-//        return findChatRoom.get();
-//    }
-//
-//    /** ChatRoomRelation Method **/
-//    public ChatRoomRelation getChatRoomRelation(User findUser, ChatRoom findChatRoom) throws CustomException {
-//        Optional<ChatRoomRelation> findChatRoomRelation = chatRoomRelationRepository.findByUserAndChatRoom(findUser, findChatRoom);
-//        if(!findChatRoomRelation.isPresent()) {
-//            throw new CustomException(ErrorCode.CHATROOM_RELATION_NOT_FOUND);
-//        }
-//        return findChatRoomRelation.get();
-//    }
-//
-//    /** Location Method **/
-//    public Location getLocation_Email(String userEmail) throws CustomException  {
-//        Location findLocation = getUser("email", userEmail).getLocation();
-//        if(findLocation == null) {
-//            throw new CustomException(ErrorCode.LOCATION_NOT_FOUND);
-//        }
-//        return findLocation;
-//    }
 
+    /** Book Method **/
+    public void existingMyBook(User user, Book book) throws CustomException {
+        Optional<MyBook> findMyBook = myBookRepository.findByUserAndBook(user, book);
+        if(findMyBook.isPresent()) {
+            throw new CustomException(ErrorCode.MY_BOOK_EXIST);
+        }
+    }
 }
