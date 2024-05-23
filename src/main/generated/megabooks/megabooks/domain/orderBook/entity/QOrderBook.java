@@ -31,14 +31,14 @@ public class QOrderBook extends EntityPathBase<OrderBook> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final NumberPath<Integer> mileage = createNumber("mileage", Integer.class);
-
     public final megabooks.megabooks.domain.order.entity.QOrder order;
 
     public final NumberPath<Integer> totalPrice = createNumber("totalPrice", Integer.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;
+
+    public final NumberPath<Integer> usingMileage = createNumber("usingMileage", Integer.class);
 
     public QOrderBook(String variable) {
         this(OrderBook.class, forVariable(variable), INITS);

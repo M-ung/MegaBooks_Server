@@ -15,9 +15,18 @@ public class Order extends BaseEntity {
     private Long id;
 
     @Enumerated(value = EnumType.STRING)
-    private Status orderStatus;
+    private OrderStatus orderStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private User user;
+
+    protected Order() {
+    }
+
+    public Order(OrderStatus orderStatus, User user) {
+        this.orderStatus = orderStatus;
+        this.user = user;
+    }
+
 }

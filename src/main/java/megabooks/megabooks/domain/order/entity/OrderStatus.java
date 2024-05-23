@@ -1,6 +1,6 @@
 package megabooks.megabooks.domain.order.entity;
 
-public enum Status {
+public enum OrderStatus {
     CANCEL, FINISH, CONFIRMED
     // CANCEL = 주문 취소
     // FINISH = 주문 완료

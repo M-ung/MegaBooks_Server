@@ -2,9 +2,17 @@ package megabooks.megabooks.domain.order.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.order.dto.OrderRequestDTO;
 import megabooks.megabooks.domain.order.dto.OrderResponseDTO;
+import megabooks.megabooks.domain.order.entity.Order;
+import megabooks.megabooks.domain.order.entity.OrderStatus;
 import megabooks.megabooks.domain.order.repository.OrderRepository;
+import megabooks.megabooks.domain.orderBook.entity.OrderBook;
+import megabooks.megabooks.domain.orderBook.entity.OrderBookStatus;
+import megabooks.megabooks.domain.orderBook.repository.OrderBookRepository;
+import megabooks.megabooks.domain.user.entity.User;
+import megabooks.megabooks.global.common.CommonMethod;
 import megabooks.megabooks.global.common.exception.CustomException;
 import megabooks.megabooks.global.common.reponse.ErrorCode;
 import org.springframework.stereotype.Service;
@@ -16,12 +24,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final OrderBookRepository orderBookRepository;
+    private final CommonMethod commonMethod;
 
     @Override
     @Transactional
     public OrderResponseDTO.OrderCreateDTO create(OrderRequestDTO.OrderCreateDTO orderCreateDTO) {
         try {
             log.info("[OrderServiceImpl] create");
+            User findUser = commonMethod.getUser("id", orderCreateDTO.getUserId());
+            Book findBook = commonMethod.getBook_Id(orderCreateDTO.getBookId());
+            Order order = new Order(OrderStatus.FINISH, findUser);
+            orderRepository.save(order);
+
+            int totalPrice = orderCreateDTO.getTotalPrice();
+            int usingMileage = orderCreateDTO.getUsingMileage();
+
+            OrderBook orderBook = new OrderBook(totalPrice, usingMileage, OrderBookStatus.NOT_OPEN, order, findBook);
+            orderBookRepository.save(orderBook);
+
             return null;
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl create");
