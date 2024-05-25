@@ -61,11 +61,6 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private void getMyBook(User findUser, Book findBook) {
-        MyBook myBook = new MyBook(findUser, findBook);
-        myBookRepository.save(myBook);
-    }
-
     @Override
     public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId) {
         try {
@@ -135,5 +130,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order(OrderStatus.FINISH, findUser);
         orderRepository.save(order);
         return order;
+    }
+
+    private void getMyBook(User findUser, Book findBook) {
+        MyBook myBook = new MyBook(findUser, findBook);
+        myBookRepository.save(myBook);
     }
 }
