@@ -3,13 +3,18 @@ package megabooks.megabooks.domain.order.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.order.dto.OrderResponseDTO;
+import megabooks.megabooks.global.common.exception.CustomException;
+import megabooks.megabooks.global.common.reponse.ErrorCode;
+
 import java.util.List;
 import static megabooks.megabooks.domain.Image.entity.QImage.image;
 import static megabooks.megabooks.domain.order.entity.QOrder.order;
 import static megabooks.megabooks.domain.orderBook.entity.QOrderBook.orderBook;
 import static megabooks.megabooks.domain.user.entity.QUser.user;
 
+@Slf4j
 public class OrderRepositoryImpl implements OrderRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
@@ -19,6 +24,7 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
     @Override
     public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId, String userEmail) {
+        log.info("[OrderRepositoryImpl] findOne");
         OrderResponseDTO.OrderFindOneDTO result = queryFactory.select(Projections.constructor(OrderResponseDTO.OrderFindOneDTO.class,
                         order.id,
                         order.orderStatus,
@@ -34,6 +40,10 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
                 .where(order.id.eq(orderId).and(user.userEmail.eq(userEmail)))
                 .fetchOne();
 
+        if (result == null) {
+            throw new CustomException(ErrorCode.ORDER_NOT_FOUND);
+        }
+
         List<String> bookUrlList = queryFactory.select(image.imageUrl)
                 .from(image)
                 .where(image.book.id.eq(result.getBookId()))
@@ -45,6 +55,7 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
 
     @Override
     public OrderResponseDTO.OrderFindAllDTO findAll(String userEmail) {
+        log.info("[OrderRepositoryImpl] findAll");
         List<OrderResponseDTO.OrderFindOneDTO> orderList = queryFactory.select(Projections.constructor(OrderResponseDTO.OrderFindOneDTO.class,
                         order.id,
                         order.orderStatus,

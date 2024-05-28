@@ -63,6 +63,10 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId, String userEmail) {
         try {
             log.info("[OrderServiceImpl] findOne");
+            Order findOrder = commonMethod.getOrder_Id(orderId);
+            if(!findOrder.getUser().getUserEmail().equals(userEmail)) {
+                throw new CustomException(ErrorCode.USER_DENIED);
+            }
             return orderRepository.findOne(orderId, userEmail);
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl findOne");
