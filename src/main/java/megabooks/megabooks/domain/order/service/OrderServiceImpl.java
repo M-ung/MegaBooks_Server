@@ -20,8 +20,6 @@ import megabooks.megabooks.global.common.reponse.ErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -65,7 +63,9 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId) {
         try {
             log.info("[OrderServiceImpl] findOne");
-            return null;
+            Order findOrder = commonMethod.getOrder_Id(orderId);
+            OrderBook findOrderBook = commonMethod.getOrderBook_Id(orderId);
+            return new OrderResponseDTO.OrderFindOneDTO(findOrder, findOrderBook);
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl findOne");
             throw ce;

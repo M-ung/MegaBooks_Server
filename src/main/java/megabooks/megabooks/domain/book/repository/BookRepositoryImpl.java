@@ -1,11 +1,9 @@
 package megabooks.megabooks.domain.book.repository;
 import com.querydsl.core.Tuple;
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
-import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.global.common.exception.CustomException;
 import megabooks.megabooks.global.common.reponse.ErrorCode;
 
@@ -32,7 +30,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
         BookResponseDTO.BookDetailDTO bookDetail = result.stream()
                 .findFirst()
                 .map(tuple -> new BookResponseDTO.BookDetailDTO(tuple.get(book)))
-                .orElseThrow(() -> new CustomException(ErrorCode.Book_NOT_FOUND));
+                .orElseThrow(() -> new CustomException(ErrorCode.BOOK_NOT_FOUND));
 
         List<String> imageUrlList = result.stream()
                 .map(tuple -> tuple.get(image.imageUrl))

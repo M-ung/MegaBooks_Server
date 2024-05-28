@@ -11,10 +11,7 @@ import megabooks.megabooks.global.common.exception.Exception500;
 import megabooks.megabooks.global.common.reponse.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/member/order")
@@ -33,6 +30,19 @@ public class OrderApiController {
             return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] OrderApiController create", result));
         }  catch (Exception500 e) {
             log.info("[Exception500] OrderApiController create");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
+        }
+    }
+
+    @GetMapping("/findOne/{orderId}")
+    public ResponseEntity<?> findOne(@PathVariable("orderId") Long orderId) {
+        try {
+            log.info("[OrderApiController] findOne");
+            String userEmail = getUserEmail();
+            OrderResponseDTO.OrderFindOneDTO result = orderService.findOne(orderId);
+            return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] OrderApiController findOne", result));
+        }  catch (Exception500 e) {
+            log.info("[Exception500] OrderApiController findOne");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
         }
     }
