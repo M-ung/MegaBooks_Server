@@ -11,6 +11,21 @@ import java.util.List;
 public class OrderResponseDTO {
     @Data
     public static class OrderCreateDTO{
+        private Long orderId;
+        private OrderStatus orderStatus;
+        private String userEmail;
+        private String bookTitle;
+        private int usingMileage; // 사용한 마일리지
+        private int totalPrice; // 총 결제 금액
+
+        public OrderCreateDTO(Order order, OrderBook orderBook) {
+            this.orderId = order.getId();
+            this.orderStatus = order.getOrderStatus();
+            this.userEmail = order.getUser().getUserEmail();
+            this.bookTitle =  orderBook.getBook().getBookTitle();
+            this.usingMileage = orderBook.getUsingMileage();
+            this.totalPrice = orderBook.getTotalPrice();
+        }
     }
 
     @Data
