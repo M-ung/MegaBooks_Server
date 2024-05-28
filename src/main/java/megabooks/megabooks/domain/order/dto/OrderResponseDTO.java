@@ -10,7 +10,11 @@ import java.util.List;
 @Data
 public class OrderResponseDTO {
     @Data
-    public static class OrderDetails {
+    public static class OrderCreateDTO{
+    }
+
+    @Data
+    public static class OrderFindOneDTO{
         private Long orderId;
         private OrderStatus orderStatus;
         private Long userId;
@@ -18,31 +22,27 @@ public class OrderResponseDTO {
         private Long orderBookId;
         private int usingMileage; // 사용한 마일리지
         private int totalPrice; // 총 결제 금액
-    }
+        private List<String> bookUrlList;
 
-    @Data
-    public static class OrderCreateDTO extends OrderDetails {
-        public OrderCreateDTO(Order order, OrderBook orderBook) {
-            this.setOrderId(order.getId());
-            this.setOrderStatus(order.getOrderStatus());
-            this.setUserId(order.getUser().getId());
-            this.setBookId(orderBook.getBook().getId());
-            this.setOrderBookId(orderBook.getId());
-            this.setUsingMileage(orderBook.getUsingMileage());
-            this.setTotalPrice(orderBook.getTotalPrice());
-        }
-    }
-
-    @Data
-    public static class OrderFindOneDTO extends OrderDetails {
         public OrderFindOneDTO(Long orderId, OrderStatus orderStatus, Long userId, Long bookId, Long orderBookId, int usingMileage, int totalPrice) {
-            this.setOrderId(orderId);
-            this.setOrderStatus(orderStatus);
-            this.setUserId(userId);
-            this.setBookId(bookId);
-            this.setOrderBookId(orderBookId);
-            this.setUsingMileage(usingMileage);
-            this.setTotalPrice(totalPrice);
+            this.orderId = orderId;
+            this.orderStatus = orderStatus;
+            this.userId = userId;
+            this.bookId = bookId;
+            this.orderBookId = orderBookId;
+            this.usingMileage = usingMileage;
+            this.totalPrice = totalPrice;
+        }
+
+        public OrderFindOneDTO(Long orderId, OrderStatus orderStatus, Long userId, Long bookId, Long orderBookId, int usingMileage, int totalPrice, List<String> bookUrlList) {
+            this.orderId = orderId;
+            this.orderStatus = orderStatus;
+            this.userId = userId;
+            this.bookId = bookId;
+            this.orderBookId = orderBookId;
+            this.usingMileage = usingMileage;
+            this.totalPrice = totalPrice;
+            this.bookUrlList = bookUrlList;
         }
     }
 
@@ -58,12 +58,12 @@ public class OrderResponseDTO {
     }
 
     @Data
-    public static class OrderCancelDTO extends OrderDetails {
+    public static class OrderCancelDTO {
         // No additional fields
     }
 
     @Data
-    public static class OrderConfirmedDTO extends OrderDetails {
+    public static class OrderConfirmedDTO {
         // No additional fields
     }
 }

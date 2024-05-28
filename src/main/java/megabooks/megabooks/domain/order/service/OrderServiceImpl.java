@@ -33,30 +33,31 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderResponseDTO.OrderCreateDTO create(String userEmail, OrderRequestDTO.OrderCreateDTO orderCreateDTO) {
-        try {
-            log.info("[OrderServiceImpl] create");
-            User findUser = commonMethod.getUser("email", userEmail);
-            Book findBook = commonMethod.getBook_Id(orderCreateDTO.getBookId());
-
-            commonMethod.existingMyBook(findUser, findBook);
-
-            getMyBook(findUser, findBook);
-
-            Order order = getOrder(findUser);
-
-            int totalPrice = orderCreateDTO.getTotalPrice();
-            int usingMileage = orderCreateDTO.getUsingMileage();
-
-            OrderBook orderBook = getOrderBook(findBook, order, totalPrice, usingMileage);
-
-            return new OrderResponseDTO.OrderCreateDTO(order, orderBook);
-        } catch (CustomException ce){
-            log.info("[CustomException] OrderServiceImpl create");
-            throw ce;
-        } catch (Exception e) {
-            log.info("[Exception500] OrderServiceImpl create");
-            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl create : " + e.getMessage());
-        }
+//        try {
+//            log.info("[OrderServiceImpl] create");
+//            User findUser = commonMethod.getUser("email", userEmail);
+//            Book findBook = commonMethod.getBook_Id(orderCreateDTO.getBookId());
+//
+//            commonMethod.existingMyBook(findUser, findBook);
+//
+//            getMyBook(findUser, findBook);
+//
+//            Order order = getOrder(findUser);
+//
+//            int totalPrice = orderCreateDTO.getTotalPrice();
+//            int usingMileage = orderCreateDTO.getUsingMileage();
+//
+//            OrderBook orderBook = getOrderBook(findBook, order, totalPrice, usingMileage);
+//
+//            return new OrderResponseDTO.OrderCreateDTO(order, orderBook);
+//        } catch (CustomException ce){
+//            log.info("[CustomException] OrderServiceImpl create");
+//            throw ce;
+//        } catch (Exception e) {
+//            log.info("[Exception500] OrderServiceImpl create");
+//            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl create : " + e.getMessage());
+//        }
+        return null;
     }
 
     @Override
