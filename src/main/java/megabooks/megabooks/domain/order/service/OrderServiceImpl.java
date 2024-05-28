@@ -63,9 +63,10 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId) {
         try {
             log.info("[OrderServiceImpl] findOne");
-            Order findOrder = commonMethod.getOrder_Id(orderId);
-            OrderBook findOrderBook = commonMethod.getOrderBook_Id(orderId);
-            return new OrderResponseDTO.OrderFindOneDTO(findOrder, findOrderBook);
+//            Order findOrder = commonMethod.getOrder_Id(orderId);
+//            OrderBook findOrderBook = commonMethod.getOrderBook_Id(orderId);
+//            return new OrderResponseDTO.OrderFindOneDTO(findOrder, findOrderBook);
+            return orderRepository.findOne(orderId);
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl findOne");
             throw ce;
@@ -79,7 +80,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponseDTO.OrderFindAllDTO findAll(String userEmail) {
         try {
             log.info("[OrderServiceImpl] findAll");
-            return null;
+            return orderRepository.findAll(userEmail);
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl findAll");
             throw ce;

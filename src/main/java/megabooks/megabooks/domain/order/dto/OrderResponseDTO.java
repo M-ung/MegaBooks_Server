@@ -35,14 +35,14 @@ public class OrderResponseDTO {
 
     @Data
     public static class OrderFindOneDTO extends OrderDetails {
-        public OrderFindOneDTO(Order order, OrderBook orderBook) {
-            this.setOrderId(order.getId());
-            this.setOrderStatus(order.getOrderStatus());
-            this.setUserId(order.getUser().getId());
-            this.setBookId(orderBook.getBook().getId());
-            this.setOrderBookId(orderBook.getId());
-            this.setUsingMileage(orderBook.getUsingMileage());
-            this.setTotalPrice(orderBook.getTotalPrice());
+        public OrderFindOneDTO(Long orderId, OrderStatus orderStatus, Long userId, Long bookId, Long orderBookId, int usingMileage, int totalPrice) {
+            this.setOrderId(orderId);
+            this.setOrderStatus(orderStatus);
+            this.setUserId(userId);
+            this.setBookId(bookId);
+            this.setOrderBookId(orderBookId);
+            this.setUsingMileage(usingMileage);
+            this.setTotalPrice(totalPrice);
         }
     }
 
