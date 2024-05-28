@@ -3,7 +3,6 @@ package megabooks.megabooks.domain.book.dto;
 import lombok.Data;
 import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.book.entity.Genre;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class BookResponseDTO {
         }
     }
     @Data
-    public static class BookDetailDTO {
+    public static class BookFindOneDTO {
         private Long id;
         private String bookTitle;
         private String bookAuthor;
@@ -40,25 +39,16 @@ public class BookResponseDTO {
         private int bookPrice;
         private double bookRate;
         private Genre bookGenre;
-
-        public BookDetailDTO(Book book) {
-            this.id = book.getId();
-            this.bookTitle = book.getBookTitle();
-            this.bookAuthor = book.getBookAuthor();
-            this.bookPublisher = book.getBookPublisher();
-            this.bookPrice = book.getBookPrice();
-            this.bookRate = book.getBookRate();
-            this.bookGenre = book.getBookGenre();
-        }
-    }
-    @Data
-    public static class BookFindOneDTO {
-        private BookResponseDTO.BookDetailDTO bookDetailDTO;
         private List<String> bookUrlList;
 
-        public BookFindOneDTO(BookResponseDTO.BookDetailDTO bookDetailDTO, List<String> imageUrlList) {
-            this.bookDetailDTO = bookDetailDTO;
-            this.bookUrlList = imageUrlList;
+        public BookFindOneDTO(Long id, String bookTitle, String bookAuthor, String bookPublisher, int bookPrice, double bookRate, Genre bookGenre) {
+            this.id = id;
+            this.bookTitle = bookTitle;
+            this.bookAuthor = bookAuthor;
+            this.bookPublisher = bookPublisher;
+            this.bookPrice = bookPrice;
+            this.bookRate = bookRate;
+            this.bookGenre = bookGenre;
         }
     }
     @Data
