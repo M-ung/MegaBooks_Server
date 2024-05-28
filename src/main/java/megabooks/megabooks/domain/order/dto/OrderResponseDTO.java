@@ -48,9 +48,13 @@ public class OrderResponseDTO {
 
     @Data
     public static class OrderFindAllDTO {
-        private Long userId;
         private String userEmail;
         private List<OrderFindOneDTO> orderList;
+
+        public OrderFindAllDTO(String userEmail, List<OrderFindOneDTO> orderList) {
+            this.userEmail = userEmail;
+            this.orderList = orderList;
+        }
     }
 
     @Data

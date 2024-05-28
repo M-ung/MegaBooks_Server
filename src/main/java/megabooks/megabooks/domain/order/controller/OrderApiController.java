@@ -47,6 +47,19 @@ public class OrderApiController {
         }
     }
 
+    @GetMapping("/findAll")
+    public ResponseEntity<?> findAll() {
+        try {
+            log.info("[OrderApiController] findAll");
+            String userEmail = getUserEmail();
+            OrderResponseDTO.OrderFindAllDTO result = orderService.findAll(userEmail);
+            return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] OrderApiController findAll", result));
+        }  catch (Exception500 e) {
+            log.info("[Exception500] OrderApiController findAll");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
+        }
+    }
+
     private String getUserEmail() {
         User user = authenticationService.getCurrentAuthenticatedUser();
         String userEmail = user.getUserEmail();

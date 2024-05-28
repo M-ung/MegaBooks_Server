@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import megabooks.megabooks.domain.order.dto.OrderResponseDTO;
 import megabooks.megabooks.global.common.exception.CustomException;
 import megabooks.megabooks.global.common.reponse.ErrorCode;
+
+import java.util.List;
 import java.util.Optional;
 import static megabooks.megabooks.domain.book.entity.QBook.book;
 import static megabooks.megabooks.domain.order.entity.QOrder.order;
@@ -44,6 +46,23 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
     }
     @Override
     public OrderResponseDTO.OrderFindAllDTO findAll(String userEmail) {
-        return null;
+        List<OrderResponseDTO.OrderFindOneDTO> orderList = queryFactory
+                .select(Projections.constructor(OrderResponseDTO.OrderFindOneDTO.class,
+                        order.id,
+                        order.orderStatus,
+                        user.id,
+                        book.id,
+                        orderBook.id,
+                        orderBook.usingMileage,
+                        orderBook.totalPrice))
+                .from(orderBook)
+                .leftJoin(orderBook.order, order)
+                .leftJoin(order.user, user)
+                .leftJoin(orderBook.book, book)
+                .where(user.userEmail.eq(userEmail))
+                .fetch();
+
+
+        return new OrderResponseDTO.OrderFindAllDTO(userEmail, orderList);
     }
 }
