@@ -13,6 +13,7 @@ public enum ErrorCode {
     INVALID_REFRESH_TOKEN(401, HttpStatus.UNAUTHORIZED,"리프레쉬 토큰이 유효하지 않습니다."),
     EXPIRED_REFRESH_TOKEN(401, HttpStatus.UNAUTHORIZED,"리프레쉬 토큰이 만료되었습니다."),
 
+    USER_DENIED(403, HttpStatus.FORBIDDEN, "접근할 수 없는 회원입니다."),
     ACCESS_DENIED(403, HttpStatus.FORBIDDEN, "접근 권한이 없습니다."),
     BLACKLIST_TOKEN(403, HttpStatus.FORBIDDEN, "블랙 리스트에 존재하는 토큰입니다."),
 

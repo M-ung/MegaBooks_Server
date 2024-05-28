@@ -7,7 +7,7 @@ public interface OrderService {
     // 주문 생성
     OrderResponseDTO.OrderCreateDTO create(String userEmail, OrderRequestDTO.OrderCreateDTO orderCreateDTO);
     // 주문 조회
-    OrderResponseDTO.OrderFindOneDTO findOne(Long orderId);
+    OrderResponseDTO.OrderFindOneDTO findOne(Long orderId, String userEmail);
     // 주문 전체 조회
     OrderResponseDTO.OrderFindAllDTO findAll(String userEmail);
     // 주문 취소

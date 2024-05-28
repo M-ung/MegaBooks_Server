@@ -18,8 +18,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
         this.queryFactory = new JPAQueryFactory(em);
     }
     @Override
-    public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId) {
-       OrderResponseDTO.OrderFindOneDTO result = queryFactory
+    public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId, String userEmail) {
+        OrderResponseDTO.OrderFindOneDTO result = queryFactory
                 .select(Projections.constructor(OrderResponseDTO.OrderFindOneDTO.class,
                         order.id,
                         order.orderStatus,
@@ -32,11 +32,15 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
                 .leftJoin(orderBook.order, order)
                 .leftJoin(order.user, user)
                 .leftJoin(orderBook.book, book)
-                .where(order.id.eq(orderId))
+                .where(order.id.eq(orderId)
+                        .and(user.userEmail.eq(userEmail)))
                 .fetchOne();
 
-        return Optional.ofNullable(result)
-                .orElseThrow(() -> new CustomException(ErrorCode.ORDER_NOT_FOUND));
+        if (result == null) {
+            throw new CustomException(ErrorCode.ORDER_NOT_FOUND);
+        }
+
+        return result;
     }
     @Override
     public OrderResponseDTO.OrderFindAllDTO findAll(String userEmail) {

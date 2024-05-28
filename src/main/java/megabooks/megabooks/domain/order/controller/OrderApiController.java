@@ -39,7 +39,7 @@ public class OrderApiController {
         try {
             log.info("[OrderApiController] findOne");
             String userEmail = getUserEmail();
-            OrderResponseDTO.OrderFindOneDTO result = orderService.findOne(orderId);
+            OrderResponseDTO.OrderFindOneDTO result = orderService.findOne(orderId, userEmail);
             return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] OrderApiController findOne", result));
         }  catch (Exception500 e) {
             log.info("[Exception500] OrderApiController findOne");

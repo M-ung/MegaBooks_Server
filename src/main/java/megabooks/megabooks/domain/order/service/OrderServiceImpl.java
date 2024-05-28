@@ -60,13 +60,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId) {
+    public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId, String userEmail) {
         try {
             log.info("[OrderServiceImpl] findOne");
-//            Order findOrder = commonMethod.getOrder_Id(orderId);
-//            OrderBook findOrderBook = commonMethod.getOrderBook_Id(orderId);
-//            return new OrderResponseDTO.OrderFindOneDTO(findOrder, findOrderBook);
-            return orderRepository.findOne(orderId);
+            return orderRepository.findOne(orderId, userEmail);
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl findOne");
             throw ce;
