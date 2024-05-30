@@ -26,9 +26,9 @@ public class MyBook extends BaseEntity {
     private Book book;
 
     protected MyBook() {}
-
-    public MyBook(User user, Book book) {
-        this.user = user;
-        this.book = book;
+    public MyBook(User findUser, Book findBook, MyBookStatus myBookStatus) {
+        this.user = findUser;
+        this.book = findBook;
+        this.myBookStatus = myBookStatus;
     }
 }

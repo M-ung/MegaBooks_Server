@@ -19,6 +19,8 @@ import megabooks.megabooks.global.common.reponse.ErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static megabooks.megabooks.domain.myBook.entity.MyBookStatus.NOT_OPEN;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -134,7 +136,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private void getMyBook(User findUser, Book findBook) {
-        MyBook myBook = new MyBook(findUser, findBook);
+        MyBook myBook = new MyBook(findUser, findBook, NOT_OPEN);
         myBookRepository.save(myBook);
     }
 }
