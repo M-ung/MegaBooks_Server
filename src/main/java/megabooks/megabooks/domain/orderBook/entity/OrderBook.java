@@ -16,9 +16,6 @@ public class OrderBook extends BaseEntity {
     private int totalPrice; // 총 결제 금액
     private int usingMileage; // 사용 마일리지
 
-    @Enumerated(value = EnumType.STRING)
-    private OrderBookStatus orderBookStatus; // 열람 상태 확인
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
@@ -28,10 +25,9 @@ public class OrderBook extends BaseEntity {
     private Book book;
 
     protected OrderBook() {}
-    public OrderBook(int totalPrice, int usingMileage, OrderBookStatus orderBookStatus, Order order, Book book) {
+    public OrderBook(int totalPrice, int usingMileage, Order order, Book book) {
         this.totalPrice = totalPrice;
         this.usingMileage = usingMileage;
-        this.orderBookStatus = orderBookStatus;
         this.order = order;
         this.book = book;
     }

@@ -11,7 +11,6 @@ import megabooks.megabooks.domain.order.entity.Order;
 import megabooks.megabooks.domain.order.entity.OrderStatus;
 import megabooks.megabooks.domain.order.repository.OrderRepository;
 import megabooks.megabooks.domain.orderBook.entity.OrderBook;
-import megabooks.megabooks.domain.orderBook.entity.OrderBookStatus;
 import megabooks.megabooks.domain.orderBook.repository.OrderBookRepository;
 import megabooks.megabooks.domain.user.entity.User;
 import megabooks.megabooks.global.common.CommonMethod;
@@ -123,7 +122,7 @@ public class OrderServiceImpl implements OrderService {
 
     /** ================== 추가 메서드 ================== **/
     private OrderBook getOrderBook(Book findBook, Order order, int totalPrice, int usingMileage) {
-        OrderBook orderBook = new OrderBook(totalPrice, usingMileage, OrderBookStatus.NOT_OPEN, order, findBook);
+        OrderBook orderBook = new OrderBook(totalPrice, usingMileage, order, findBook);
         orderBookRepository.save(orderBook);
         return orderBook;
     }

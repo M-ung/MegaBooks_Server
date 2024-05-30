@@ -31,6 +31,8 @@ public class QMyBook extends EntityPathBase<MyBook> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final EnumPath<MyBookStatus> myBookStatus = createEnum("myBookStatus", MyBookStatus.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;
 

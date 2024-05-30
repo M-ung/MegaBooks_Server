@@ -14,6 +14,9 @@ public class MyBook extends BaseEntity {
     @Column(name = "my_book_id")
     private Long id;
 
+    @Enumerated(value = EnumType.STRING)
+    private MyBookStatus myBookStatus; // 열람 상태 확인
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private User user;

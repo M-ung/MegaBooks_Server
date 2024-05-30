@@ -33,8 +33,6 @@ public class QOrderBook extends EntityPathBase<OrderBook> {
 
     public final megabooks.megabooks.domain.order.entity.QOrder order;
 
-    public final EnumPath<OrderBookStatus> orderBookStatus = createEnum("orderBookStatus", OrderBookStatus.class);
-
     public final NumberPath<Integer> totalPrice = createNumber("totalPrice", Integer.class);
 
     //inherited
