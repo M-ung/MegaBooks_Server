@@ -6,6 +6,6 @@ import megabooks.megabooks.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
-public interface MyBookRepository extends JpaRepository<MyBook, Long> {
+public interface MyBookRepository extends JpaRepository<MyBook, Long>, MyBookRepositoryCustom{
     Optional<MyBook> findByUserAndBook(User user, Book book);
 }
