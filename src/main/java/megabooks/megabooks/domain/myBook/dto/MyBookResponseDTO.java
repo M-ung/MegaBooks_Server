@@ -18,6 +18,15 @@ public class MyBookResponseDTO {
         private Genre bookGenre;
         private MyBookStatus myBookStatus;
         private List<String> bookUrlList;
+        public MyBookFindOne(Long bookId, String bookTitle, String bookAuthor, String bookPublisher, double bookRate, Genre bookGenre, MyBookStatus myBookStatus) {
+            this.bookId = bookId;
+            this.bookTitle = bookTitle;
+            this.bookAuthor = bookAuthor;
+            this.bookPublisher = bookPublisher;
+            this.bookRate = bookRate;
+            this.bookGenre = bookGenre;
+            this.myBookStatus = myBookStatus;
+        }
     }
     @Data
     public static class MyBookFindAll {
