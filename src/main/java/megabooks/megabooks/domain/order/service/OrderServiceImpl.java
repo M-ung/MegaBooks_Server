@@ -49,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
             int usingMileage = orderCreateDTO.getUsingMileage();
 
             OrderBook orderBook = getOrderBook(findBook, order, totalPrice, usingMileage);
+            findBook.increaseBookSales();
 
             return new OrderResponseDTO.OrderCreateDTO(order, orderBook);
         } catch (CustomException ce){

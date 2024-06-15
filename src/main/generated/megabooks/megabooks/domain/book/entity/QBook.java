@@ -31,6 +31,8 @@ public class QBook extends EntityPathBase<Book> {
 
     public final NumberPath<Double> bookRate = createNumber("bookRate", Double.class);
 
+    public final NumberPath<Integer> bookSales = createNumber("bookSales", Integer.class);
+
     public final StringPath bookTitle = createString("bookTitle");
 
     //inherited

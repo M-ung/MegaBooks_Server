@@ -16,6 +16,7 @@ public class Book extends BaseEntity {
     private String bookPublisher;
     private int bookPrice;
     private double bookRate = 0;
+    private int bookSales = 0;
 
     @Enumerated(value = EnumType.STRING)
     private Genre bookGenre;
@@ -29,5 +30,9 @@ public class Book extends BaseEntity {
         this.bookPrice = bookPrice;
         this.bookRate = bookRate;
         this.bookGenre = bookGenre;
+    }
+
+    public void increaseBookSales() {
+        this.bookSales += 1;
     }
 }

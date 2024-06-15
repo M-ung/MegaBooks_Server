@@ -4,7 +4,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
-import megabooks.megabooks.domain.order.dto.OrderResponseDTO;
 import megabooks.megabooks.global.common.exception.CustomException;
 import megabooks.megabooks.global.common.reponse.ErrorCode;
 
@@ -27,6 +26,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
                         book.bookPublisher,
                         book.bookPrice,
                         book.bookRate,
+                        book.bookSales,
                         book.bookGenre
                 ))
                 .from(book)
@@ -56,6 +56,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
                         book.bookPublisher,
                         book.bookPrice,
                         book.bookRate,
+                        book.bookSales,
                         book.bookGenre
                 ))
                 .from(book)

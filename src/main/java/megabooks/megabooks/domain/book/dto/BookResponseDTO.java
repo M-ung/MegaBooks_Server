@@ -16,6 +16,7 @@ public class BookResponseDTO {
         private String bookPublisher;
         private int bookPrice;
         private double bookRate;
+        private int bookSales;
         private Genre bookGenre;
         private List<String> bookUrlList;
 
@@ -26,6 +27,7 @@ public class BookResponseDTO {
             this.bookPublisher = book.getBookPublisher();
             this.bookPrice = book.getBookPrice();
             this.bookRate = book.getBookRate();
+            this.bookSales = book.getBookSales();
             this.bookGenre = book.getBookGenre();
             this.bookUrlList = bookUrlList;
         }
@@ -38,16 +40,18 @@ public class BookResponseDTO {
         private String bookPublisher;
         private int bookPrice;
         private double bookRate;
+        private int bookSales;
         private Genre bookGenre;
         private List<String> bookUrlList;
 
-        public BookFindOneDTO(Long id, String bookTitle, String bookAuthor, String bookPublisher, int bookPrice, double bookRate, Genre bookGenre) {
+        public BookFindOneDTO(Long id, String bookTitle, String bookAuthor, String bookPublisher, int bookPrice, double bookRate, int bookSales, Genre bookGenre) {
             this.id = id;
             this.bookTitle = bookTitle;
             this.bookAuthor = bookAuthor;
             this.bookPublisher = bookPublisher;
             this.bookPrice = bookPrice;
             this.bookRate = bookRate;
+            this.bookSales = bookSales;
             this.bookGenre = bookGenre;
         }
     }
