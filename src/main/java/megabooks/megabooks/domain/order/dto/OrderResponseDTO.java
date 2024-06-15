@@ -85,6 +85,17 @@ public class OrderResponseDTO {
 
     @Data
     public static class OrderConfirmedDTO {
-        // No additional fields
+        private Long orderId;
+        private OrderStatus orderStatus;
+        private String userEmail;
+        private String bookTitle;
+        private int totalPrice; // 총 결제 금액
+        public OrderConfirmedDTO(OrderBook orderBook) {
+            this.orderId = orderBook.getOrder().getId();
+            this.orderStatus = orderBook.getOrder().getOrderStatus();
+            this.userEmail = orderBook.getOrder().getUser().getUserEmail();
+            this.bookTitle = orderBook.getBook().getBookTitle();
+            this.totalPrice = orderBook.getTotalPrice();
+        }
     }
 }

@@ -47,6 +47,19 @@ public class OrderApiController {
         }
     }
 
+    @PostMapping("/confirmed/{orderId}")
+    public ResponseEntity<?> confirmed(@PathVariable("orderId") Long orderId) {
+        try {
+            log.info("[OrderApiController] confirmed");
+            String userEmail = getUserEmail();
+            OrderResponseDTO.OrderConfirmedDTO result = orderService.confirmed(userEmail, orderId);
+            return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] OrderApiController confirmed", result));
+        }  catch (Exception500 e) {
+            log.info("[Exception500] OrderApiController confirmed");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
+        }
+    }
+
     @GetMapping("/findOne/{orderId}")
     public ResponseEntity<?> findOne(@PathVariable("orderId") Long orderId) {
         try {

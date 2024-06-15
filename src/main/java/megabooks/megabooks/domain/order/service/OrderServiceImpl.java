@@ -72,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
             OrderBook findOrderBook = commonMethod.getOrderBook_Id(orderId);
             Book findBook = commonMethod.getBook_Id(findOrderBook.getBook().getId());
 
-            if (!findOrder.getUser().getUserEmail().equals(userEmail)) {
+            if (!findUser.getUserEmail().equals(userEmail)) {
                 throw new CustomException(ErrorCode.USER_DENIED);
             }
 
@@ -93,12 +93,23 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
+    // 이 코드는 7일 뒤 자동으로 confirmed가 되게 짜야 함.
     @Override
     @Transactional
     public OrderResponseDTO.OrderConfirmedDTO confirmed(String userEmail, Long orderId) {
         try {
             log.info("[OrderServiceImpl] confirmed");
-            return null;
+            User findUser = commonMethod.getUser("email", userEmail);
+            Order findOrder = commonMethod.getOrder_Id(orderId);
+            OrderBook findOrderBook = commonMethod.getOrderBook_Id(orderId);
+
+            if (!findUser.getUserEmail().equals(userEmail)) {
+                throw new CustomException(ErrorCode.USER_DENIED);
+            }
+
+            findOrder.updateOrderStatus(OrderStatus.CONFIRMED);
+
+            return new OrderResponseDTO.OrderConfirmedDTO(findOrderBook);
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl confirmed");
             throw ce;
