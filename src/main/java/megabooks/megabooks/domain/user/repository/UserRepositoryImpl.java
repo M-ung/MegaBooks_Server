@@ -26,8 +26,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
                                 user.userEmail,
                                 user.userName,
                                 user.role,
-                                user.userImg,
-                                user.userMileage
+                                user.userImg
                         ))
                         .from(user)
                         .where(user.userEmail.eq(userEmail))
