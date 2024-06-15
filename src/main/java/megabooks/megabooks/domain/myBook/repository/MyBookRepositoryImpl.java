@@ -23,6 +23,7 @@ public class MyBookRepositoryImpl implements MyBookRepositoryCustom {
     public MyBookResponseDTO.MyBookFindAll findAll(String userEmail) {
         List<MyBookResponseDTO.MyBookFindOne> myBookList = queryFactory
                 .select(Projections.constructor(MyBookResponseDTO.MyBookFindOne.class,
+                        myBook.id,
                         book.id,
                         book.bookTitle,
                         book.bookAuthor,

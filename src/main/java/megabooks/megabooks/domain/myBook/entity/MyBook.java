@@ -31,4 +31,7 @@ public class MyBook extends BaseEntity {
         this.book = findBook;
         this.myBookStatus = myBookStatus;
     }
+    public void updateMyBook(MyBookStatus myBookStatus) {
+        this.myBookStatus = myBookStatus;
+    }
 }

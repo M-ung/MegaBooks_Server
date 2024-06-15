@@ -10,9 +10,7 @@ import megabooks.megabooks.global.common.exception.Exception500;
 import megabooks.megabooks.global.common.reponse.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/member/myBook")
@@ -30,6 +28,18 @@ public class MyBookApiController {
             return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] MyBookApiController findAll", result));
         }  catch (Exception500 e) {
             log.info("[Exception500] MyBookApiController findAll");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
+        }
+    }
+    @PostMapping("/confirmed/{myBookId}")
+    public ResponseEntity<?> confirmed(@PathVariable("myBookId") Long myBookId) {
+        try {
+            log.info("[MyBookApiController] confirmed");
+            String userEmail = getUserEmail();
+            MyBookResponseDTO.MyBookConfirmed result = myBookService.confirmed(userEmail, myBookId);
+            return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] MyBookApiController confirmed", result));
+        }  catch (Exception500 e) {
+            log.info("[Exception500] MyBookApiController confirmed");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
         }
     }

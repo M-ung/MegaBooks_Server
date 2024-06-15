@@ -80,6 +80,13 @@ public class CommonMethod {
         }
         return findMyBook.get();
     }
+    public MyBook getMyBook_Id(Long myBookId) throws CustomException {
+        Optional<MyBook> findMyBook = myBookRepository.findById(myBookId);
+        if(!findMyBook.isPresent()) {
+            throw new CustomException(ErrorCode.MY_BOOK_NOT_FOUND);
+        }
+        return findMyBook.get();
+    }
 
     /** Order Method **/
     public Order getOrder_Id(Long orderId) throws CustomException {
