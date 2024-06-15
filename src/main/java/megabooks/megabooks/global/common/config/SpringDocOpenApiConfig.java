@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 // http://localhost:8080/swagger-ui/index.html#/
 // http://localhost:8080/swagger-ui/index.html#/
+// http://3.38.185.5:8080/swagger-ui/index.html#/
 public class SpringDocOpenApiConfig {
 
     @Bean
