@@ -12,14 +12,12 @@ public class UserResponseDTO {
         private String userName;
         private String userImg;
         private String role;
-        private int userMileage;
-        public UserJoinDTO(Long id, String userEmail, String userName, String userImg, String role, int userMileage) {
+        public UserJoinDTO(Long id, String userEmail, String userName, String userImg, String role) {
             this.id = id;
             this.userEmail = userEmail;
             this.userName = userName;
             this.userImg = userImg;
             this.role = role;
-            this.userMileage = userMileage;
         }
 
         public UserJoinDTO(User user) {
@@ -28,7 +26,6 @@ public class UserResponseDTO {
             this.userName = user.getUserName();
             this.userImg = user.getUserImg();
             this.role = user.getRole();
-            this.userMileage = user.getUserMileage();
         }
     }
     @Data
@@ -38,14 +35,12 @@ public class UserResponseDTO {
         private String userName;
         private String userImg;
         private String role;
-        private int userMileage;
-        public UserFindOneDTO(Long id, String userEmail, String userName, String userImg, String role, int userMileage) {
+        public UserFindOneDTO(Long id, String userEmail, String userName, String userImg, String role) {
             this.id = id;
             this.userEmail = userEmail;
             this.userName = userName;
             this.userImg = userImg;
             this.role = role;
-            this.userMileage = userMileage;
         }
     }
 
@@ -56,14 +51,12 @@ public class UserResponseDTO {
         private String userName;
         private String userImg;
         private String role;
-        private int userMileage;
         public UserUpdateDTO(User user) {
             this.id = user.getId();
             this.userEmail = user.getUserEmail();
             this.userName = user.getUserName();
             this.userImg = user.getUserImg();
             this.role = user.getRole();
-            this.userMileage = user.getUserMileage();
         }
     }
     @Data
@@ -73,14 +66,12 @@ public class UserResponseDTO {
         private String userName;
         private String userImg;
         private String role;
-        private int userMileage;
         public UserDeleteDTO(User user) {
             this.id = user.getId();
             this.userEmail = user.getUserEmail();
             this.userName = user.getUserName();
             this.userImg = user.getUserImg();
             this.role = user.getRole();
-            this.userMileage = user.getUserMileage();
         }
     }
 }

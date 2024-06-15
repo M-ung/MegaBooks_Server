@@ -25,7 +25,6 @@ public class User extends BaseEntity {
     private String userPassword;
     private String userName;
     private String userImg = "img";
-    private int userMileage = 0;
 
 
     /** ======================== 메소드 ======================== **/
@@ -59,15 +58,5 @@ public class User extends BaseEntity {
         this.userPassword = userPassword;
         this.userName = userName;
         this.userImg = userImg;
-    }
-
-    public User(Long id, String role, String userEmail, String userPassword, String userName, String userImg, int userMileage) {
-        this.id = id;
-        this.role = role;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userName = userName;
-        this.userImg = userImg;
-        this.userMileage = userMileage;
     }
 }

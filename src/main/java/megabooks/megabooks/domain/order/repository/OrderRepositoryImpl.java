@@ -31,7 +31,6 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
                         user.id,
                         orderBook.book.id,
                         orderBook.id,
-                        orderBook.usingMileage,
                         orderBook.totalPrice
                 ))
                 .from(order)
@@ -62,7 +61,6 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
                         user.id,
                         orderBook.book.id,
                         orderBook.id,
-                        orderBook.usingMileage,
                         orderBook.totalPrice
                 ))
                 .from(order)

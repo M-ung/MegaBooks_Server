@@ -8,6 +8,5 @@ public class OrderRequestDTO {
     public static class OrderCreateDTO {
         private Long bookId;
         private int totalPrice; // 총 결제 금액
-        private int usingMileage; // 사용 마일리지
     }
 }

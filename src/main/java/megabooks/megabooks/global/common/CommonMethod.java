@@ -82,8 +82,8 @@ public class CommonMethod {
     }
 
     /** OrderBook Method **/
-    public OrderBook getOrderBook_Id(Long orderId) throws CustomException {
-        Optional<OrderBook> findOrderBook = orderBookRepository.findByOrder_Id(orderId);
+    public OrderBook getOrderBook_Id(Long orderBookId) throws CustomException {
+        Optional<OrderBook> findOrderBook = orderBookRepository.findByOrder_Id(orderBookId);
         if(!findOrderBook.isPresent()) {
             throw new CustomException(ErrorCode.ORDER_BOOK_NOT_FOUND);
         }

@@ -38,8 +38,6 @@ public class QOrderBook extends EntityPathBase<OrderBook> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;
 
-    public final NumberPath<Integer> usingMileage = createNumber("usingMileage", Integer.class);
-
     public QOrderBook(String variable) {
         this(OrderBook.class, forVariable(variable), INITS);
     }

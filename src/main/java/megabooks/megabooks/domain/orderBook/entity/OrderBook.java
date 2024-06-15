@@ -14,7 +14,6 @@ public class OrderBook extends BaseEntity {
     @Column(name = "order_book_id")
     private Long id;
     private int totalPrice; // 총 결제 금액
-    private int usingMileage; // 사용 마일리지
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
@@ -25,9 +24,8 @@ public class OrderBook extends BaseEntity {
     private Book book;
 
     protected OrderBook() {}
-    public OrderBook(int totalPrice, int usingMileage, Order order, Book book) {
+    public OrderBook(int totalPrice, Order order, Book book) {
         this.totalPrice = totalPrice;
-        this.usingMileage = usingMileage;
         this.order = order;
         this.book = book;
     }

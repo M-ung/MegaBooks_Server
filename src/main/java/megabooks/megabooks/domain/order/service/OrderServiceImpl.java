@@ -19,6 +19,8 @@ import megabooks.megabooks.global.common.reponse.ErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static megabooks.megabooks.domain.myBook.entity.MyBookStatus.NOT_OPEN;
 
 @Service
@@ -46,9 +48,8 @@ public class OrderServiceImpl implements OrderService {
             Order order = getOrder(findUser);
 
             int totalPrice = orderCreateDTO.getTotalPrice();
-            int usingMileage = orderCreateDTO.getUsingMileage();
 
-            OrderBook orderBook = getOrderBook(findBook, order, totalPrice, usingMileage);
+            OrderBook orderBook = getOrderBook(findBook, order, totalPrice);
             findBook.increaseBookSales();
 
             return new OrderResponseDTO.OrderCreateDTO(order, orderBook);
@@ -58,6 +59,42 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             log.info("[Exception500] OrderServiceImpl create");
             throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl create : " + e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public OrderResponseDTO.OrderCancelDTO cancel(String userEmail, Long orderId) {
+        try {
+            log.info("[OrderServiceImpl] cancel");
+            User findUser = commonMethod.getUser("email", userEmail);
+            Order findOrder = commonMethod.getOrder_Id(orderId);
+            findOrder.updateOrderStatus(OrderStatus.CANCEL);
+
+            orderRepository.findByUserAndId(findUser, orderId);
+
+            return new OrderResponseDTO.OrderCancelDTO(commonMethod.getOrderBook_Id(orderId));
+        } catch (CustomException ce){
+            log.info("[CustomException] OrderServiceImpl cancel");
+            throw ce;
+        } catch (Exception e) {
+            log.info("[Exception500] OrderServiceImpl cancel");
+            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl cancel : " + e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public OrderResponseDTO.OrderConfirmedDTO confirmed(String userEmail, Long orderId) {
+        try {
+            log.info("[OrderServiceImpl] confirmed");
+            return null;
+        } catch (CustomException ce){
+            log.info("[CustomException] OrderServiceImpl confirmed");
+            throw ce;
+        } catch (Exception e) {
+            log.info("[Exception500] OrderServiceImpl confirmed");
+            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl confirmed : " + e.getMessage());
         }
     }
 
@@ -93,39 +130,9 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    @Override
-    @Transactional
-    public OrderResponseDTO.OrderCancelDTO cancel(Long orderId) {
-        try {
-            log.info("[OrderServiceImpl] cancel");
-            return null;
-        } catch (CustomException ce){
-            log.info("[CustomException] OrderServiceImpl cancel");
-            throw ce;
-        } catch (Exception e) {
-            log.info("[Exception500] OrderServiceImpl cancel");
-            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl cancel : " + e.getMessage());
-        }
-    }
-
-    @Override
-    @Transactional
-    public OrderResponseDTO.OrderConfirmedDTO confirmed(Long orderId) {
-        try {
-            log.info("[OrderServiceImpl] confirmed");
-            return null;
-        } catch (CustomException ce){
-            log.info("[CustomException] OrderServiceImpl confirmed");
-            throw ce;
-        } catch (Exception e) {
-            log.info("[Exception500] OrderServiceImpl confirmed");
-            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] OrderServiceImpl confirmed : " + e.getMessage());
-        }
-    }
-
     /** ================== 추가 메서드 ================== **/
-    private OrderBook getOrderBook(Book findBook, Order order, int totalPrice, int usingMileage) {
-        OrderBook orderBook = new OrderBook(totalPrice, usingMileage, order, findBook);
+    private OrderBook getOrderBook(Book findBook, Order order, int totalPrice) {
+        OrderBook orderBook = new OrderBook(totalPrice, order, findBook);
         orderBookRepository.save(orderBook);
         return orderBook;
     }

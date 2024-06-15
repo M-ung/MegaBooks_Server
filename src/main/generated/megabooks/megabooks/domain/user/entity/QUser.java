@@ -35,8 +35,6 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath userImg = createString("userImg");
 
-    public final NumberPath<Integer> userMileage = createNumber("userMileage", Integer.class);
-
     public final StringPath userName = createString("userName");
 
     public final StringPath userPassword = createString("userPassword");

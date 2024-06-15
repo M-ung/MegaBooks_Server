@@ -34,6 +34,19 @@ public class OrderApiController {
         }
     }
 
+    @PostMapping("/cancel/{orderId}")
+    public ResponseEntity<?> cancel(@PathVariable("orderId") Long orderId) {
+        try {
+            log.info("[OrderApiController] cancel");
+            String userEmail = getUserEmail();
+            OrderResponseDTO.OrderCancelDTO result = orderService.cancel(userEmail, orderId);
+            return ResponseEntity.ok().body(ApiResponse.SUCCESS(HttpStatus.CREATED.value(), "[SUCCESS] OrderApiController cancel", result));
+        }  catch (Exception500 e) {
+            log.info("[Exception500] OrderApiController cancel");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ApiResponse.ERROR(e.status().value(), e.getMessage()));
+        }
+    }
+
     @GetMapping("/findOne/{orderId}")
     public ResponseEntity<?> findOne(@PathVariable("orderId") Long orderId) {
         try {
