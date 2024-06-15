@@ -65,11 +65,20 @@ public class CommonMethod {
         }
         return findBook.get();
     }
+
+    /** MyBook Method **/
     public void existingMyBook(User user, Book book) throws CustomException {
         Optional<MyBook> findMyBook = myBookRepository.findByUserAndBook(user, book);
         if(findMyBook.isPresent()) {
             throw new CustomException(ErrorCode.MY_BOOK_EXIST);
         }
+    }
+    public MyBook getMyBook(User user, Book book) throws CustomException {
+        Optional<MyBook> findMyBook = myBookRepository.findByUserAndBook(user, book);
+        if(!findMyBook.isPresent()) {
+            throw new CustomException(ErrorCode.MY_BOOK_NOT_FOUND);
+        }
+        return findMyBook.get();
     }
 
     /** Order Method **/
@@ -82,8 +91,8 @@ public class CommonMethod {
     }
 
     /** OrderBook Method **/
-    public OrderBook getOrderBook_Id(Long orderBookId) throws CustomException {
-        Optional<OrderBook> findOrderBook = orderBookRepository.findByOrder_Id(orderBookId);
+    public OrderBook getOrderBook_Id(Long orderId) throws CustomException {
+        Optional<OrderBook> findOrderBook = orderBookRepository.findByOrder_Id(orderId);
         if(!findOrderBook.isPresent()) {
             throw new CustomException(ErrorCode.ORDER_BOOK_NOT_FOUND);
         }

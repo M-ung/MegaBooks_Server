@@ -67,16 +67,23 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponseDTO.OrderCancelDTO cancel(String userEmail, Long orderId) {
         try {
             log.info("[OrderServiceImpl] cancel");
+            User findUser = commonMethod.getUser("email", userEmail);
             Order findOrder = commonMethod.getOrder_Id(orderId);
+            OrderBook findOrderBook = commonMethod.getOrderBook_Id(orderId);
+            Book findBook = commonMethod.getBook_Id(findOrderBook.getBook().getId());
+
             if (!findOrder.getUser().getUserEmail().equals(userEmail)) {
                 throw new CustomException(ErrorCode.USER_DENIED);
             }
 
             findOrder.updateOrderStatus(OrderStatus.CANCEL);
 
+            MyBook findMyBook = commonMethod.getMyBook(findUser, findBook);
+            myBookRepository.delete(findMyBook);
+
             // 환불해 주는 로직 필요!!!!
 
-            return new OrderResponseDTO.OrderCancelDTO(commonMethod.getOrderBook_Id(orderId));
+            return new OrderResponseDTO.OrderCancelDTO(findOrderBook);
         } catch (CustomException ce){
             log.info("[CustomException] OrderServiceImpl cancel");
             throw ce;

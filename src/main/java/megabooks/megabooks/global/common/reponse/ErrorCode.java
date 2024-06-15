@@ -21,6 +21,7 @@ public enum ErrorCode {
     REFRESH_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 RefreshToken입니다."),
     BOOK_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 책입니다."),
     ORDER_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 주문입니다."),
+    MY_BOOK_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 MyBook입니다."),
     ORDER_BOOK_NOT_FOUND(404, HttpStatus.NOT_FOUND, "존재하지 않는 OrderBook입니다."),
 
     USER_EXIST(409, HttpStatus.CONFLICT, "이미 가입된 이메일입니다."),
