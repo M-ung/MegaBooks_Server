@@ -25,7 +25,7 @@ public class SpringDocOpenApiConfig {
     private Info getInfo() {
         return new Info()
                 .version("1.0.0")
-                .description("UNI REST API DOC")
-                .title("UNI Server");
+                .description("MegaBooks REST API DOC")
+                .title("MegaBooks Server");
     }
 }
