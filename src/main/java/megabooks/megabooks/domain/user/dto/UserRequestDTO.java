@@ -1,7 +1,6 @@
 package megabooks.megabooks.domain.user.dto;
 
 import lombok.Data;
-import megabooks.megabooks.domain.user.entity.User;
 
 @Data
 public class UserRequestDTO {
@@ -10,13 +9,18 @@ public class UserRequestDTO {
         private String userEmail;
         private String userPassword;
         private String userName;
-        public User toEntity() {
-            return new User(this.userEmail, this.userPassword, this.userName);
-        }
     }
     @Data
-    public static class UserUpdateDTO {
+    public static class UserLoginDTO {
+        private String userEmail;
+        private String userPassword;
+    }
+    @Data
+    public static class UserUpdatePasswordDTO {
+        private String userPassword;
+    }
+    @Data
+    public class UserUpdateNameDTO {
         private String userName;
-        private String userImg;
     }
 }

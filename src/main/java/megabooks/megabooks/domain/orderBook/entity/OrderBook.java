@@ -1,18 +1,22 @@
 package megabooks.megabooks.domain.orderBook.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.order.entity.Order;
-import megabooks.megabooks.global.common.BaseEntity;
+import megabooks.megabooks.global.entity.BaseEntity;
 
 @Entity
 @Getter
+@Builder
+@Table(name = "order_book")
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderBook extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "order_book_id")
-    private Long id;
+    private Long orderBookId;
     private int totalPrice; // 총 결제 금액
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,11 +26,4 @@ public class OrderBook extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private Book book;
-
-    protected OrderBook() {}
-    public OrderBook(int totalPrice, Order order, Book book) {
-        this.totalPrice = totalPrice;
-        this.order = order;
-        this.book = book;
-    }
 }

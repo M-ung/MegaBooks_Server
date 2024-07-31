@@ -1,25 +1,25 @@
 package megabooks.megabooks.domain.Image.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 import megabooks.megabooks.domain.book.entity.Book;
+import megabooks.megabooks.global.entity.BaseEntity;
 
 @Entity
 @Getter
-public class Image {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Image extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "image_id")
-    private Long id; // 고유 식별자
+    private Long imageId;
     private String imageUrl;
+    private String imagePath;
+    private String imageName;
+
     @ManyToOne
     @JoinColumn(name="book_id")
     private Book book;
-
-    protected Image() {
-    }
-    public Image(String imgURL, Book book) {
-        this.imageUrl = imgURL;
-        this.book = book;
-    }
 }

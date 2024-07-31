@@ -5,13 +5,20 @@ import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.user.dto.UserRequestDTO;
 import megabooks.megabooks.domain.user.dto.UserResponseDTO;
 import megabooks.megabooks.domain.user.entity.User;
+import megabooks.megabooks.domain.user.mapper.UserMapper;
 import megabooks.megabooks.domain.user.repository.UserRepository;
-import megabooks.megabooks.global.common.CommonMethod;
-import megabooks.megabooks.global.common.exception.CustomException;
-import megabooks.megabooks.global.common.reponse.ErrorCode;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import megabooks.megabooks.global.exception.user.UserEmailDuplicationException;
+import megabooks.megabooks.global.exception.user.UserInvalidPasswordException;
+import megabooks.megabooks.global.exception.user.UserNotFoundException;
+import megabooks.megabooks.global.security.jwt.JwtDto;
+import megabooks.megabooks.global.security.jwt.JwtProvider;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+import static megabooks.megabooks.global.exception.ErrorCode.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -19,77 +26,71 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final CommonMethod commonMethod;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
+    private final JwtProvider jwtProvider;
 
     @Override
     @Transactional
     public UserResponseDTO.UserJoinDTO join(UserRequestDTO.UserJoinDTO userJoinDTO) {
-        try {
-            log.info("[UserServiceImpl] join");
-            if (userRepository.existsByUserEmail(userJoinDTO.getUserEmail())) {
-                throw new CustomException(ErrorCode.USER_EXIST);
-            }
-
-            userJoinDTO.setUserPassword(bCryptPasswordEncoder.encode(userJoinDTO.getUserPassword()));
-
-            User user = userJoinDTO.toEntity();
-            userRepository.save(user);
-            return new UserResponseDTO.UserJoinDTO(user);
-        } catch (CustomException ce){
-            log.info("[CustomException] UserServiceImpl join");
-            throw ce;
-        } catch (Exception e){
-            log.info("[Exception500] UserServiceImpl join");
-            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] UserServiceImpl join : " + e.getMessage());
+        // 이메일 중복 확인
+        if(userRepository.findByUserEmail(userJoinDTO.getUserEmail()).isPresent()) {
+            throw new UserEmailDuplicationException(EMAIL_DUPLICATION_USER);
         }
-    }
 
-    @Override
-    public UserResponseDTO.UserFindOneDTO findOne(String userEmail) {
-        try {
-            log.info("[UserServiceImpl] findOne");;
-            return userRepository.findOne(userEmail);
-        } catch (CustomException ce){
-            log.info("[CustomException] UserServiceImpl findOne");
-            throw ce;
-        } catch (Exception e) {
-            log.info("[Exception500] UserServiceImpl findOne");
-            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] UserServiceImpl findOne : " + e.getMessage());
-        }
+        // User 생성 및 저장
+        User user = userRepository.save(userMapper.toUserEntity(userJoinDTO, passwordEncoder));
+
+        // UserResponseDTO.UserJoinDTO 반환
+        return userMapper.toUserJoinResDTO(user);
     }
 
     @Override
     @Transactional
-    public UserResponseDTO.UserDeleteDTO delete(String userEmail) {
-        try {
-            log.info("[UserServiceImpl] delete");
-            User findUser = commonMethod.getUser("email", userEmail);
-            userRepository.delete(findUser);
-            return new UserResponseDTO.UserDeleteDTO(findUser);
-        } catch (CustomException ce){
-            log.info("[CustomException] UserServiceImpl delete");
-            throw ce;
-        } catch (Exception e) {
-            log.info("[Exception500] UserServiceImpl delete");
-            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] UserServiceImpl delete : " + e.getMessage());
-        }
+    public JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO) {
+        User findUser = getUser_Email(userLoginDTO.getUserEmail());
+        checkPassword(userLoginDTO.getUserPassword(), findUser, passwordEncoder);
+        return jwtProvider.createJwtDto(findUser.getUserId(), findUser.getMegaBooksRole());
+    }
+
+    @Override
+    public UserResponseDTO.UserFindOneDTO findOne(Long userId) {
+        return userRepository.findOneByUserId(userId);
     }
 
     @Override
     @Transactional
-    public UserResponseDTO.UserUpdateDTO update(UserRequestDTO.UserUpdateDTO userUpdateDTO, String userEmail) {
-        try {
-            log.info("[UserServiceImpl] update");
-            User findUser = commonMethod.getUser("email", userEmail);
-            findUser.userUpdate(userUpdateDTO);
-            return new UserResponseDTO.UserUpdateDTO(findUser);
-        } catch (CustomException ce){
-            log.info("[CustomException] UserServiceImpl update");
-            throw ce;
-        } catch (Exception e) {
-            log.info("[Exception500] UserServiceImpl update");
-            throw new CustomException(ErrorCode.SERVER_ERROR, "[Exception500] UserServiceImpl update : " + e.getMessage());
+    public void updatePassword(UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO, Long userId) {
+        User findUser = getUser_Id(userId);
+        findUser.updatePassword(userUpdatePasswordDTO, passwordEncoder);
+    }
+
+    @Override
+    @Transactional
+    public void updateName(UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO, Long userId) {
+        User findUser = getUser_Id(userId);
+        findUser.updateName(userUpdateNameDTO);
+    }
+
+    /** 추가 메서드 **/
+    private static void checkPassword(String password, User findUser, PasswordEncoder passwordEncoder) {
+        if(!passwordEncoder.matches(password, findUser.getUserPassword())) {
+            throw new UserInvalidPasswordException(INVALID_PASSWORD_USER);
         }
     }
+    private User getUser_Id(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(!optionalUser.isPresent()) {
+            throw new UserNotFoundException(NOT_FOUND_USER);
+        }
+        return optionalUser.get();
+    }
+    private User getUser_Email(String userEmail) {
+        Optional<User> optionalUser = userRepository.findByUserEmail(userEmail);
+        if(!optionalUser.isPresent()) {
+            throw new UserNotFoundException(NOT_FOUND_USER);
+        }
+        return optionalUser.get();
+    }
+
 }

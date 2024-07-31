@@ -2,7 +2,7 @@ package megabooks.megabooks.domain.book.dto;
 
 import lombok.Data;
 import megabooks.megabooks.domain.book.entity.Book;
-import megabooks.megabooks.domain.book.entity.Genre;
+import megabooks.megabooks.domain.book.entity.BookGenre;
 
 import java.util.List;
 
@@ -17,20 +17,8 @@ public class BookResponseDTO {
         private int bookPrice;
         private double bookRate;
         private int bookSales;
-        private Genre bookGenre;
+        private BookGenre bookGenre;
         private List<String> bookUrlList;
-
-        public BookUploadDTO(Book book, List<String> bookUrlList) {
-            this.id = book.getId();
-            this.bookTitle = book.getBookTitle();
-            this.bookAuthor = book.getBookAuthor();
-            this.bookPublisher = book.getBookPublisher();
-            this.bookPrice = book.getBookPrice();
-            this.bookRate = book.getBookRate();
-            this.bookSales = book.getBookSales();
-            this.bookGenre = book.getBookGenre();
-            this.bookUrlList = bookUrlList;
-        }
     }
     @Data
     public static class BookFindOneDTO {
@@ -41,19 +29,9 @@ public class BookResponseDTO {
         private int bookPrice;
         private double bookRate;
         private int bookSales;
-        private Genre bookGenre;
+        private BookGenre bookGenre;
         private List<String> bookUrlList;
 
-        public BookFindOneDTO(Long id, String bookTitle, String bookAuthor, String bookPublisher, int bookPrice, double bookRate, int bookSales, Genre bookGenre) {
-            this.id = id;
-            this.bookTitle = bookTitle;
-            this.bookAuthor = bookAuthor;
-            this.bookPublisher = bookPublisher;
-            this.bookPrice = bookPrice;
-            this.bookRate = bookRate;
-            this.bookSales = bookSales;
-            this.bookGenre = bookGenre;
-        }
     }
     @Data
     public static class BookFindAllDTO {

@@ -1,7 +1,7 @@
 package megabooks.megabooks.domain.myBook.dto;
 
 import lombok.Data;
-import megabooks.megabooks.domain.book.entity.Genre;
+import megabooks.megabooks.domain.book.entity.BookGenre;
 import megabooks.megabooks.domain.myBook.entity.MyBook;
 import megabooks.megabooks.domain.myBook.entity.MyBookStatus;
 
@@ -17,10 +17,10 @@ public class MyBookResponseDTO {
         private String bookAuthor;
         private String bookPublisher;
         private double bookRate;
-        private Genre bookGenre;
+        private BookGenre bookGenre;
         private MyBookStatus myBookStatus;
         private List<String> bookUrlList;
-        public MyBookFindOne(Long myBookId, Long bookId, String bookTitle, String bookAuthor, String bookPublisher, double bookRate, Genre bookGenre, MyBookStatus myBookStatus) {
+        public MyBookFindOne(Long myBookId, Long bookId, String bookTitle, String bookAuthor, String bookPublisher, double bookRate, BookGenre bookGenre, MyBookStatus myBookStatus) {
             this.myBookId = myBookId;
             this.bookId = bookId;
             this.bookTitle = bookTitle;
@@ -50,19 +50,7 @@ public class MyBookResponseDTO {
         private String bookAuthor;
         private String bookPublisher;
         private double bookRate;
-        private Genre bookGenre;
+        private BookGenre bookGenre;
         private MyBookStatus myBookStatus;
-
-        public MyBookConfirmed(MyBook myBook) {
-            this.myBookId = myBook.getId();
-            this.bookId = myBook.getBook().getId();
-            this.bookTitle = myBook.getBook().getBookTitle();
-            this.bookAuthor = myBook.getBook().getBookAuthor();
-            this.bookPublisher = myBook.getBook().getBookPublisher();
-            this.bookRate = myBook.getBook().getBookRate();
-            this.bookGenre = myBook.getBook().getBookGenre();
-            this.myBookStatus = myBook.getMyBookStatus();
-
-        }
     }
 }
