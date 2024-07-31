@@ -10,9 +10,6 @@ public class UserRequestDTO {
         private String userEmail;
         private String userPassword;
         private String userName;
-//        public User toEntity() {
-//            return new User(this.userEmail, this.userPassword, this.userName);
-//        }
     }
     @Data
     public static class UserUpdateDTO {

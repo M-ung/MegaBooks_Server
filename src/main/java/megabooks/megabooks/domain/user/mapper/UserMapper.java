@@ -3,15 +3,29 @@ package megabooks.megabooks.domain.user.mapper;
 import megabooks.megabooks.domain.user.dto.UserRequestDTO;
 import megabooks.megabooks.domain.user.dto.UserResponseDTO;
 import megabooks.megabooks.domain.user.entity.User;
+import megabooks.megabooks.domain.user.entity.UserStatus;
+import megabooks.megabooks.global.security.jwt.MegaBooksRole;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
+@Component
 public class UserMapper {
     private static final ModelMapper modelMapper = new ModelMapper();
-    public static User toEntity(UserRequestDTO.UserJoinDTO userJoinDTO) {
-        return modelMapper.map(userJoinDTO, User.class);
+    public User toUserEntity(UserRequestDTO.UserJoinDTO userJoinDTO, PasswordEncoder passwordEncoder) {
+        return User.builder()
+                .userEmail(userJoinDTO.getUserEmail())
+                .userPassword(passwordEncoder.encode(userJoinDTO.getUserPassword()))
+                .userName(userJoinDTO.getUserName())
+                .lastLogin(LocalDateTime.now())
+                .userStatus(UserStatus.ACTIVE)
+                .megaBooksRole(MegaBooksRole.USER)
+                .build();
     }
 
-    public static UserResponseDTO.UserJoinDTO toDto(User user) {
+    public UserResponseDTO.UserJoinDTO toUserJoinResDTO(User user) {
         return modelMapper.map(user, UserResponseDTO.UserJoinDTO.class);
     }
 }
