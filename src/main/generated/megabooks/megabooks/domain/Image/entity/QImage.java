@@ -22,11 +22,23 @@ public class QImage extends EntityPathBase<Image> {
 
     public static final QImage image = new QImage("image");
 
+    public final megabooks.megabooks.global.entity.QBaseEntity _super = new megabooks.megabooks.global.entity.QBaseEntity(this);
+
     public final megabooks.megabooks.domain.book.entity.QBook book;
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
+
+    public final NumberPath<Long> imageId = createNumber("imageId", Long.class);
+
+    public final StringPath imageName = createString("imageName");
+
+    public final StringPath imagePath = createString("imagePath");
 
     public final StringPath imageUrl = createString("imageUrl");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;
 
     public QImage(String variable) {
         this(Image.class, forVariable(variable), INITS);

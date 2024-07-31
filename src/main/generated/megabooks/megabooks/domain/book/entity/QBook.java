@@ -19,26 +19,36 @@ public class QBook extends EntityPathBase<Book> {
 
     public static final QBook book = new QBook("book");
 
-    public final megabooks.megabooks.global.common.QBaseEntity _super = new megabooks.megabooks.global.common.QBaseEntity(this);
+    public final megabooks.megabooks.global.entity.QBaseEntity _super = new megabooks.megabooks.global.entity.QBaseEntity(this);
 
     public final StringPath bookAuthor = createString("bookAuthor");
 
-    public final EnumPath<Genre> bookGenre = createEnum("bookGenre", Genre.class);
+    public final StringPath bookContent = createString("bookContent");
+
+    public final EnumPath<BookGenre> bookGenre = createEnum("bookGenre", BookGenre.class);
+
+    public final NumberPath<Long> bookId = createNumber("bookId", Long.class);
+
+    public final StringPath bookImgUrl = createString("bookImgUrl");
 
     public final NumberPath<Integer> bookPrice = createNumber("bookPrice", Integer.class);
 
     public final StringPath bookPublisher = createString("bookPublisher");
 
-    public final NumberPath<Double> bookRate = createNumber("bookRate", Double.class);
-
     public final NumberPath<Integer> bookSales = createNumber("bookSales", Integer.class);
+
+    public final EnumPath<BookStatus> bookStatus = createEnum("bookStatus", BookStatus.class);
 
     public final StringPath bookTitle = createString("bookTitle");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
+    public final NumberPath<Integer> likes = createNumber("likes", Integer.class);
+
+    public final NumberPath<Double> stars = createNumber("stars", Double.class);
+
+    public final NumberPath<Integer> totalPage = createNumber("totalPage", Integer.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;

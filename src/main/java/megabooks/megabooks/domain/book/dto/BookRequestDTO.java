@@ -1,8 +1,7 @@
 package megabooks.megabooks.domain.book.dto;
 
 import lombok.Data;
-import megabooks.megabooks.domain.book.entity.Book;
-import megabooks.megabooks.domain.book.entity.Genre;
+import megabooks.megabooks.domain.book.entity.BookGenre;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
@@ -16,9 +15,9 @@ public class BookRequestDTO {
         private int bookPrice;
         private List<MultipartFile> bookImgList;
         private double bookRate;
-        private Genre bookGenre;
-        public Book toEntity() {
-            return new Book(this.bookTitle, this.bookAuthor, this.bookPublisher, this.bookPrice, this.bookRate, this.bookGenre);
-        }
+        private BookGenre bookGenre;
+//        public Book toEntity() {
+//            return new Book(this.bookTitle, this.bookAuthor, this.bookPublisher, this.bookPrice, this.bookRate, this.bookGenre);
+//        }
     }
 }

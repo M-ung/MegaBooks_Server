@@ -22,16 +22,16 @@ public class QOrderBook extends EntityPathBase<OrderBook> {
 
     public static final QOrderBook orderBook = new QOrderBook("orderBook");
 
-    public final megabooks.megabooks.global.common.QBaseEntity _super = new megabooks.megabooks.global.common.QBaseEntity(this);
+    public final megabooks.megabooks.global.entity.QBaseEntity _super = new megabooks.megabooks.global.entity.QBaseEntity(this);
 
     public final megabooks.megabooks.domain.book.entity.QBook book;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
-
     public final megabooks.megabooks.domain.order.entity.QOrder order;
+
+    public final NumberPath<Long> orderBookId = createNumber("orderBookId", Long.class);
 
     public final NumberPath<Integer> totalPrice = createNumber("totalPrice", Integer.class);
 

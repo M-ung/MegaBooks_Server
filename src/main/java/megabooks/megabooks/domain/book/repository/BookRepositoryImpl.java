@@ -4,8 +4,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
-import megabooks.megabooks.global.common.exception.CustomException;
-import megabooks.megabooks.global.common.reponse.ErrorCode;
 
 import java.util.*;
 import static megabooks.megabooks.domain.Image.entity.QImage.image;
@@ -32,10 +30,6 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
                 .from(book)
                 .where(book.id.eq(bookId))
                 .fetchOne();
-
-        if (result == null) {
-            throw new CustomException(ErrorCode.BOOK_NOT_FOUND);
-        }
 
         List<String> bookUrlList = queryFactory.select(image.imageUrl)
                 .from(image)

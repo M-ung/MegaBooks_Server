@@ -5,8 +5,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.order.dto.OrderResponseDTO;
-import megabooks.megabooks.global.common.exception.CustomException;
-import megabooks.megabooks.global.common.reponse.ErrorCode;
+import megabooks.megabooks.global.exception.ErrorCode;
+import megabooks.megabooks.global.exception.order.OrderNotFoundException;
 
 import java.util.List;
 import static megabooks.megabooks.domain.Image.entity.QImage.image;
@@ -40,7 +40,7 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
                 .fetchOne();
 
         if (result == null) {
-            throw new CustomException(ErrorCode.ORDER_NOT_FOUND);
+            throw new OrderNotFoundException(ErrorCode.NOT_FOUND_ORDER);
         }
 
         List<String> bookUrlList = queryFactory.select(image.imageUrl)

@@ -1,62 +1,40 @@
 package megabooks.megabooks.domain.user.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import megabooks.megabooks.domain.user.dto.UserRequestDTO;
-import megabooks.megabooks.global.common.BaseEntity;
+import lombok.*;
+import megabooks.megabooks.global.entity.BaseEntity;
+import megabooks.megabooks.global.security.jwt.MegaBooksRole;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDateTime;
 
 
 @Entity
 @Getter
 @Builder
-@Table(name = "member")
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity {
     @Id
-    @GeneratedValue
-    @Column(name = "member_id")
-    private Long id;
-    private String role = "ROLE_USER";
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
+
+    @Column(nullable = false, unique = true)
     private String userEmail;
+
+    @Column(nullable = false)
     private String userPassword;
+
+    @Column(nullable = false)
     private String userName;
-    private String userImg = "img";
 
+    private String kakaoId;
 
-    /** ======================== 메소드 ======================== **/
-    public List<String> getRoleList() {
-        if (this.role.length() > 0) {
-            return Arrays.asList(this.role.split(","));
-        }
-        return new ArrayList<>();
-    }
+    private LocalDateTime lastLogin;
 
-    public void userUpdate(UserRequestDTO.UserUpdateDTO userUpdateDTO) {
-        this.userName = userUpdateDTO.getUserName();
-        this.userImg = userUpdateDTO.getUserImg();
-    }
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus;
 
-    /** ======================== 생성자 ======================== **/
-    protected User() {
+    @Enumerated(EnumType.STRING)
+    private MegaBooksRole megaBooksRole;
 
-    }
-
-    public User(String userEmail, String userPassword, String userName) {
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userName = userName;
-    }
-
-    public User(Long id, String role, String userEmail, String userPassword, String userName, String userImg) {
-        this.id = id;
-        this.role = role;
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userName = userName;
-        this.userImg = userImg;
-    }
 }

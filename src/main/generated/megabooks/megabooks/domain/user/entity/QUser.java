@@ -19,25 +19,29 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
-    public final megabooks.megabooks.global.common.QBaseEntity _super = new megabooks.megabooks.global.common.QBaseEntity(this);
+    public final megabooks.megabooks.global.entity.QBaseEntity _super = new megabooks.megabooks.global.entity.QBaseEntity(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
+    public final StringPath kakaoId = createString("kakaoId");
 
-    public final StringPath role = createString("role");
+    public final DateTimePath<java.time.LocalDateTime> lastLogin = createDateTime("lastLogin", java.time.LocalDateTime.class);
+
+    public final EnumPath<megabooks.megabooks.global.security.jwt.MegaBooksRole> megaBooksRole = createEnum("megaBooksRole", megabooks.megabooks.global.security.jwt.MegaBooksRole.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;
 
     public final StringPath userEmail = createString("userEmail");
 
-    public final StringPath userImg = createString("userImg");
+    public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
     public final StringPath userName = createString("userName");
 
     public final StringPath userPassword = createString("userPassword");
+
+    public final EnumPath<UserStatus> userStatus = createEnum("userStatus", UserStatus.class);
 
     public QUser(String variable) {
         super(User.class, forVariable(variable));

@@ -16,14 +16,6 @@ public class OrderResponseDTO {
         private String userEmail;
         private String bookTitle;
         private int totalPrice; // 총 결제 금액
-
-        public OrderCreateDTO(Order order, OrderBook orderBook) {
-            this.orderId = order.getId();
-            this.orderStatus = order.getOrderStatus();
-            this.userEmail = order.getUser().getUserEmail();
-            this.bookTitle =  orderBook.getBook().getBookTitle();
-            this.totalPrice = orderBook.getTotalPrice();
-        }
     }
 
     @Data
@@ -35,25 +27,6 @@ public class OrderResponseDTO {
         private Long orderBookId;
         private int totalPrice; // 총 결제 금액
         private List<String> bookUrlList;
-
-        public OrderFindOneDTO(Long orderId, OrderStatus orderStatus, Long userId, Long bookId, Long orderBookId, int totalPrice) {
-            this.orderId = orderId;
-            this.orderStatus = orderStatus;
-            this.userId = userId;
-            this.bookId = bookId;
-            this.orderBookId = orderBookId;
-            this.totalPrice = totalPrice;
-        }
-
-        public OrderFindOneDTO(Long orderId, OrderStatus orderStatus, Long userId, Long bookId, Long orderBookId, int totalPrice, List<String> bookUrlList) {
-            this.orderId = orderId;
-            this.orderStatus = orderStatus;
-            this.userId = userId;
-            this.bookId = bookId;
-            this.orderBookId = orderBookId;
-            this.totalPrice = totalPrice;
-            this.bookUrlList = bookUrlList;
-        }
     }
 
     @Data
@@ -74,13 +47,6 @@ public class OrderResponseDTO {
         private String userEmail;
         private String bookTitle;
         private int totalPrice; // 총 결제 금액
-        public OrderCancelDTO(OrderBook orderBook) {
-            this.orderId = orderBook.getOrder().getId();
-            this.orderStatus = orderBook.getOrder().getOrderStatus();
-            this.userEmail = orderBook.getOrder().getUser().getUserEmail();
-            this.bookTitle = orderBook.getBook().getBookTitle();
-            this.totalPrice = orderBook.getTotalPrice();
-        }
     }
 
     @Data
@@ -90,12 +56,5 @@ public class OrderResponseDTO {
         private String userEmail;
         private String bookTitle;
         private int totalPrice; // 총 결제 금액
-        public OrderConfirmedDTO(OrderBook orderBook) {
-            this.orderId = orderBook.getOrder().getId();
-            this.orderStatus = orderBook.getOrder().getOrderStatus();
-            this.userEmail = orderBook.getOrder().getUser().getUserEmail();
-            this.bookTitle = orderBook.getBook().getBookTitle();
-            this.totalPrice = orderBook.getTotalPrice();
-        }
     }
 }

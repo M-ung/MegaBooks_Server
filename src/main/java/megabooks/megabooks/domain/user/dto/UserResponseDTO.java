@@ -12,21 +12,6 @@ public class UserResponseDTO {
         private String userName;
         private String userImg;
         private String role;
-        public UserJoinDTO(Long id, String userEmail, String userName, String userImg, String role) {
-            this.id = id;
-            this.userEmail = userEmail;
-            this.userName = userName;
-            this.userImg = userImg;
-            this.role = role;
-        }
-
-        public UserJoinDTO(User user) {
-            this.id = user.getId();
-            this.userEmail = user.getUserEmail();
-            this.userName = user.getUserName();
-            this.userImg = user.getUserImg();
-            this.role = user.getRole();
-        }
     }
     @Data
     public static class UserFindOneDTO {
@@ -51,13 +36,6 @@ public class UserResponseDTO {
         private String userName;
         private String userImg;
         private String role;
-        public UserUpdateDTO(User user) {
-            this.id = user.getId();
-            this.userEmail = user.getUserEmail();
-            this.userName = user.getUserName();
-            this.userImg = user.getUserImg();
-            this.role = user.getRole();
-        }
     }
     @Data
     public static class UserDeleteDTO {
@@ -66,12 +44,5 @@ public class UserResponseDTO {
         private String userName;
         private String userImg;
         private String role;
-        public UserDeleteDTO(User user) {
-            this.id = user.getId();
-            this.userEmail = user.getUserEmail();
-            this.userName = user.getUserName();
-            this.userImg = user.getUserImg();
-            this.role = user.getRole();
-        }
     }
 }

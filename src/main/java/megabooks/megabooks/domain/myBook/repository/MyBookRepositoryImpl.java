@@ -28,7 +28,7 @@ public class MyBookRepositoryImpl implements MyBookRepositoryCustom {
                         book.bookTitle,
                         book.bookAuthor,
                         book.bookPublisher,
-                        book.bookRate,
+//                        book.bookRate,
                         book.bookGenre,
                         myBook.myBookStatus
                 ))

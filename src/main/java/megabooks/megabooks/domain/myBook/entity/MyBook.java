@@ -1,37 +1,30 @@
 package megabooks.megabooks.domain.myBook.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.user.entity.User;
-import megabooks.megabooks.global.common.BaseEntity;
+import megabooks.megabooks.global.entity.BaseEntity;
 @Entity
 @Getter
-@Table(name = "my_book")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MyBook extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "my_book_id")
-    private Long id;
+    private Long myBookId;
+    private int myBookProcess;
 
     @Enumerated(value = EnumType.STRING)
     private MyBookStatus myBookStatus; // 열람 상태 확인
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private Book book;
-
-    protected MyBook() {}
-    public MyBook(User findUser, Book findBook, MyBookStatus myBookStatus) {
-        this.user = findUser;
-        this.book = findBook;
-        this.myBookStatus = myBookStatus;
-    }
-    public void updateMyBook(MyBookStatus myBookStatus) {
-        this.myBookStatus = myBookStatus;
-    }
 }

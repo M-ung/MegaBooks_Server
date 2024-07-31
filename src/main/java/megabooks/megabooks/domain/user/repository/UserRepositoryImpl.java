@@ -24,9 +24,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
                         .select(Projections.constructor(UserResponseDTO.UserFindOneDTO.class,
                                 user.id,
                                 user.userEmail,
-                                user.userName,
-                                user.role,
-                                user.userImg
+                                user.userName
                         ))
                         .from(user)
                         .where(user.userEmail.eq(userEmail))
