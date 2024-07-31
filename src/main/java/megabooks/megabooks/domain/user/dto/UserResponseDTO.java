@@ -25,18 +25,6 @@ public class UserResponseDTO {
         private String userEmail;
         private String userName;
     }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    @Builder
-    public static class UserUpdateDTO {
-        private Long id;
-        private String userEmail;
-        private String userName;
-        private String userImg;
-        private String role;
-    }
     @Data
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)

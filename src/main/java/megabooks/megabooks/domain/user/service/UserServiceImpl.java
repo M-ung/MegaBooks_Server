@@ -58,6 +58,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.findOneByUserId(userId);
     }
 
+    @Override
+    @Transactional
+    public void updatePassword(UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO, Long userId) {
+        User findUser = getUser_Id(userId);
+        findUser.updatePassword(userUpdatePasswordDTO, passwordEncoder);
+    }
+
+    @Override
+    @Transactional
+    public void updateName(UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO, Long userId) {
+        User findUser = getUser_Id(userId);
+        findUser.updateName(userUpdateNameDTO);
+    }
+
     /** 추가 메서드 **/
     private static void checkPassword(String password, User findUser, PasswordEncoder passwordEncoder) {
         if(!passwordEncoder.matches(password, findUser.getUserPassword())) {

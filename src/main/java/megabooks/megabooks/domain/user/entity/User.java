@@ -2,8 +2,10 @@ package megabooks.megabooks.domain.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import megabooks.megabooks.domain.user.dto.UserRequestDTO;
 import megabooks.megabooks.global.entity.BaseEntity;
 import megabooks.megabooks.global.security.jwt.MegaBooksRole;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -37,4 +39,10 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MegaBooksRole megaBooksRole;
 
+    public void updatePassword(UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO, PasswordEncoder passwordEncoder) {
+        this.userPassword = passwordEncoder.encode(userUpdatePasswordDTO.getUserPassword());
+    }
+    public void updateName(UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO) {
+        this.userName = userUpdateNameDTO.getUserName();
+    }
 }

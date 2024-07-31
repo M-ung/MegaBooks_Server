@@ -11,10 +11,12 @@ public interface UserService {
     JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO);
     // 회원 조회
     UserResponseDTO.UserFindOneDTO findOne(Long userId);
-//    // 회원 탈퇴
+    // 회원 비밀번호 수정
+    void updatePassword(UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO, Long userId);
+    // 회원 이름 수정
+    void updateName(UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO, Long userId);
+    //    // 회원 탈퇴
 //    UserResponseDTO.UserDeleteDTO delete(String userEmail);
-//    // 회원 수정
-//    UserResponseDTO.UserUpdateDTO update(UserRequestDTO.UserUpdateDTO userUpdateDTO, String userEmail);
 //    // 로그아웃
 
 }

@@ -14,6 +14,7 @@ import megabooks.megabooks.domain.user.dto.UserResponseDTO;
 import megabooks.megabooks.domain.user.service.UserService;
 import megabooks.megabooks.global.reponse.CustomResponse;
 import megabooks.megabooks.global.security.jwt.JwtDto;
+import megabooks.megabooks.global.security.util.SecurityUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +57,30 @@ public class UserApiController {
     public ResponseEntity<?> findOneByUserId(@Parameter(description = "회원 고유 식별자")
                                                    @PathVariable("userId") Long userId) {
         return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), userService.findOne(userId)));
+    }
+
+    @PostMapping("/updatePassword")
+    @Operation(summary = "회원 비밀번호 수정", description = "회원 비밀번호 수정합니다.")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS")
+//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    public ResponseEntity<?> updatePassword(@Parameter(description = "회원 수정 정보를 담는 DTO")
+                                  UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO) {
+        userService.updatePassword(userUpdatePasswordDTO, SecurityUtil.getCurrentId());
+        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value()));
+    }
+
+    @PostMapping("/updateName")
+    @Operation(summary = "회원 이름 수정", description = "회원 이름 수정합니다.")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS")
+//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    public ResponseEntity<?> updateName(@Parameter(description = "회원 수정 정보를 담는 DTO")
+                                  UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO) {
+        userService.updateName(userUpdateNameDTO, SecurityUtil.getCurrentId());
+        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value()));
     }
 
 }
