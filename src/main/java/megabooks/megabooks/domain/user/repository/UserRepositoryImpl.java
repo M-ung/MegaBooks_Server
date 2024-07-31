@@ -17,17 +17,15 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         this.queryFactory = new JPAQueryFactory(em);
     }
     @Override
-    public UserResponseDTO.UserFindOneDTO findOne(String userEmail) {
-        log.info("[BookRepositoryImpl] findOne");
-        log.info(userEmail);
+    public UserResponseDTO.UserFindOneDTO findOneByUserId(Long userId) {
         return Optional.ofNullable(queryFactory
                         .select(Projections.constructor(UserResponseDTO.UserFindOneDTO.class,
-                                user.id,
+                                user.userId,
                                 user.userEmail,
                                 user.userName
                         ))
                         .from(user)
-                        .where(user.userEmail.eq(userEmail))
+                        .where(user.userId.eq(userId))
                         .fetchOne())
                 .orElse(null);
     }

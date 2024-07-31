@@ -47,4 +47,15 @@ public class UserApiController {
                                    @RequestBody UserRequestDTO.UserLoginDTO userLoginDTO) {
         return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), userService.login(userLoginDTO)));
     }
+    @GetMapping("/findOne/{userId}")
+    @Operation(summary = "회원 조회", description = "회원을 조회합니다.")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS", content = @Content(schema = @Schema(implementation = UserResponseDTO.UserFindOneDTO.class)))
+//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    public ResponseEntity<?> findOneByUserId(@Parameter(description = "회원 고유 식별자")
+                                                   @PathVariable("userId") Long userId) {
+        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), userService.findOne(userId)));
+    }
+
 }

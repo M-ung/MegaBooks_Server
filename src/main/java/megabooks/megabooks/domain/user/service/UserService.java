@@ -9,8 +9,8 @@ public interface UserService {
     UserResponseDTO.UserJoinDTO join(UserRequestDTO.UserJoinDTO userJoinDTO);
     // 로그인
     JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO);
-//    // 회원 조회
-//    UserResponseDTO.UserFindOneDTO findOne(String userEmail);
+    // 회원 조회
+    UserResponseDTO.UserFindOneDTO findOne(Long userId);
 //    // 회원 탈퇴
 //    UserResponseDTO.UserDeleteDTO delete(String userEmail);
 //    // 회원 수정

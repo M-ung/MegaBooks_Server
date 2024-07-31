@@ -53,6 +53,11 @@ public class UserServiceImpl implements UserService {
         return jwtProvider.createJwtDto(findUser.getUserId(), findUser.getMegaBooksRole());
     }
 
+    @Override
+    public UserResponseDTO.UserFindOneDTO findOne(Long userId) {
+        return userRepository.findOneByUserId(userId);
+    }
+
     /** 추가 메서드 **/
     private static void checkPassword(String password, User findUser, PasswordEncoder passwordEncoder) {
         if(!passwordEncoder.matches(password, findUser.getUserPassword())) {
