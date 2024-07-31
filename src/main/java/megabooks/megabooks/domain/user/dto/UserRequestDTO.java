@@ -12,8 +12,8 @@ public class UserRequestDTO {
         private String userName;
     }
     @Data
-    public static class UserUpdateDTO {
-        private String userName;
-        private String userImg;
+    public static class UserLoginDTO {
+        private String userEmail;
+        private String userPassword;
     }
 }

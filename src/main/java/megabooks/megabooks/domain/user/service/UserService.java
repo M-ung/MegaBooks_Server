@@ -2,10 +2,13 @@ package megabooks.megabooks.domain.user.service;
 
 import megabooks.megabooks.domain.user.dto.UserRequestDTO;
 import megabooks.megabooks.domain.user.dto.UserResponseDTO;
+import megabooks.megabooks.global.security.jwt.JwtDto;
 
 public interface UserService {
     // 회원 가입
     UserResponseDTO.UserJoinDTO join(UserRequestDTO.UserJoinDTO userJoinDTO);
+    // 로그인
+    JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO);
 //    // 회원 조회
 //    UserResponseDTO.UserFindOneDTO findOne(String userEmail);
 //    // 회원 탈퇴

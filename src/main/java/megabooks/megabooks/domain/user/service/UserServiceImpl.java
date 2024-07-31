@@ -8,11 +8,17 @@ import megabooks.megabooks.domain.user.entity.User;
 import megabooks.megabooks.domain.user.mapper.UserMapper;
 import megabooks.megabooks.domain.user.repository.UserRepository;
 import megabooks.megabooks.global.exception.user.UserEmailDuplicationException;
+import megabooks.megabooks.global.exception.user.UserInvalidPasswordException;
+import megabooks.megabooks.global.exception.user.UserNotFoundException;
+import megabooks.megabooks.global.security.jwt.JwtDto;
+import megabooks.megabooks.global.security.jwt.JwtProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static megabooks.megabooks.global.exception.ErrorCode.EMAIL_DUPLICATION_USER;
+import java.util.Optional;
+
+import static megabooks.megabooks.global.exception.ErrorCode.*;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,8 +28,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final JwtProvider jwtProvider;
 
     @Override
+    @Transactional
     public UserResponseDTO.UserJoinDTO join(UserRequestDTO.UserJoinDTO userJoinDTO) {
         // 이메일 중복 확인
         if(userRepository.findByUserEmail(userJoinDTO.getUserEmail()).isPresent()) {
@@ -36,4 +44,34 @@ public class UserServiceImpl implements UserService {
         // UserResponseDTO.UserJoinDTO 반환
         return userMapper.toUserJoinResDTO(user);
     }
+
+    @Override
+    @Transactional
+    public JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO) {
+        User findUser = getUser_Email(userLoginDTO.getUserEmail());
+        checkPassword(userLoginDTO.getUserPassword(), findUser, passwordEncoder);
+        return jwtProvider.createJwtDto(findUser.getUserId(), findUser.getMegaBooksRole());
+    }
+
+    /** 추가 메서드 **/
+    private static void checkPassword(String password, User findUser, PasswordEncoder passwordEncoder) {
+        if(!passwordEncoder.matches(password, findUser.getUserPassword())) {
+            throw new UserInvalidPasswordException(INVALID_PASSWORD_USER);
+        }
+    }
+    private User getUser_Id(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(!optionalUser.isPresent()) {
+            throw new UserNotFoundException(NOT_FOUND_USER);
+        }
+        return optionalUser.get();
+    }
+    private User getUser_Email(String userEmail) {
+        Optional<User> optionalUser = userRepository.findByUserEmail(userEmail);
+        if(!optionalUser.isPresent()) {
+            throw new UserNotFoundException(NOT_FOUND_USER);
+        }
+        return optionalUser.get();
+    }
+
 }
