@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserApiController {
     private final UserService userService;
 
-    @GetMapping("/join")
+    @PostMapping("/join")
     @Operation(summary = "회원 가입", description = "회원 가입합니다.")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS", content = @Content(schema = @Schema(implementation = UserResponseDTO.UserJoinDTO.class)))
