@@ -17,53 +17,11 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
     }
     @Override
     public BookResponseDTO.BookFindOneDTO findOne(Long bookId) {
-        BookResponseDTO.BookFindOneDTO result = queryFactory.select(Projections.constructor(BookResponseDTO.BookFindOneDTO.class,
-                        book.id,
-                        book.bookTitle,
-                        book.bookAuthor,
-                        book.bookPublisher,
-                        book.bookPrice,
-                        book.bookRate,
-                        book.bookSales,
-                        book.bookGenre
-                ))
-                .from(book)
-                .where(book.id.eq(bookId))
-                .fetchOne();
-
-        List<String> bookUrlList = queryFactory.select(image.imageUrl)
-                .from(image)
-                .where(image.book.id.eq(result.getId()))
-                .fetch();
-
-        result.setBookUrlList(bookUrlList);
-
-        return result;
+        return null;
     }
 
     @Override
     public BookResponseDTO.BookFindAllDTO findAllBook() {
-        List<BookResponseDTO.BookFindOneDTO> bookList = queryFactory.select(Projections.constructor(BookResponseDTO.BookFindOneDTO.class,
-                        book.id,
-                        book.bookTitle,
-                        book.bookAuthor,
-                        book.bookPublisher,
-                        book.bookPrice,
-                        book.bookRate,
-                        book.bookSales,
-                        book.bookGenre
-                ))
-                .from(book)
-                .fetch();
-
-        for (BookResponseDTO.BookFindOneDTO bookDTO : bookList) {
-            List<String> bookUrlList = queryFactory.select(image.imageUrl)
-                    .from(image)
-                    .where(image.book.id.eq(bookDTO.getId()))
-                    .fetch();
-            bookDTO.setBookUrlList(bookUrlList);
-        }
-
-        return new BookResponseDTO.BookFindAllDTO(bookList);
+        return null;
     }
 }

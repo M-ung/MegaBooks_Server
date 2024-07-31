@@ -82,22 +82,7 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:2.4.4'
 }
 
-tasks.named('bootBuildImage') {
-    builder = 'paketobuildpacks/builder-jammy-base:latest'
-}
-
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-// === ⭐ QueryDsl 빌드 옵션 (선택) ===
-def querydslDir = "/generated/querydsl"
-
-sourceSets {
-    main.java.srcDirs += [ querydslDir ]
-}
-
-
-clean.doLast {
-    file(querydslDir).deleteDir()
-}

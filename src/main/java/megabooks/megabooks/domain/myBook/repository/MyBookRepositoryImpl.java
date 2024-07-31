@@ -21,30 +21,6 @@ public class MyBookRepositoryImpl implements MyBookRepositoryCustom {
     }
     @Override
     public MyBookResponseDTO.MyBookFindAll findAll(String userEmail) {
-        List<MyBookResponseDTO.MyBookFindOne> myBookList = queryFactory
-                .select(Projections.constructor(MyBookResponseDTO.MyBookFindOne.class,
-                        myBook.id,
-                        book.id,
-                        book.bookTitle,
-                        book.bookAuthor,
-                        book.bookPublisher,
-//                        book.bookRate,
-                        book.bookGenre,
-                        myBook.myBookStatus
-                ))
-                .from(myBook)
-                .join(myBook.book, book)
-                .where(myBook.user.userEmail.eq(userEmail))
-                .fetch();
-
-        for (MyBookResponseDTO.MyBookFindOne myBookDTO : myBookList) {
-            List<String> bookUrlList = queryFactory.select(image.imageUrl)
-                    .from(image)
-                    .where(image.book.id.eq(myBookDTO.getBookId()))
-                    .fetch();
-            myBookDTO.setBookUrlList(bookUrlList);
-        }
-
-        return new MyBookResponseDTO.MyBookFindAll(userEmail, myBookList);
+        return null;
     }
 }
