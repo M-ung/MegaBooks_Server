@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import static megabooks.megabooks.domain.Image.entity.QImage.image;
 import static megabooks.megabooks.domain.book.entity.QBook.book;
+import static megabooks.megabooks.domain.like.QLikes.likes;
 import static megabooks.megabooks.domain.order.entity.QOrder.order;
 import static megabooks.megabooks.domain.orderBook.entity.QOrderBook.orderBook;
 

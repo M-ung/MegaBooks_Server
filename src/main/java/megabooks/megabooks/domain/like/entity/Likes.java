@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.like;
+package megabooks.megabooks.domain.like.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
