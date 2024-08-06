@@ -79,18 +79,13 @@ public class UserServiceImpl implements UserService {
         }
     }
     private User getUser_Id(Long userId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if(!optionalUser.isPresent()) {
-            throw new UserNotFoundException(NOT_FOUND_USER);
-        }
-        return optionalUser.get();
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(NOT_FOUND_USER));
     }
+
     private User getUser_Email(String userEmail) {
-        Optional<User> optionalUser = userRepository.findByUserEmail(userEmail);
-        if(!optionalUser.isPresent()) {
-            throw new UserNotFoundException(NOT_FOUND_USER);
-        }
-        return optionalUser.get();
+        return userRepository.findByUserEmail(userEmail)
+                .orElseThrow(() -> new UserNotFoundException(NOT_FOUND_USER));
     }
 
 }
