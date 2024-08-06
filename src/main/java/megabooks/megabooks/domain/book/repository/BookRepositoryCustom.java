@@ -10,4 +10,7 @@ public interface BookRepositoryCustom {
 
     // 주간 베스트 조회
     Page<BookResponseDTO.BookFindOneDTO> findAllByWeeklyBestWithPageable(Pageable pageable);
+
+    // 책 상세보기
+    BookResponseDTO.BookFindDetailDTO findDetailByBookId(Long bookId);
 }

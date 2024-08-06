@@ -36,4 +36,9 @@ public class BookServiceImpl implements BookService {
     public Page<BookResponseDTO.BookFindOneDTO> findAllByWeeklyBest(Pageable pageable) {
         return bookRepository.findAllByWeeklyBestWithPageable(pageable);
     }
+
+    @Override
+    public BookResponseDTO.BookFindDetailDTO findDetailByBookId(Long bookId) {
+        return bookRepository.findDetailByBookId(bookId);
+    }
 }

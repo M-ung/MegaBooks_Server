@@ -25,6 +25,8 @@ public class QBook extends EntityPathBase<Book> {
 
     public final StringPath bookContent = createString("bookContent");
 
+    public final DatePath<java.time.LocalDate> bookDate = createDate("bookDate", java.time.LocalDate.class);
+
     public final EnumPath<BookGenre> bookGenre = createEnum("bookGenre", BookGenre.class);
 
     public final NumberPath<Long> bookId = createNumber("bookId", Long.class);
@@ -37,10 +39,14 @@ public class QBook extends EntityPathBase<Book> {
 
     public final EnumPath<BookStatus> bookStatus = createEnum("bookStatus", BookStatus.class);
 
+    public final StringPath bookSummary = createString("bookSummary");
+
     public final StringPath bookTitle = createString("bookTitle");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
+
+    public final NumberPath<Integer> downloads = createNumber("downloads", Integer.class);
 
     public final NumberPath<Integer> likes = createNumber("likes", Integer.class);
 

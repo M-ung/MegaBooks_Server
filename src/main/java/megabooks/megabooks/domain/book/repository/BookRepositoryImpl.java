@@ -69,4 +69,24 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
         LocalDateTime oneWeekAgo = LocalDateTime.now().minusDays(7);
         return findAllByBestWithPageable(pageable, oneWeekAgo);
     }
+
+    @Override
+    public BookResponseDTO.BookFindDetailDTO findDetailByBookId(Long bookId) {
+        return queryFactory.select(Projections.constructor(BookResponseDTO.BookFindDetailDTO.class,
+                        book.bookId,
+                        book.bookTitle,
+                        book.bookSummary,
+                        book.bookStatus,
+                        book.bookAuthor,
+                        book.bookPublisher,
+                        book.bookImgUrl,
+                        book.bookGenre,
+                        book.bookDate,
+                        book.stars,
+                        book.downloads
+                ))
+                .from(book)
+                .where(book.bookId.eq(bookId))
+                .fetchOne();
+    }
 }

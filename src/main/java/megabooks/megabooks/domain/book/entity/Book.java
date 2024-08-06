@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import megabooks.megabooks.global.entity.BaseEntity;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Builder
@@ -27,4 +29,7 @@ public class Book extends BaseEntity {
     private BookGenre bookGenre;
     private double stars;
     private int likes;
+    private LocalDate bookDate;
+    private String bookSummary;
+    private int downloads;
 }
