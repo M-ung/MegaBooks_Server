@@ -5,6 +5,8 @@ import lombok.*;
 import megabooks.megabooks.domain.user.entity.User;
 import megabooks.megabooks.global.entity.BaseEntity;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Builder
@@ -17,10 +19,9 @@ public class Order extends BaseEntity {
     @Column(name = "order_id")
     private Long orderId;
 
-    @Enumerated(value = EnumType.STRING)
-    private OrderStatus orderStatus;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private User user;
+
+    private LocalDateTime orderDate;
 }

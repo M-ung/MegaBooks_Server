@@ -27,9 +27,9 @@ public class QOrder extends EntityPathBase<Order> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
 
-    public final NumberPath<Long> orderId = createNumber("orderId", Long.class);
+    public final DateTimePath<java.time.LocalDateTime> orderDate = createDateTime("orderDate", java.time.LocalDateTime.class);
 
-    public final EnumPath<OrderStatus> orderStatus = createEnum("orderStatus", OrderStatus.class);
+    public final NumberPath<Long> orderId = createNumber("orderId", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;

@@ -27,9 +27,4 @@ public class Book extends BaseEntity {
     private BookGenre bookGenre;
     private double stars;
     private int likes;
-    private int bookSales; // 판매량
-
-    public void increaseBookSales() {
-        this.bookSales += 1;
-    }
 }

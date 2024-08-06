@@ -22,13 +22,4 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    @Override
-    public OrderResponseDTO.OrderFindOneDTO findOne(Long orderId, String userEmail) {
-        return null;
-    }
-
-    @Override
-    public OrderResponseDTO.OrderFindAllDTO findAll(String userEmail) {
-        return null;
-    }
 }
