@@ -15,10 +15,8 @@ public class MyBook extends BaseEntity {
     @GeneratedValue
     @Column(name = "my_book_id")
     private Long myBookId;
-    private int myBookProcess;
 
-    @Enumerated(value = EnumType.STRING)
-    private MyBookStatus myBookStatus; // 열람 상태 확인
+    private int myBookProcess;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

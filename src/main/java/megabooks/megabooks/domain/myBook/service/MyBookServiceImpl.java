@@ -2,11 +2,7 @@ package megabooks.megabooks.domain.myBook.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import megabooks.megabooks.domain.myBook.dto.MyBookResponseDTO;
-import megabooks.megabooks.domain.myBook.entity.MyBook;
-import megabooks.megabooks.domain.myBook.entity.MyBookStatus;
 import megabooks.megabooks.domain.myBook.repository.MyBookRepository;
-import megabooks.megabooks.domain.user.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

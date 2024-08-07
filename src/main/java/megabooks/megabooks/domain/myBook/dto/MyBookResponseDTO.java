@@ -2,8 +2,6 @@ package megabooks.megabooks.domain.myBook.dto;
 
 import lombok.Data;
 import megabooks.megabooks.domain.book.entity.BookGenre;
-import megabooks.megabooks.domain.myBook.entity.MyBook;
-import megabooks.megabooks.domain.myBook.entity.MyBookStatus;
 
 import java.util.List;
 
