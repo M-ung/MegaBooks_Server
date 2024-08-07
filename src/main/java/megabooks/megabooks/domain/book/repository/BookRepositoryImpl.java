@@ -4,18 +4,13 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
-import megabooks.megabooks.domain.book.entity.QBook;
-import megabooks.megabooks.domain.order.entity.QOrder;
-import megabooks.megabooks.domain.orderBook.entity.QOrderBook;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import static megabooks.megabooks.domain.Image.entity.QImage.image;
 import static megabooks.megabooks.domain.book.entity.QBook.book;
-import static megabooks.megabooks.domain.like.QLikes.likes;
 import static megabooks.megabooks.domain.order.entity.QOrder.order;
 import static megabooks.megabooks.domain.orderBook.entity.QOrderBook.orderBook;
 

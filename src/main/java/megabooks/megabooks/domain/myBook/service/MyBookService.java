@@ -1,8 +1,9 @@
 package megabooks.megabooks.domain.myBook.service;
 
 import megabooks.megabooks.domain.myBook.dto.MyBookResponseDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface MyBookService {
-//    MyBookResponseDTO.MyBookFindAll findAll(String userEmail);
-//    MyBookResponseDTO.MyBookConfirmed confirmed(String userEmail, Long myBookId);
+    Page<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserId(Long userId, Pageable pageable);
 }

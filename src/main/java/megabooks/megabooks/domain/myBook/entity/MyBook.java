@@ -16,7 +16,7 @@ public class MyBook extends BaseEntity {
     @Column(name = "my_book_id")
     private Long myBookId;
 
-    private int myBookProcess;
+    private int myBookProcess; // 현재까지 읽은 진행도
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
