@@ -1,6 +1,7 @@
 package megabooks.megabooks.domain.book.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -50,5 +51,15 @@ public class BookApiController {
     })
     public ResponseEntity<?> findDetailByBookId(@PathVariable("bookId") Long bookId) {
         return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findDetailByBookId(bookId)));
+    }
+
+    @GetMapping("/findAllByKeyword")
+    @Operation(summary = "책 키워드 전체 조회", description = "책 키워드 전체 조회합니다.")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS", content = @Content(schema = @Schema(implementation = BookResponseDTO.BookFindOneDTO.class)))
+//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    public ResponseEntity<?> findAllByKeyword(@RequestParam(value = "keyword", required = false) String keyword, Pageable pageable) {
+        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findAllByKeyword(keyword, pageable)));
     }
 }

@@ -41,4 +41,9 @@ public class BookServiceImpl implements BookService {
     public BookResponseDTO.BookFindDetailDTO findDetailByBookId(Long bookId) {
         return bookRepository.findDetailByBookId(bookId);
     }
+
+    @Override
+    public Page<BookResponseDTO.BookFindOneDTO> findAllByKeyword(String keyword, Pageable pageable) {
+        return bookRepository.findAllByKeywordWithPageable(keyword, pageable);
+    }
 }

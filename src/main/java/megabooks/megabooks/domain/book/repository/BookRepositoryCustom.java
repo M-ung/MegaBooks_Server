@@ -13,4 +13,7 @@ public interface BookRepositoryCustom {
 
     // 책 상세보기
     BookResponseDTO.BookFindDetailDTO findDetailByBookId(Long bookId);
+
+    // 키워드 검색
+    Page<BookResponseDTO.BookFindOneDTO> findAllByKeywordWithPageable(String keyword, Pageable pageable);
 }
