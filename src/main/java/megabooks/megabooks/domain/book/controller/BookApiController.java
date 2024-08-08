@@ -1,7 +1,6 @@
 package megabooks.megabooks.domain.book.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -27,7 +26,6 @@ public class BookApiController {
     @Operation(summary = "책 월간 베스트 전체 조회", description = "책 월간 베스트 전체 조회합니다.")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS", content = @Content(schema = @Schema(implementation = BookResponseDTO.BookFindOneDTO.class)))
-//            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "잘못된 요청", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
     public ResponseEntity<?> findAllByMonthlyBest(Pageable pageable) {
         return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findAllByMonthlyBest(pageable)));
