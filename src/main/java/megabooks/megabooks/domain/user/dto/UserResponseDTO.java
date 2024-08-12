@@ -1,7 +1,7 @@
 package megabooks.megabooks.domain.user.dto;
 
 import lombok.*;
-import megabooks.megabooks.domain.user.entity.User;
+import megabooks.megabooks.global.security.jwt.MegaBooksRole;
 
 @Data
 public class UserResponseDTO {
@@ -9,31 +9,19 @@ public class UserResponseDTO {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Builder
-    public static class UserJoinDTO {
-        private Long id;
+    public static class UserFindDetailDTO {
+        private Long userId;
         private String userEmail;
         private String userName;
-        private String userImg;
-        private String role;
+        private MegaBooksRole megaBooksRole;
     }
     @Data
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Builder
     public static class UserFindOneDTO {
-        private Long id;
+        private Long userId;
         private String userEmail;
         private String userName;
-    }
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    @Builder
-    public static class UserDeleteDTO {
-        private Long id;
-        private String userEmail;
-        private String userName;
-        private String userImg;
-        private String role;
     }
 }

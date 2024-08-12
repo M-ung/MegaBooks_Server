@@ -30,68 +30,44 @@ public class UserApiController {
     @PostMapping("/join")
     @Operation(summary = "회원 가입", description = "회원 가입합니다.")
     @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS", content = @Content(schema = @Schema(implementation = UserResponseDTO.UserJoinDTO.class))),
+            @ApiResponse(responseCode = "200", description = "SUCCESS", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
             @ApiResponse(responseCode = "404", description = "Data Not Found", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = CustomResponse.class)))
     })
-    public ResponseEntity<?> join(@Parameter(description = "회원 가입 정보를 담는 DTO")
-                                                   UserRequestDTO.UserJoinDTO userJoinDTO) {
-        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), userService.join(userJoinDTO)));
+    public CustomResponse<UserResponseDTO.UserFindDetailDTO> join(@Parameter(description = "회원 가입 정보를 담는 DTO")
+                                                   @RequestBody  UserRequestDTO.UserJoinDTO userJoinDTO) {
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.join(userJoinDTO));
     }
 
     /** 회원 로그인 API **/
     @PostMapping("/login")
     @Operation(summary = "로그인 API", description = "로그인 API 입니다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "SUCCESS", content = @Content(schema = @Schema(implementation = JwtDto.class))),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Data Not Found", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = CustomResponse.class)))
-    })
-    public ResponseEntity<?> login(@Parameter(description = "로그인 정보를 담고 있는 DTO")
+    public CustomResponse<JwtDto> login(@Parameter(description = "로그인 정보를 담고 있는 DTO")
                                    @RequestBody UserRequestDTO.UserLoginDTO userLoginDTO) {
-        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), userService.login(userLoginDTO)));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.login(userLoginDTO));
     }
     @GetMapping("/findOne/{userId}")
     @Operation(summary = "회원 조회", description = "회원을 조회합니다.")
-    @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS", content = @Content(schema = @Schema(implementation = UserResponseDTO.UserFindOneDTO.class))),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Data Not Found", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = CustomResponse.class)))
-    })
-    public ResponseEntity<?> findOneByUserId(@Parameter(description = "회원 고유 식별자")
+    public CustomResponse<UserResponseDTO.UserFindOneDTO> findOneByUserId(@Parameter(description = "회원 고유 식별자")
                                                    @PathVariable("userId") Long userId) {
-        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value(), userService.findOne(userId)));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.findOne(userId));
     }
 
     @PostMapping("/updatePassword")
     @Operation(summary = "회원 비밀번호 수정", description = "회원 비밀번호 수정합니다.")
-    @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Data Not Found", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = CustomResponse.class)))
-    })
-    public ResponseEntity<?> updatePassword(@Parameter(description = "회원 수정 정보를 담는 DTO")
-                                  UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO) {
+    public CustomResponse<?> updatePassword(@Parameter(description = "회원 수정 정보를 담는 DTO")
+                                  @RequestBody UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO) {
         userService.updatePassword(userUpdatePasswordDTO, SecurityUtil.getCurrentId());
-        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value()));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value());
     }
 
     @PostMapping("/updateName")
     @Operation(summary = "회원 이름 수정", description = "회원 이름 수정합니다.")
-    @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "SUCCESS"),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Data Not Found", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = CustomResponse.class)))
-    })
-    public ResponseEntity<?> updateName(@Parameter(description = "회원 수정 정보를 담는 DTO")
-                                  UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO) {
+    public CustomResponse<?> updateName(@Parameter(description = "회원 수정 정보를 담는 DTO")
+                                  @RequestBody UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO) {
         userService.updateName(userUpdateNameDTO, SecurityUtil.getCurrentId());
-        return ResponseEntity.ok().body(CustomResponse.SUCCESS(HttpStatus.CREATED.value()));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value());
     }
 
 }

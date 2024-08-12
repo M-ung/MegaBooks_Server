@@ -20,7 +20,7 @@ public class UserRequestDTO {
         private String userPassword;
     }
     @Data
-    public class UserUpdateNameDTO {
+    public static class UserUpdateNameDTO {
         private String userName;
     }
 }

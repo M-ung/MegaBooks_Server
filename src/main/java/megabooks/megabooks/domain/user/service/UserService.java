@@ -6,7 +6,7 @@ import megabooks.megabooks.global.security.jwt.JwtDto;
 
 public interface UserService {
     // 회원 가입
-    UserResponseDTO.UserJoinDTO join(UserRequestDTO.UserJoinDTO userJoinDTO);
+    UserResponseDTO.UserFindDetailDTO join(UserRequestDTO.UserJoinDTO userJoinDTO);
     // 로그인
     JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO);
     // 회원 조회

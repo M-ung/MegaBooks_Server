@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .sessionManagement(it -> it.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/v1/member/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/member/user/login", "/api/v1/member/user/join").permitAll()
                                 // 스웨거
                                 .requestMatchers( "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                                 // GET (User)

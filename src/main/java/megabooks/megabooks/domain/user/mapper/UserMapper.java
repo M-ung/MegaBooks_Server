@@ -25,7 +25,7 @@ public class UserMapper {
                 .build();
     }
 
-    public UserResponseDTO.UserJoinDTO toUserJoinResDTO(User user) {
-        return modelMapper.map(user, UserResponseDTO.UserJoinDTO.class);
+    public UserResponseDTO.UserFindDetailDTO toUserJoinResDTO(User user) {
+        return modelMapper.map(user, UserResponseDTO.UserFindDetailDTO.class);
     }
 }

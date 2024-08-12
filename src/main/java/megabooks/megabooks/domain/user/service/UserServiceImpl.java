@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponseDTO.UserJoinDTO join(UserRequestDTO.UserJoinDTO userJoinDTO) {
+    public UserResponseDTO.UserFindDetailDTO join(UserRequestDTO.UserJoinDTO userJoinDTO) {
         // 이메일 중복 확인
         if(userRepository.findByUserEmail(userJoinDTO.getUserEmail()).isPresent()) {
             throw new UserEmailDuplicationException(EMAIL_DUPLICATION_USER);
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         // User 생성 및 저장
         User user = userRepository.save(userMapper.toUserEntity(userJoinDTO, passwordEncoder));
 
-        // UserResponseDTO.UserJoinDTO 반환
+        // UserResponseDTO.UserFindDetailDTO 반환
         return userMapper.toUserJoinResDTO(user);
     }
 
