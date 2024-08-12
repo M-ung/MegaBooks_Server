@@ -29,12 +29,6 @@ public class UserApiController {
 
     @PostMapping("/join")
     @Operation(summary = "회원 가입", description = "회원 가입합니다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "SUCCESS", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Data Not Found", content = @Content(schema = @Schema(implementation = CustomResponse.class))),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content(schema = @Schema(implementation = CustomResponse.class)))
-    })
     public CustomResponse<UserResponseDTO.UserFindDetailDTO> join(@Parameter(description = "회원 가입 정보를 담는 DTO")
                                                    @RequestBody  UserRequestDTO.UserJoinDTO userJoinDTO) {
         return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.join(userJoinDTO));
@@ -47,11 +41,10 @@ public class UserApiController {
                                    @RequestBody UserRequestDTO.UserLoginDTO userLoginDTO) {
         return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.login(userLoginDTO));
     }
-    @GetMapping("/findOne/{userId}")
+    @GetMapping("/findOne")
     @Operation(summary = "회원 조회", description = "회원을 조회합니다.")
-    public CustomResponse<UserResponseDTO.UserFindOneDTO> findOneByUserId(@Parameter(description = "회원 고유 식별자")
-                                                   @PathVariable("userId") Long userId) {
-        return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.findOne(userId));
+    public CustomResponse<UserResponseDTO.UserFindDetailDTO> findOneByUserId() {
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.findOne(SecurityUtil.getCurrentId()));
     }
 
     @PostMapping("/updatePassword")

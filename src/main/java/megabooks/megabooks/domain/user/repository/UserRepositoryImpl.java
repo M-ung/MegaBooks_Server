@@ -17,16 +17,15 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         this.queryFactory = new JPAQueryFactory(em);
     }
     @Override
-    public UserResponseDTO.UserFindOneDTO findOneByUserId(Long userId) {
-        return Optional.ofNullable(queryFactory
-                        .select(Projections.constructor(UserResponseDTO.UserFindOneDTO.class,
+    public UserResponseDTO.UserFindDetailDTO findOneByUserId(Long userId) {
+        return queryFactory.select(Projections.constructor(UserResponseDTO.UserFindDetailDTO.class,
                                 user.userId,
                                 user.userEmail,
-                                user.userName
+                                user.userName,
+                                user.megaBooksRole
                         ))
                         .from(user)
                         .where(user.userId.eq(userId))
-                        .fetchOne())
-                .orElse(null);
+                        .fetchOne();
     }
 }

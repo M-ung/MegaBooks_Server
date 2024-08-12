@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDTO.UserFindOneDTO findOne(Long userId) {
+    public UserResponseDTO.UserFindDetailDTO findOne(Long userId) {
         return userRepository.findOneByUserId(userId);
     }
 

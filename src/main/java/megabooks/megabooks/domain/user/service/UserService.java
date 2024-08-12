@@ -10,7 +10,7 @@ public interface UserService {
     // 로그인
     JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO);
     // 회원 조회
-    UserResponseDTO.UserFindOneDTO findOne(Long userId);
+    UserResponseDTO.UserFindDetailDTO findOne(Long userId);
     // 회원 비밀번호 수정
     void updatePassword(UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO, Long userId);
     // 회원 이름 수정
