@@ -32,4 +32,12 @@ public class Book extends BaseEntity {
     private LocalDate bookDate;
     private String bookSummary;
     private int downloads;
+
+    public void minusLikes() {
+        this.likes--;
+    }
+
+    public void plusLikes() {
+        this.likes++;
+    }
 }

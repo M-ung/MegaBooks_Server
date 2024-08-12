@@ -70,20 +70,22 @@ public class UserServiceImpl implements UserService {
         findUser.updateName(userUpdateNameDTO);
     }
 
+    @Override
+    public User getUser_Id(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(NOT_FOUND_USER));
+    }
+
+    @Override
+    public User getUser_Email(String userEmail) {
+        return userRepository.findByUserEmail(userEmail)
+                .orElseThrow(() -> new UserNotFoundException(NOT_FOUND_USER));
+    }
+
     /** 추가 메서드 **/
     private static void checkPassword(String password, User findUser, PasswordEncoder passwordEncoder) {
         if(!passwordEncoder.matches(password, findUser.getUserPassword())) {
             throw new UserInvalidPasswordException(INVALID_PASSWORD_USER);
         }
     }
-    private User getUser_Id(Long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(NOT_FOUND_USER));
-    }
-
-    private User getUser_Email(String userEmail) {
-        return userRepository.findByUserEmail(userEmail)
-                .orElseThrow(() -> new UserNotFoundException(NOT_FOUND_USER));
-    }
-
 }

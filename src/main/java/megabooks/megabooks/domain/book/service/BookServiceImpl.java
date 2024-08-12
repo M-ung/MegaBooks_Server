@@ -1,25 +1,17 @@
 package megabooks.megabooks.domain.book.service;
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import megabooks.megabooks.domain.Image.entity.Image;
-import megabooks.megabooks.domain.Image.repository.ImageRepository;
-import megabooks.megabooks.domain.book.dto.BookRequestDTO;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
 import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.book.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Value;
+import megabooks.megabooks.global.exception.book.BookNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import static megabooks.megabooks.global.exception.ErrorCode.NOT_FOUND_BOOK;
 
 @Service
 @Transactional(readOnly = true)
@@ -45,5 +37,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public Page<BookResponseDTO.BookFindOneDTO> findAllByKeyword(String keyword, Pageable pageable) {
         return bookRepository.findAllByKeywordWithPageable(keyword, pageable);
+    }
+
+    @Override
+    public Book getBook_id(Long bookId) {
+        return bookRepository.findById(bookId)
+                .orElseThrow(() -> new BookNotFoundException(NOT_FOUND_BOOK));
     }
 }

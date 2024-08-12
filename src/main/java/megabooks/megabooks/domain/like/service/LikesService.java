@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface LikesService {
     Page<BookResponseDTO.BookFindOneDTO> findLikesAllByUserId(Long userId, Pageable pageable);
+    void toggle(Long bookId, Long userId);
 }

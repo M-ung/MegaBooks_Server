@@ -1,6 +1,7 @@
 package megabooks.megabooks.domain.book.service;
 
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
+import megabooks.megabooks.domain.book.entity.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,4 +14,5 @@ public interface BookService {
     BookResponseDTO.BookFindDetailDTO findDetailByBookId(Long bookId);
     // 책 키워드 검색
     Page<BookResponseDTO.BookFindOneDTO> findAllByKeyword(String keyword, Pageable pageable);
+    Book getBook_id(Long bookId);
 }

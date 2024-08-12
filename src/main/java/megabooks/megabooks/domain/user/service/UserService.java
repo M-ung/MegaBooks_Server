@@ -2,6 +2,7 @@ package megabooks.megabooks.domain.user.service;
 
 import megabooks.megabooks.domain.user.dto.UserRequestDTO;
 import megabooks.megabooks.domain.user.dto.UserResponseDTO;
+import megabooks.megabooks.domain.user.entity.User;
 import megabooks.megabooks.global.security.jwt.JwtDto;
 
 public interface UserService {
@@ -19,4 +20,6 @@ public interface UserService {
 //    UserResponseDTO.UserDeleteDTO delete(String userEmail);
 //    // 로그아웃
 
+    User getUser_Id(Long userId);
+    User getUser_Email(String userEmail);
 }
