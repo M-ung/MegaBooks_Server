@@ -28,12 +28,16 @@ public class MyBookRepositoryImpl implements MyBookRepositoryCustom {
     @Override
     public Page<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserIdWithPageable(Long userId, Pageable pageable) {
         List<MyBookResponseDTO.MyBookFindOneDTO> result = queryFactory.select(Projections.constructor(MyBookResponseDTO.MyBookFindOneDTO.class,
-                        myBook.myBookId,
-                        myBook.myBookProcess,
-                        user.userId,
-                        user.userName,
                         book.bookId,
-                        book.bookTitle
+                        myBook.myBookId,
+                        book.bookTitle,
+                        book.bookAuthor,
+                        book.bookPublisher,
+                        myBook.myBookProcess,
+                        book.totalPage,
+                        book.bookImgUrl,
+                        book.bookGenre,
+                        book.stars
                 ))
                 .from(myBook)
                 .leftJoin(myBook.user, user)

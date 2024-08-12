@@ -3,7 +3,6 @@ package megabooks.megabooks.domain.user.dto;
 import lombok.*;
 import megabooks.megabooks.global.security.jwt.MegaBooksRole;
 
-@Data
 public class UserResponseDTO {
     @Data
     @AllArgsConstructor

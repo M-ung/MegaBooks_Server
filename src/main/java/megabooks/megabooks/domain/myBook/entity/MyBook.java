@@ -12,7 +12,7 @@ import megabooks.megabooks.global.entity.BaseEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MyBook extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "my_book_id")
     private Long myBookId;
 
