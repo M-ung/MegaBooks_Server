@@ -15,27 +15,42 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionCustomAdvice {
     @ExceptionHandler(UserEmailDuplicationException.class)
-    public CustomResponse<?> handleUserEmailDuplicationException(UserEmailDuplicationException ex) {
-        log.error("User email duplication error: {}", ex.getMessage(), ex);
-        return CustomResponse.ERROR(ErrorCode.EMAIL_DUPLICATION_USER);
+    public ResponseEntity<ApiErrorResponse> handleException(UserEmailDuplicationException ex) {
+        log.debug(ex.getMessage(), ex);
+        return new ResponseEntity<>(
+                new ApiErrorResponse(
+                        ErrorCode.EMAIL_DUPLICATION_USER.getStatus(),
+                        ex.getMessage()),
+                HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UserInvalidPasswordException.class)
-    public CustomResponse<?> handleUserInvalidPasswordException(UserInvalidPasswordException ex) {
-        log.error("Invalid password error: {}", ex.getMessage(), ex);
-        return CustomResponse.ERROR(ErrorCode.INVALID_PASSWORD_USER);
+    public ResponseEntity<ApiErrorResponse> handleException(UserInvalidPasswordException ex) {
+        log.debug(ex.getMessage(), ex);
+        return new ResponseEntity<>(
+                new ApiErrorResponse(
+                        ErrorCode.INVALID_PASSWORD_USER.getStatus(),
+                        ex.getMessage()),
+                HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public CustomResponse<?> handleUserNotFoundException(UserNotFoundException ex) {
-        log.error("User not found error: {}", ex.getMessage(), ex);
-        return CustomResponse.ERROR(ErrorCode.NOT_FOUND_USER);
+    public ResponseEntity<ApiErrorResponse> handleException(UserNotFoundException ex) {
+        log.debug(ex.getMessage(), ex);
+        return new ResponseEntity<>(
+                new ApiErrorResponse(
+                        ErrorCode.NOT_FOUND_USER.getStatus(),
+                        ex.getMessage()),
+                HttpStatus.NOT_FOUND);
     }
-
     @ExceptionHandler(BookNotFoundException.class)
-    public CustomResponse<?> handleBookNotFoundException(BookNotFoundException ex) {
-        log.error("User not found error: {}", ex.getMessage(), ex);
-        return CustomResponse.ERROR(ErrorCode.NOT_FOUND_BOOK);
+    public ResponseEntity<ApiErrorResponse> handleException(BookNotFoundException ex) {
+        log.debug(ex.getMessage(), ex);
+        return new ResponseEntity<>(
+                new ApiErrorResponse(
+                        ErrorCode.NOT_FOUND_BOOK.getStatus(),
+                        ex.getMessage()),
+                HttpStatus.NOT_FOUND);
     }
 
     // 추가 예외 핸들러를 필요에 따라 추가할 수 있습니다

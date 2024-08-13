@@ -36,7 +36,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     private final Logger log = LoggerFactory.getLogger(SecurityFilter.class);
     private final UserRepository userRepository;
     private static final Set<String> EXCLUDED_PATHS = Set.of(
-            "/api/v1/member/user/auth/**",
+            "/api/v1/member/**",
             "/swagger-ui/**", "/v3/api-docs/**"
     );
     @Override
