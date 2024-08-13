@@ -39,7 +39,7 @@ public class UserApiController {
     @Operation(summary = "로그인 API", description = "로그인 API 입니다.")
     public CustomResponse<JwtDto> login(@Parameter(description = "로그인 정보를 담고 있는 DTO")
                                    @RequestBody UserRequestDTO.UserLoginDTO userLoginDTO) {
-        return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.login(userLoginDTO));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), userService.login(userLoginDTO)); 
     }
     @GetMapping("/findOne")
     @Operation(summary = "회원 조회", description = "회원을 조회합니다.")
