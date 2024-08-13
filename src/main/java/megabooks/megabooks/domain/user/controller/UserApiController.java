@@ -51,7 +51,7 @@ public class UserApiController {
     @Operation(summary = "회원 비밀번호 수정", description = "회원 비밀번호 수정합니다.")
     public CustomResponse<?> updatePassword(@Parameter(description = "회원 수정 정보를 담는 DTO")
                                   @RequestBody UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO) {
-        userService.updatePassword(userUpdatePasswordDTO, SecurityUtil.getCurrentId());
+        userService.updatePassword(userUpdatePasswordDTO, SecurityUtil.getCurrentId()); 
         return CustomResponse.SUCCESS(HttpStatus.OK.value());
     }
 
