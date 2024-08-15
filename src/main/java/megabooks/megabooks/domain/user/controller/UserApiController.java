@@ -58,4 +58,10 @@ public class UserApiController {
         return CustomResponse.SUCCESS(HttpStatus.OK.value());
     }
 
+    @PostMapping("/delete")
+    @Operation(summary = "회원 탈퇴", description = "회원 탈퇴합니다.")
+    public CustomResponse<?> delete() {
+        userService.delete(SecurityUtil.getCurrentId());
+        return CustomResponse.SUCCESS(HttpStatus.OK.value());
+    }
 }

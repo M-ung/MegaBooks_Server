@@ -5,10 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.user.dto.UserRequestDTO;
 import megabooks.megabooks.domain.user.dto.UserResponseDTO;
 import megabooks.megabooks.domain.user.entity.User;
+import megabooks.megabooks.domain.user.entity.UserStatus;
 import megabooks.megabooks.domain.user.mapper.UserMapper;
 import megabooks.megabooks.domain.user.repository.UserRepository;
 import megabooks.megabooks.global.exception.user.UserEmailDuplicationException;
 import megabooks.megabooks.global.exception.user.UserInvalidPasswordException;
+import megabooks.megabooks.global.exception.user.UserNotActiveException;
 import megabooks.megabooks.global.exception.user.UserNotFoundException;
 import megabooks.megabooks.global.security.jwt.JwtDto;
 import megabooks.megabooks.global.security.jwt.JwtProvider;
@@ -48,6 +50,9 @@ public class UserServiceImpl implements UserService {
     public JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO) {
         User findUser = getUser_Email(userLoginDTO.getUserEmail());
         checkPassword(userLoginDTO.getUserPassword(), findUser, passwordEncoder);
+        if(findUser.getUserStatus().equals(UserStatus.DISACTIVE)) {
+            throw new UserNotActiveException(NOT_ACTIVE_USER);
+        }
         return jwtProvider.createJwtDto(findUser.getUserId(), findUser.getMegaBooksRole());
     }
 
@@ -68,6 +73,13 @@ public class UserServiceImpl implements UserService {
     public void updateName(UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO, Long userId) {
         User findUser = getUser_Id(userId);
         findUser.updateName(userUpdateNameDTO);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long userId) {
+        User findUser = getUser_Id(userId);
+        findUser.updateUserStatus();
     }
 
     @Override

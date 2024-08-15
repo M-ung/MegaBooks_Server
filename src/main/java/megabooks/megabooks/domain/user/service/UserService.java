@@ -16,8 +16,8 @@ public interface UserService {
     void updatePassword(UserRequestDTO.UserUpdatePasswordDTO userUpdatePasswordDTO, Long userId);
     // 회원 이름 수정
     void updateName(UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO, Long userId);
-    //    // 회원 탈퇴
-//    UserResponseDTO.UserDeleteDTO delete(String userEmail);
+    // 회원 탈퇴
+    void delete(Long userId);
 //    // 로그아웃
 
     User getUser_Id(Long userId);

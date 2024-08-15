@@ -45,4 +45,8 @@ public class User extends BaseEntity {
     public void updateName(UserRequestDTO.UserUpdateNameDTO userUpdateNameDTO) {
         this.userName = userUpdateNameDTO.getUserName();
     }
+
+    public void updateUserStatus() {
+        this.userStatus = UserStatus.DISACTIVE;
+    }
 }

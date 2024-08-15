@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.global.exception.book.BookNotFoundException;
 import megabooks.megabooks.global.exception.user.UserEmailDuplicationException;
 import megabooks.megabooks.global.exception.user.UserInvalidPasswordException;
+import megabooks.megabooks.global.exception.user.UserNotActiveException;
 import megabooks.megabooks.global.exception.user.UserNotFoundException;
 import megabooks.megabooks.global.reponse.CustomResponse;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 @ControllerAdvice
 public class ExceptionCustomAdvice {
+    @ExceptionHandler(UserNotActiveException.class)
+    public ResponseEntity<ApiErrorResponse> handleException(UserNotActiveException ex) {
+        log.debug(ex.getMessage(), ex);
+        return new ResponseEntity<>(
+                new ApiErrorResponse(
+                        ErrorCode.NOT_ACTIVE_USER.getStatus(),
+                        ex.getMessage()),
+                HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(UserEmailDuplicationException.class)
     public ResponseEntity<ApiErrorResponse> handleException(UserEmailDuplicationException ex) {
         log.debug(ex.getMessage(), ex);

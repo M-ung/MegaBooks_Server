@@ -28,7 +28,7 @@ public class JwtProvider {
     private final JwtProperties jwtProperties;
     private final Logger log = LoggerFactory.getLogger(JwtProvider.class);
 
-    private final static String JWT_TOKEN_ID = "PETAROUND_API";
+    private final static String JWT_TOKEN_ID = "MEGABOOKS_API";
     private final static String ID = "id";
 
     private SecretKey memberAccessToken;
