@@ -5,10 +5,10 @@ import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class OrderRepositoryImpl implements OrderRepositoryCustom {
+public class OrdersRepositoryImpl implements OrdersRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
-    public OrderRepositoryImpl(EntityManager em) {
+    public OrdersRepositoryImpl(EntityManager em) {
         this.queryFactory = new JPAQueryFactory(em);
     }
 

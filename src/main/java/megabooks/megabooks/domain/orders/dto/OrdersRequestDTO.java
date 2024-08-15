@@ -1,4 +1,4 @@
 package megabooks.megabooks.domain.orders.dto;
 
-public class OrderRequestDTO {
+public class OrdersRequestDTO {
 }

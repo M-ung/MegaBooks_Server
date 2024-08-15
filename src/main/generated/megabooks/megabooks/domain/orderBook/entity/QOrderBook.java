@@ -29,9 +29,9 @@ public class QOrderBook extends EntityPathBase<OrderBook> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
 
-    public final megabooks.megabooks.domain.orders.entity.QOrder order;
-
     public final NumberPath<Long> orderBookId = createNumber("orderBookId", Long.class);
+
+    public final megabooks.megabooks.domain.orders.entity.QOrders orders;
 
     public final NumberPath<Integer> totalPrice = createNumber("totalPrice", Integer.class);
 
@@ -57,7 +57,7 @@ public class QOrderBook extends EntityPathBase<OrderBook> {
     public QOrderBook(Class<? extends OrderBook> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.book = inits.isInitialized("book") ? new megabooks.megabooks.domain.book.entity.QBook(forProperty("book")) : null;
-        this.order = inits.isInitialized("order") ? new megabooks.megabooks.domain.orders.entity.QOrder(forProperty("order"), inits.get("order")) : null;
+        this.orders = inits.isInitialized("orders") ? new megabooks.megabooks.domain.orders.entity.QOrders(forProperty("orders"), inits.get("orders")) : null;
     }
 
 }

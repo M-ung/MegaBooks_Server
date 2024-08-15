@@ -3,7 +3,7 @@ package megabooks.megabooks.domain.orderBook.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import megabooks.megabooks.domain.book.entity.Book;
-import megabooks.megabooks.domain.orders.entity.Order;
+import megabooks.megabooks.domain.orders.entity.Orders;
 import megabooks.megabooks.global.entity.BaseEntity;
 
 @Entity
@@ -21,7 +21,7 @@ public class OrderBook extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private Order order;
+    private Orders orders;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")

@@ -6,5 +6,5 @@ import megabooks.megabooks.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderBookRepository extends JpaRepository<OrderBook, Long> {
-    boolean existsByOrder_UserAndBook(User user, Book book);
+    boolean existsByOrders_UserAndBook(User user, Book book);
 }

@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QOrder is a Querydsl query type for Orders
+ * QOrders is a Querydsl query type for Orders
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QOrder extends EntityPathBase<Orders> {
+public class QOrders extends EntityPathBase<Orders> {
 
-    private static final long serialVersionUID = 911530753L;
+    private static final long serialVersionUID = 2028835749L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QOrder order = new QOrder("order1");
+    public static final QOrders orders = new QOrders("orders");
 
     public final megabooks.megabooks.global.entity.QBaseEntity _super = new megabooks.megabooks.global.entity.QBaseEntity(this);
 
@@ -36,23 +36,23 @@ public class QOrder extends EntityPathBase<Orders> {
 
     public final megabooks.megabooks.domain.user.entity.QUser user;
 
-    public QOrder(String variable) {
+    public QOrders(String variable) {
         this(Orders.class, forVariable(variable), INITS);
     }
 
-    public QOrder(Path<? extends Orders> path) {
+    public QOrders(Path<? extends Orders> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QOrder(PathMetadata metadata) {
+    public QOrders(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QOrder(PathMetadata metadata, PathInits inits) {
+    public QOrders(PathMetadata metadata, PathInits inits) {
         this(Orders.class, metadata, inits);
     }
 
-    public QOrder(Class<? extends Orders> type, PathMetadata metadata, PathInits inits) {
+    public QOrders(Class<? extends Orders> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.user = inits.isInitialized("user") ? new megabooks.megabooks.domain.user.entity.QUser(forProperty("user")) : null;
     }

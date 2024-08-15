@@ -10,10 +10,9 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Builder
-@Table(name = "orders")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Order extends BaseEntity {
+public class Orders extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "order_id")

@@ -68,7 +68,7 @@ public class ExceptionCustomAdvice {
                 HttpStatus.NOT_FOUND);
     }
 
-    /** Order Exception **/
+    /** Orders Exception **/
     @ExceptionHandler(OrderDuplicationException.class)
     public ResponseEntity<ApiErrorResponse> handleException(OrderDuplicationException ex) {
         log.debug(ex.getMessage(), ex);

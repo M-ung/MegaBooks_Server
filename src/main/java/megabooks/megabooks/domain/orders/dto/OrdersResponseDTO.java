@@ -2,7 +2,7 @@ package megabooks.megabooks.domain.orders.dto;
 
 import lombok.*;
 
-public class OrderResponseDTO {
+public class OrdersResponseDTO {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -12,8 +12,8 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.util.*;
 import static megabooks.megabooks.domain.book.entity.QBook.book;
-import static megabooks.megabooks.domain.orders.entity.QOrder.order;
 import static megabooks.megabooks.domain.orderBook.entity.QOrderBook.orderBook;
+import static megabooks.megabooks.domain.orders.entity.QOrders.orders;
 
 @Slf4j
 public class BookRepositoryImpl implements BookRepositoryCustom {
@@ -36,8 +36,8 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
                 ))
                 .from(orderBook)
                 .join(orderBook.book, book)
-                .join(orderBook.order, order)
-                .where(order.orderDate.after(date))
+                .join(orderBook.orders, orders)
+                .where(orders.orderDate.after(date))
                 .groupBy(book.bookId)
                 .orderBy(orderBook.totalPrice.sum().desc())
                 .offset(pageable.getOffset())
@@ -47,8 +47,8 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
         long total = queryFactory
                 .selectFrom(orderBook)
                 .join(orderBook.book, book)
-                .join(orderBook.order, order)
-                .where(order.orderDate.after(date))
+                .join(orderBook.orders, orders)
+                .where(orders.orderDate.after(date))
                 .groupBy(book.bookId)
                 .fetchCount();
 
