@@ -3,7 +3,7 @@ package megabooks.megabooks.domain.orderBook.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import megabooks.megabooks.domain.book.entity.Book;
-import megabooks.megabooks.domain.order.entity.Order;
+import megabooks.megabooks.domain.orders.entity.Order;
 import megabooks.megabooks.global.entity.BaseEntity;
 
 @Entity

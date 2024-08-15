@@ -1,8 +1,10 @@
 package megabooks.megabooks.domain.orderBook.repository;
 
+import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.orderBook.entity.OrderBook;
+import megabooks.megabooks.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.Optional;
 
 public interface OrderBookRepository extends JpaRepository<OrderBook, Long> {
+    boolean existsByOrder_UserAndBook(User user, Book book);
 }

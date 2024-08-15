@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.util.*;
 import static megabooks.megabooks.domain.book.entity.QBook.book;
-import static megabooks.megabooks.domain.order.entity.QOrder.order;
+import static megabooks.megabooks.domain.orders.entity.QOrder.order;
 import static megabooks.megabooks.domain.orderBook.entity.QOrderBook.orderBook;
 
 @Slf4j

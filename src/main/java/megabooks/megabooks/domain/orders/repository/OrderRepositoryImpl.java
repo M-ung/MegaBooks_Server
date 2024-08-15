@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.order.repository;
+package megabooks.megabooks.domain.orders.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

@@ -12,6 +12,7 @@ public enum ErrorCode {
 
     /** 4XX **/
     EMAIL_DUPLICATION_USER(400,"중복된 이메일입니다."),
+    DUPLICATION_ORDER(400,"중복된 주문입니다."),
     NOT_FOUND_USER(404,"찾을 수 없는 회원입니다."),
     NOT_FOUND_ORDER(404,"찾을 수 없는 주문입니다."),
     NOT_FOUND_BOOK(404,"찾을 수 없는 책입니다."),

@@ -2,6 +2,7 @@ package megabooks.megabooks.global.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.global.exception.book.BookNotFoundException;
+import megabooks.megabooks.global.exception.order.OrderDuplicationException;
 import megabooks.megabooks.global.exception.user.UserEmailDuplicationException;
 import megabooks.megabooks.global.exception.user.UserInvalidPasswordException;
 import megabooks.megabooks.global.exception.user.UserNotActiveException;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 @ControllerAdvice
 public class ExceptionCustomAdvice {
+    /** User Exception **/
     @ExceptionHandler(UserNotActiveException.class)
     public ResponseEntity<ApiErrorResponse> handleException(UserNotActiveException ex) {
         log.debug(ex.getMessage(), ex);
@@ -54,6 +56,8 @@ public class ExceptionCustomAdvice {
                         ex.getMessage()),
                 HttpStatus.NOT_FOUND);
     }
+
+    /** Book Exception **/
     @ExceptionHandler(BookNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> handleException(BookNotFoundException ex) {
         log.debug(ex.getMessage(), ex);
@@ -63,6 +67,18 @@ public class ExceptionCustomAdvice {
                         ex.getMessage()),
                 HttpStatus.NOT_FOUND);
     }
+
+    /** Order Exception **/
+    @ExceptionHandler(OrderDuplicationException.class)
+    public ResponseEntity<ApiErrorResponse> handleException(OrderDuplicationException ex) {
+        log.debug(ex.getMessage(), ex);
+        return new ResponseEntity<>(
+                new ApiErrorResponse(
+                        ErrorCode.DUPLICATION_ORDER.getStatus(),
+                        ex.getMessage()),
+                HttpStatus.BAD_REQUEST);
+    }
+
 
     // 추가 예외 핸들러를 필요에 따라 추가할 수 있습니다
     @ExceptionHandler(Exception.class)

@@ -50,9 +50,7 @@ public class UserServiceImpl implements UserService {
     public JwtDto login(UserRequestDTO.UserLoginDTO userLoginDTO) {
         User findUser = getUser_Email(userLoginDTO.getUserEmail());
         checkPassword(userLoginDTO.getUserPassword(), findUser, passwordEncoder);
-        if(findUser.getUserStatus().equals(UserStatus.DISACTIVE)) {
-            throw new UserNotActiveException(NOT_ACTIVE_USER);
-        }
+        checkUserStatus(findUser);
         return jwtProvider.createJwtDto(findUser.getUserId(), findUser.getMegaBooksRole());
     }
 
@@ -98,6 +96,11 @@ public class UserServiceImpl implements UserService {
     private static void checkPassword(String password, User findUser, PasswordEncoder passwordEncoder) {
         if(!passwordEncoder.matches(password, findUser.getUserPassword())) {
             throw new UserInvalidPasswordException(INVALID_PASSWORD_USER);
+        }
+    }
+    private static void checkUserStatus(User findUser) {
+        if(findUser.getUserStatus().equals(UserStatus.DISACTIVE)) {
+            throw new UserNotActiveException(NOT_ACTIVE_USER);
         }
     }
 }
