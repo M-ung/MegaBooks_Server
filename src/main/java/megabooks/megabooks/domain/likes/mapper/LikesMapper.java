@@ -1,6 +1,7 @@
 package megabooks.megabooks.domain.likes.mapper;
 
 import megabooks.megabooks.domain.book.entity.Book;
+import megabooks.megabooks.domain.likes.dto.LikesResponseDTO;
 import megabooks.megabooks.domain.likes.entity.Likes;
 import megabooks.megabooks.domain.user.entity.User;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,12 @@ public class LikesMapper {
         return Likes.builder()
                 .book(book)
                 .user(user)
+                .build();
+    }
+
+    public LikesResponseDTO.LikesCheckDTO toLikesCheckDTO(boolean check) {
+        return LikesResponseDTO.LikesCheckDTO.builder()
+                .check(check)
                 .build();
     }
 }

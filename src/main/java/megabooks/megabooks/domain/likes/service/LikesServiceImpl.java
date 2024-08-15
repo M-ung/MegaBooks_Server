@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
 import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.book.service.BookService;
+import megabooks.megabooks.domain.likes.dto.LikesResponseDTO;
 import megabooks.megabooks.domain.likes.entity.Likes;
 import megabooks.megabooks.domain.likes.mapper.LikesMapper;
 import megabooks.megabooks.domain.likes.repository.LikesRepository;
@@ -38,6 +39,14 @@ public class LikesServiceImpl implements LikesService {
         User findUser = userService.getUser_Id(userId);
         Book findBook = bookService.getBook_id(bookId);
         checkLikes(findUser, findBook);
+    }
+
+    @Override
+    public LikesResponseDTO.LikesCheckDTO check(Long userId, Long bookId) {
+        User findUser = userService.getUser_Id(userId);
+        Book findBook = bookService.getBook_id(bookId);
+
+        return likesMapper.toLikesCheckDTO(likesRepository.existsByUserAndBook(findUser, findBook));
     }
 
     private void checkLikes(User findUser, Book findBook) {

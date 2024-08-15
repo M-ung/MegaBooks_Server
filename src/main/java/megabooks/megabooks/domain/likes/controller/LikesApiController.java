@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
+import megabooks.megabooks.domain.likes.dto.LikesResponseDTO;
 import megabooks.megabooks.domain.likes.service.LikesService;
 import megabooks.megabooks.global.reponse.CustomResponse;
 import megabooks.megabooks.global.security.util.SecurityUtil;
@@ -32,5 +33,11 @@ public class LikesApiController {
     public CustomResponse<?> toggle(@PathVariable("bookId") Long bookId) {
         likesService.toggle(bookId, SecurityUtil.getCurrentId());
         return CustomResponse.SUCCESS(HttpStatus.OK.value());
+    }
+
+    @GetMapping("/check/{bookId}")
+    @Operation(summary = "좋아요한 책인지 확인", description = "좋아요한 책인지 확인합니다.")
+    public CustomResponse<LikesResponseDTO.LikesCheckDTO> check(@PathVariable("bookId") Long bookId) {
+        return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), likesService.check(SecurityUtil.getCurrentId(), bookId));
     }
 }
