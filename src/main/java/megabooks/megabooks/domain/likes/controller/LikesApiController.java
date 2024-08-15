@@ -1,11 +1,11 @@
-package megabooks.megabooks.domain.like.controller;
+package megabooks.megabooks.domain.likes.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
-import megabooks.megabooks.domain.like.service.LikesService;
+import megabooks.megabooks.domain.likes.service.LikesService;
 import megabooks.megabooks.global.reponse.CustomResponse;
 import megabooks.megabooks.global.security.util.SecurityUtil;
 import org.springframework.data.domain.Page;

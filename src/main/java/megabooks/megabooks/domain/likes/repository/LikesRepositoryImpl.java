@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.like.repository;
+package megabooks.megabooks.domain.likes.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 import static megabooks.megabooks.domain.book.entity.QBook.book;
-import static megabooks.megabooks.domain.like.entity.QLikes.likes;
+import static megabooks.megabooks.domain.likes.entity.QLikes.likes;
 
 public class LikesRepositoryImpl implements LikesRepositoryCustom {
 

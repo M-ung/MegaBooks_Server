@@ -1,13 +1,13 @@
-package megabooks.megabooks.domain.like.service;
+package megabooks.megabooks.domain.likes.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
 import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.book.service.BookService;
-import megabooks.megabooks.domain.like.entity.Likes;
-import megabooks.megabooks.domain.like.mapper.LikesMapper;
-import megabooks.megabooks.domain.like.repository.LikesRepository;
+import megabooks.megabooks.domain.likes.entity.Likes;
+import megabooks.megabooks.domain.likes.mapper.LikesMapper;
+import megabooks.megabooks.domain.likes.repository.LikesRepository;
 import megabooks.megabooks.domain.user.entity.User;
 import megabooks.megabooks.domain.user.service.UserService;
 import org.springframework.data.domain.Page;
@@ -33,10 +33,10 @@ public class LikesServiceImpl implements LikesService {
     }
 
     @Override
+    @Transactional
     public void toggle(Long bookId, Long userId) {
         User findUser = userService.getUser_Id(userId);
         Book findBook = bookService.getBook_id(bookId);
-
         checkLikes(findUser, findBook);
     }
 

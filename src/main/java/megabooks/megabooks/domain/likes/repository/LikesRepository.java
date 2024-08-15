@@ -1,7 +1,7 @@
-package megabooks.megabooks.domain.like.repository;
+package megabooks.megabooks.domain.likes.repository;
 
 import megabooks.megabooks.domain.book.entity.Book;
-import megabooks.megabooks.domain.like.entity.Likes;
+import megabooks.megabooks.domain.likes.entity.Likes;
 import megabooks.megabooks.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

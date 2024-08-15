@@ -1,7 +1,7 @@
-package megabooks.megabooks.domain.like.mapper;
+package megabooks.megabooks.domain.likes.mapper;
 
 import megabooks.megabooks.domain.book.entity.Book;
-import megabooks.megabooks.domain.like.entity.Likes;
+import megabooks.megabooks.domain.likes.entity.Likes;
 import megabooks.megabooks.domain.user.entity.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

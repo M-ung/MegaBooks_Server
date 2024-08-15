@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.like.entity;
+package megabooks.megabooks.domain.likes.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QLikes extends EntityPathBase<Likes> {
 
-    private static final long serialVersionUID = 811706378L;
+    private static final long serialVersionUID = 525532609L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 

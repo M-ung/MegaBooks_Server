@@ -1,4 +1,4 @@
-package megabooks.megabooks.domain.like.service;
+package megabooks.megabooks.domain.likes.service;
 
 import megabooks.megabooks.domain.book.dto.BookResponseDTO;
 import org.springframework.data.domain.Page;
