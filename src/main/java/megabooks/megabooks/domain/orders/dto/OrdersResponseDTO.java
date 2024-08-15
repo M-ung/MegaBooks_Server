@@ -14,4 +14,12 @@ public class OrdersResponseDTO {
         private Long bookId;
         private int totalPrice;
     }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @Builder
+    public static class OrderCheckDTO {
+        private Boolean check;
+    }
 }

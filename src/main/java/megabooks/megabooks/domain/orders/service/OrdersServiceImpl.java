@@ -47,6 +47,14 @@ public class OrdersServiceImpl implements OrdersService {
         return ordersMapper.toOrderFindDetailDTO(findUser, orderBook);
     }
 
+    @Override
+    public OrdersResponseDTO.OrderCheckDTO check(Long userId, Long bookId) {
+        User findUser = userService.getUser_Id(userId);
+        Book findBook = bookService.getBook_id(bookId);
+
+        return ordersMapper.toOrderCheckDTO(orderBookService.existsByUserAndBook(findUser, findBook));
+    }
+
     private void checkExistUserAndBook(User findUser, Book findBook) {
         if (orderBookService.existsByUserAndBook(findUser, findBook)) {
             throw new OrderDuplicationException(ErrorCode.DUPLICATION_ORDER);

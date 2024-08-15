@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/member/order")
+@RequestMapping("/api/v1/member/orders")
 @Tag(name = "Orders", description = "주문 관련 API")
 @RequiredArgsConstructor
 @Slf4j
@@ -23,5 +23,11 @@ public class OrdersApiController {
     @Operation(summary = "책 주문", description = "책을 주문합니다.")
     public CustomResponse<OrdersResponseDTO.OrderFindDetailDTO> create(@PathVariable("bookId") Long bookId) {
         return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), ordersService.create(SecurityUtil.getCurrentId(), bookId));
+    }
+
+    @GetMapping("/check/{bookId}")
+    @Operation(summary = "주문한 책인지 확인", description = "주문한 책인지 확인합니다.")
+    public CustomResponse<OrdersResponseDTO.OrderCheckDTO> check(@PathVariable("bookId") Long bookId) {
+        return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), ordersService.check(SecurityUtil.getCurrentId(), bookId));
     }
 }

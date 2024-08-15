@@ -28,4 +28,10 @@ public class OrdersMapper {
                 .totalPrice(orderBook.getBook().getBookPrice())
                 .build();
     }
+
+    public OrdersResponseDTO.OrderCheckDTO toOrderCheckDTO(boolean check) {
+        return OrdersResponseDTO.OrderCheckDTO.builder()
+                .check(check)
+                .build();
+    }
 }

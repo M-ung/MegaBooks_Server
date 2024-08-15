@@ -23,7 +23,6 @@ public class OrderBookServiceImpl implements OrderBookService{
         OrderBook orderBook = orderBookMapper.toOrderBookEntity(orders, book);
         return orderBookRepository.save(orderBook);
     }
-
     @Override
     public boolean existsByUserAndBook(User user, Book book) {
         return orderBookRepository.existsByOrders_UserAndBook(user, book);
