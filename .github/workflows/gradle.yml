@@ -28,10 +28,10 @@ jobs:
           mkdir -p ./src/main/resources
           cd ./src/main/resources
           
-        ## application.yml 파일 생성
+          # application.yml 파일 생성
           touch ./application.yml
           
-        # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
+          # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
           echo "${{ secrets.APPLICATION }}" >> ./application.yml
         shell: bash
 
@@ -41,10 +41,10 @@ jobs:
           mkdir -p ./src/main/resources
           cd ./src/main/resources
 
-        # megabooksFirebase.json 파일 생성
+          # megabooksFirebase.json 파일 생성
           touch ./megabooksFirebase.json
 
-        # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
+          # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
           echo "${{ secrets.FIREBASE }}" >> ./megabooksFirebase.json
         shell: bash
 
