@@ -60,6 +60,7 @@ jobs:
       - name: Check resources directory
         run: |
           ls -l src/main/resources
+          ls -l
 
       - name: Build with Gradle
         run: |
