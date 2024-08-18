@@ -45,6 +45,7 @@ jobs:
 
           # GitHub-Actions 에서 설정한 값을 firebase.json 파일에 쓰기
           echo "${{ secrets.FIREBASE }}" >> ./firebase.json
+          cat ./firebase.json
         shell: bash
 
       - name: Build with Gradle
@@ -68,5 +69,6 @@ jobs:
           script: |
             sudo docker stop ${{ secrets.DOCKER_REPO }}
             sudo docker rm ${{ secrets.DOCKER_REPO }}
+            sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
             sudo docker run -p 8080:8080 -d --net my-network --name=${{ secrets.DOCKER_REPO }} ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
