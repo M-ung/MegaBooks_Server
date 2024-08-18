@@ -47,15 +47,15 @@ jobs:
 #          echo "${{ secrets.FIREBASE }}" >> ./firebase.json
 #        shell: bash
 
-      - name: make firebase.json
-        run: |
-
-          # firebase.json 파일 생성
-          touch ./firebase.json
-
-          # GitHub-Actions 에서 설정한 값을 firebase.json 파일에 쓰기
-          echo "${{ secrets.FIREBASE }}" >> ./firebase.json
-        shell: bash
+#      - name: make firebase.json
+#        run: |
+#
+#          # firebase.json 파일 생성
+#          touch ./firebase.json
+#
+#          # GitHub-Actions 에서 설정한 값을 firebase.json 파일에 쓰기
+#          echo "${{ secrets.FIREBASE }}" >> ./firebase.json
+#        shell: bash
 
       - name: Check resources directory
         run: |
