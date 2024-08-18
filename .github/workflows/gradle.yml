@@ -37,19 +37,29 @@ jobs:
 
 #      - name: make firebase.json
 #        run: |
-#          cd ./src/main/resources
-#          touch ./firebase.json
-#          echo "${{ secrets.FIREBASE }}" | sed 's/\\n/\n/g' > ./firebase.json
-#        shell: bash
 #
-#      - name: Check resources directory
-#        run: |
-#          ls -l src/main/resources
-
-#      - name: Check firebase.json contents
-#        run: |
-#          cat ./src/main/resources/firebase.json
+#          cd ./src/main/resources
+#
+#          # firebase.json 파일 생성
+#          touch ./firebase.json
+#
+#          # GitHub-Actions 에서 설정한 값을 firebase.json 파일에 쓰기
+#          echo "${{ secrets.FIREBASE }}" >> ./firebase.json
 #        shell: bash
+
+      - name: make firebase.json
+        run: |
+
+          # firebase.json 파일 생성
+          touch ./firebase.json
+
+          # GitHub-Actions 에서 설정한 값을 firebase.json 파일에 쓰기
+          echo "${{ secrets.FIREBASE }}" >> ./firebase.json
+        shell: bash
+
+      - name: Check resources directory
+        run: |
+          ls -l src/main/resources
 
       - name: Build with Gradle
         run: |
