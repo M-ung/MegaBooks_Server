@@ -20,13 +20,6 @@ public class FirebaseConfig {
     public void initialize() {
         try {
             String filePath = "src/main/resources/firebase.json";
-            File file = new File(filePath);
-
-            if (file.exists()) {
-                System.out.println("Firebase config file found at: " + file.getAbsolutePath());
-            } else {
-                System.out.println("Firebase config file not found!");
-            }
 
             FileInputStream serviceAccount = new FileInputStream(filePath);
             FirebaseOptions options = new FirebaseOptions.Builder()
