@@ -35,16 +35,16 @@ jobs:
           echo "${{ secrets.APPLICATION }}" >> ./application.yml
         shell: bash
 
-      - name: make megabooksFirebase.json
+      - name: make firebase.json
         run: |
 
           cd ./src/main/resources
 
-          # megabooksFirebase.json 파일 생성
-          touch ./megabooksFirebase.json
+          # firebase.json 파일 생성
+          touch ./firebase.json
 
-          # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
-          echo "${{ secrets.FIREBASE }}" >> ./megabooksFirebase.json
+          # GitHub-Actions 에서 설정한 값을 firebase.json 파일에 쓰기
+          echo "${{ secrets.FIREBASE }}" >> ./firebase.json
         shell: bash
 
       - name: Build with Gradle

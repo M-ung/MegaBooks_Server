@@ -19,7 +19,7 @@ public class FirebaseConfig {
     public void initialize() {
         try {
             FileInputStream serviceAccount =
-                    new FileInputStream("src/main/resources/megabooksFirebase.json");
+                    new FileInputStream("src/main/resources/firebase.json");
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
