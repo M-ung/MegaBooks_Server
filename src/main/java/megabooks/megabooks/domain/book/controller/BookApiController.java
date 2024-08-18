@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/member/book")
 @Tag(name = "Book", description = "책 관련 API")
@@ -21,13 +23,13 @@ public class BookApiController {
     private final BookService bookService;
     @GetMapping("/findAllByMonthlyBest")
     @Operation(summary = "책 월간 베스트 전체 조회", description = "책 월간 베스트 전체 조회합니다.")
-    public CustomResponse<Page<BookResponseDTO.BookFindOneDTO>> findAllByMonthlyBest(Pageable pageable) {
+    public CustomResponse<List<BookResponseDTO.BookFindOneDTO>> findAllByMonthlyBest(Pageable pageable) {
         return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findAllByMonthlyBest(pageable));
     }
 
     @GetMapping("/findAllByWeeklyBest")
     @Operation(summary = "책 주간 베스트 전체 조회", description = "책 주간 베스트 전체 조회합니다.")
-    public CustomResponse<Page<BookResponseDTO.BookFindOneDTO>> findAllByWeeklyBest(Pageable pageable) {
+    public CustomResponse<List<BookResponseDTO.BookFindOneDTO>> findAllByWeeklyBest(Pageable pageable) {
         return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findAllByWeeklyBest(pageable));
     }
 
@@ -39,7 +41,7 @@ public class BookApiController {
 
     @GetMapping("/findAllByKeyword")
     @Operation(summary = "책 키워드 전체 조회", description = "책 키워드 전체 조회합니다.")
-    public CustomResponse<Page<BookResponseDTO.BookFindOneDTO>> findAllByKeyword(@RequestParam(value = "keyword", required = false) String keyword, Pageable pageable) {
+    public CustomResponse<List<BookResponseDTO.BookFindOneDTO>> findAllByKeyword(@RequestParam(value = "keyword", required = false) String keyword, Pageable pageable) {
         return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findAllByKeyword(keyword, pageable));
     }
 }

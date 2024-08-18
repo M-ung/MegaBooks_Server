@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/member/likes")
 @Tag(name = "Likes", description = "좋아요 관련 API")
@@ -24,7 +26,7 @@ public class LikesApiController {
 
     @GetMapping("/findLikesAllByUserId")
     @Operation(summary = "관심 등록 전체 조회", description = "관심 등록 전체 조회합니다.")
-    public CustomResponse<Page<BookResponseDTO.BookFindOneDTO>> findLikesAllByUserId(Pageable pageable) {
+    public CustomResponse<List<BookResponseDTO.BookFindOneDTO>> findLikesAllByUserId(Pageable pageable) {
         return CustomResponse.SUCCESS(HttpStatus.OK.value(), likesService.findLikesAllByUserId(SecurityUtil.getCurrentId(), pageable));
     }
 

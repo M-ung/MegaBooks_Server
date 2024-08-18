@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class MyBookServiceImpl implements MyBookService {
     private final MyBookMapper myBookMapper;
 
     @Override
-    public Page<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserId(Long userId, Pageable pageable) {
+    public List<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserId(Long userId, Pageable pageable) {
         return myBookRepository.findAllByUserIdWithPageable(userId, pageable);
     }
 

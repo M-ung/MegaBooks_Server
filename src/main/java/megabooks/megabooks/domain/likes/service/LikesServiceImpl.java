@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -29,7 +30,7 @@ public class LikesServiceImpl implements LikesService {
     private final BookService bookService;
     private final LikesMapper likesMapper;
     @Override
-    public Page<BookResponseDTO.BookFindOneDTO> findLikesAllByUserId(Long userId, Pageable pageable) {
+    public List<BookResponseDTO.BookFindOneDTO> findLikesAllByUserId(Long userId, Pageable pageable) {
         return likesRepository.findLikesAllByUserIdWithPageable(userId, pageable);
     }
 

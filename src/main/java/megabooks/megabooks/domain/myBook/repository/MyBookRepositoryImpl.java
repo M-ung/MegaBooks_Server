@@ -26,7 +26,7 @@ public class MyBookRepositoryImpl implements MyBookRepositoryCustom {
     }
 
     @Override
-    public Page<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserIdWithPageable(Long userId, Pageable pageable) {
+    public List<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserIdWithPageable(Long userId, Pageable pageable) {
         List<MyBookResponseDTO.MyBookFindOneDTO> result = queryFactory.select(Projections.constructor(MyBookResponseDTO.MyBookFindOneDTO.class,
                         book.bookId,
                         myBook.myBookId,
@@ -47,12 +47,6 @@ public class MyBookRepositoryImpl implements MyBookRepositoryCustom {
                 .limit(pageable.getPageSize())
                 .fetch();
 
-        long total = queryFactory
-                .select(myBook.count())
-                .from(myBook)
-                .where(myBook.user.userId.eq(userId))
-                .fetchOne();
-
-        return new PageImpl<>(result, pageable, total);
+        return result;
     }
 }

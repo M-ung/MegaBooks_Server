@@ -22,7 +22,7 @@ public class LikesRepositoryImpl implements LikesRepositoryCustom {
     }
 
     @Override
-    public Page<BookResponseDTO.BookFindOneDTO> findLikesAllByUserIdWithPageable(Long userId, Pageable pageable) {
+    public List<BookResponseDTO.BookFindOneDTO> findLikesAllByUserIdWithPageable(Long userId, Pageable pageable) {
         List<BookResponseDTO.BookFindOneDTO> results = queryFactory.select(Projections.constructor(BookResponseDTO.BookFindOneDTO.class,
                         book.bookId,
                         book.bookTitle,
@@ -39,11 +39,6 @@ public class LikesRepositoryImpl implements LikesRepositoryCustom {
                 .limit(pageable.getPageSize())
                 .fetch();
 
-        long total = queryFactory
-                .selectFrom(likes)
-                .where(likes.user.userId.eq(userId))
-                .fetchCount();
-
-        return new PageImpl<>(results, pageable, total);
+        return results;
     }
 }

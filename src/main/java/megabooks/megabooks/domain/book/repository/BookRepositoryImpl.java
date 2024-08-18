@@ -24,7 +24,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
         this.queryFactory = new JPAQueryFactory(em);
     }
 
-    private Page<BookResponseDTO.BookFindOneDTO> findAllByBestWithPageable(Pageable pageable, LocalDateTime date) {
+    private List<BookResponseDTO.BookFindOneDTO> findAllByBestWithPageable(Pageable pageable, LocalDateTime date) {
         List<BookResponseDTO.BookFindOneDTO> results = queryFactory.select(Projections.constructor(BookResponseDTO.BookFindOneDTO.class,
                         book.bookId,
                         book.bookTitle,
@@ -44,25 +44,17 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
                 .limit(pageable.getPageSize())
                 .fetch();
 
-        long total = queryFactory
-                .selectFrom(orderBook)
-                .join(orderBook.book, book)
-                .join(orderBook.orders, orders)
-                .where(orders.orderDate.after(date))
-                .groupBy(book.bookId)
-                .fetchCount();
-
-        return new PageImpl<>(results, pageable, total);
+        return results;
     }
 
     @Override
-    public Page<BookResponseDTO.BookFindOneDTO> findAllByMonthlyBestWithPageable(Pageable pageable) {
+    public List<BookResponseDTO.BookFindOneDTO> findAllByMonthlyBestWithPageable(Pageable pageable) {
         LocalDateTime oneMonthAgo = LocalDateTime.now().minusDays(30);
         return findAllByBestWithPageable(pageable, oneMonthAgo);
     }
 
     @Override
-    public Page<BookResponseDTO.BookFindOneDTO> findAllByWeeklyBestWithPageable(Pageable pageable) {
+    public List<BookResponseDTO.BookFindOneDTO> findAllByWeeklyBestWithPageable(Pageable pageable) {
         LocalDateTime oneWeekAgo = LocalDateTime.now().minusDays(7);
         return findAllByBestWithPageable(pageable, oneWeekAgo);
     }
@@ -88,7 +80,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
     }
 
     @Override
-    public Page<BookResponseDTO.BookFindOneDTO> findAllByKeywordWithPageable(String keyword, Pageable pageable) {
+    public List<BookResponseDTO.BookFindOneDTO> findAllByKeywordWithPageable(String keyword, Pageable pageable) {
         List<BookResponseDTO.BookFindOneDTO> results = queryFactory.select(Projections.constructor(BookResponseDTO.BookFindOneDTO.class,
                         book.bookId,
                         book.bookTitle,
@@ -105,15 +97,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
-
-        long total = queryFactory
-                .selectFrom(book)
-                .where(bookTitleContains(keyword)
-                        .or(bookAuthorContains(keyword))
-                        .or(bookPublisherContains(keyword)))
-                .fetchCount();
-
-        return new PageImpl<>(results, pageable, total);
+        return results;
     }
 
     private BooleanExpression bookTitleContains(String keyword) {

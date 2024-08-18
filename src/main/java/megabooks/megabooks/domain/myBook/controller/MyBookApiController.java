@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/member/myBook")
 @Tag(name = "MyBook", description = "내 서재 관련 API")
@@ -25,7 +27,7 @@ public class MyBookApiController {
 
     @GetMapping("/findAllByUserId")
     @Operation(summary = "내 서재 전체 조회", description = "내 서재 전체 조회합니다.")
-    public CustomResponse<Page<MyBookResponseDTO.MyBookFindOneDTO>> findAllByUserId(Pageable pageable) {
+    public CustomResponse<List<MyBookResponseDTO.MyBookFindOneDTO>> findAllByUserId(Pageable pageable) {
         return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), myBookService.findAllByUserId(SecurityUtil.getCurrentId(), pageable));
     }
 }

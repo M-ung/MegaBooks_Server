@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static megabooks.megabooks.global.exception.ErrorCode.NOT_FOUND_BOOK;
 
 @Service
@@ -20,12 +22,12 @@ import static megabooks.megabooks.global.exception.ErrorCode.NOT_FOUND_BOOK;
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     @Override
-    public Page<BookResponseDTO.BookFindOneDTO> findAllByMonthlyBest(Pageable pageable) {
+    public List<BookResponseDTO.BookFindOneDTO> findAllByMonthlyBest(Pageable pageable) {
         return bookRepository.findAllByMonthlyBestWithPageable(pageable);
     }
 
     @Override
-    public Page<BookResponseDTO.BookFindOneDTO> findAllByWeeklyBest(Pageable pageable) {
+    public List<BookResponseDTO.BookFindOneDTO> findAllByWeeklyBest(Pageable pageable) {
         return bookRepository.findAllByWeeklyBestWithPageable(pageable);
     }
 
@@ -35,7 +37,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<BookResponseDTO.BookFindOneDTO> findAllByKeyword(String keyword, Pageable pageable) {
+    public List<BookResponseDTO.BookFindOneDTO> findAllByKeyword(String keyword, Pageable pageable) {
         return bookRepository.findAllByKeywordWithPageable(keyword, pageable);
     }
 
