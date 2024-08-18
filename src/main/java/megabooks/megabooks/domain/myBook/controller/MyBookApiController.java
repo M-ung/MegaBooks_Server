@@ -28,6 +28,6 @@ public class MyBookApiController {
     @GetMapping("/findAllByUserId")
     @Operation(summary = "내 서재 전체 조회", description = "내 서재 전체 조회합니다.")
     public CustomResponse<List<MyBookResponseDTO.MyBookFindOneDTO>> findAllByUserId(Pageable pageable) {
-        return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), myBookService.findAllByUserId(SecurityUtil.getCurrentId(), pageable));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), myBookService.findAllByUserId(SecurityUtil.getCurrentId(), pageable));
     }
 }

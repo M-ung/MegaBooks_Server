@@ -24,24 +24,24 @@ public class BookApiController {
     @GetMapping("/findAllByMonthlyBest")
     @Operation(summary = "책 월간 베스트 전체 조회", description = "책 월간 베스트 전체 조회합니다.")
     public CustomResponse<List<BookResponseDTO.BookFindOneDTO>> findAllByMonthlyBest(Pageable pageable) {
-        return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findAllByMonthlyBest(pageable));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), bookService.findAllByMonthlyBest(pageable));
     }
 
     @GetMapping("/findAllByWeeklyBest")
     @Operation(summary = "책 주간 베스트 전체 조회", description = "책 주간 베스트 전체 조회합니다.")
     public CustomResponse<List<BookResponseDTO.BookFindOneDTO>> findAllByWeeklyBest(Pageable pageable) {
-        return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findAllByWeeklyBest(pageable));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), bookService.findAllByWeeklyBest(pageable));
     }
 
     @GetMapping("/findDetail/{bookId}")
     @Operation(summary = "책 상세 조회", description = "책 상세 조회합니다.")
     public CustomResponse<BookResponseDTO.BookFindDetailDTO> findDetailByBookId(@PathVariable("bookId") Long bookId) {
-        return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findDetailByBookId(bookId));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), bookService.findDetailByBookId(bookId));
     }
 
     @GetMapping("/findAllByKeyword")
     @Operation(summary = "책 키워드 전체 조회", description = "책 키워드 전체 조회합니다.")
     public CustomResponse<List<BookResponseDTO.BookFindOneDTO>> findAllByKeyword(@RequestParam(value = "keyword", required = false) String keyword, Pageable pageable) {
-        return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), bookService.findAllByKeyword(keyword, pageable));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), bookService.findAllByKeyword(keyword, pageable));
     }
 }

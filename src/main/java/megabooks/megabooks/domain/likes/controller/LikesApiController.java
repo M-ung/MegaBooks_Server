@@ -40,6 +40,6 @@ public class LikesApiController {
     @GetMapping("/check/{bookId}")
     @Operation(summary = "좋아요한 책인지 확인", description = "좋아요한 책인지 확인합니다.")
     public CustomResponse<LikesResponseDTO.LikesCheckDTO> check(@PathVariable("bookId") Long bookId) {
-        return CustomResponse.SUCCESS(HttpStatus.CREATED.value(), likesService.check(SecurityUtil.getCurrentId(), bookId));
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), likesService.check(SecurityUtil.getCurrentId(), bookId));
     }
 }
