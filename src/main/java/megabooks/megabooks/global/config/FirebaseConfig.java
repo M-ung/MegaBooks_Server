@@ -24,7 +24,7 @@ public class FirebaseConfig {
             FileInputStream serviceAccount = new FileInputStream(filePath);
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://megabooks-3d7bb-default-rtdb.firebaseio.com//")
+                    .setDatabaseUrl("https://megabooks-3d7bb-default-rtdb.firebaseio.com/")
                     .build();
 
             FirebaseApp.initializeApp(options);

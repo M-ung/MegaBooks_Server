@@ -26,9 +26,9 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 src/main/resources/application.yml
-src/main/resources/firebase.json
+#src/main/resources/firebase.json
 applicaiton.yml
-firebase.json
+#firebase.json
 .github/workflows/gradle.yml
 src/test
 ### NetBeans ###
