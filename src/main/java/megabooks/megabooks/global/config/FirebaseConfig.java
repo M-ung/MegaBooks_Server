@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.global.firebase.FcmProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.ResourceUtils;
 
 import java.io.FileInputStream;
@@ -23,26 +25,21 @@ import java.io.InputStream;
 @Slf4j
 public class FirebaseConfig {
     private final FcmProperties fcmProperties;
+    private final ResourceLoader resourceLoader;
+
     @Bean
     public FirebaseApp firebaseApp() {
         try {
             log.info("Initializing FirebaseApp with key path: " + fcmProperties.adminKeyPath());
             if (FirebaseApp.getApps().isEmpty()) {
-                InputStream serviceAccount = new FileInputStream(
-                        ResourceUtils.getFile(fcmProperties.adminKeyPath())
-                );
-
-                if (serviceAccount == null) {
-                    log.error("Service account file not found at path: " + fcmProperties.adminKeyPath());
-                    throw new IOException("Service account file not found");
+                Resource resource = resourceLoader.getResource(fcmProperties.adminKeyPath());
+                try (InputStream serviceAccount = resource.getInputStream()) {
+                    FirebaseOptions options = FirebaseOptions.builder()
+                            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                            .setDatabaseUrl(fcmProperties.credentialScope())
+                            .build();
+                    return FirebaseApp.initializeApp(options);
                 }
-
-                FirebaseOptions options = FirebaseOptions.builder()
-                        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                        .setDatabaseUrl(fcmProperties.credentialScope())
-                        .build();
-
-                return FirebaseApp.initializeApp(options);
             } else {
                 log.info("FirebaseApp already initialized");
                 return FirebaseApp.getInstance();
@@ -52,9 +49,4 @@ public class FirebaseConfig {
             throw new IllegalStateException("Failed to initialize FirebaseApp", e);
         }
     }
-
-//    @Bean
-//    public DatabaseReference firebaseDatabase() {
-//        return FirebaseDatabase.getInstance().getReference();
-//    }
 }
