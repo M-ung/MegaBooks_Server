@@ -17,7 +17,6 @@ import java.util.concurrent.ExecutionException;
 public class FirebaseServiceImpl implements FirebaseService {
     private final DatabaseReference databaseReference;
     private final FirebaseMapper firebaseMapper;
-
     @Override
     @Transactional
     public FirebaseResponseDTO.FirebaseFindSummaryDetailDTO findDetailSummary(String bookTitle, String summary) {
