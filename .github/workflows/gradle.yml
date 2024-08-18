@@ -38,7 +38,6 @@ jobs:
       - name: make megabooksFirebase.json
         run: |
 
-          mkdir -p ./src/main/resources
           cd ./src/main/resources
 
           # megabooksFirebase.json 파일 생성
