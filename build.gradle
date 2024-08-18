@@ -80,6 +80,9 @@ dependencies {
 
     // mapper
     implementation 'org.modelmapper:modelmapper:2.4.4'
+
+    // firebase
+    implementation 'com.google.firebase:firebase-admin:9.2.0'
 }
 
 tasks.named('test') {
