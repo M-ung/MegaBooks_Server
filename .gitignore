@@ -26,12 +26,11 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 src/main/resources/application.yml
-src/main/resources/megabooks-3d7bb-firebase-adminsdk-jh3n0-bc41877612.json
+src/main/resources/megabooksFirebase.json
 applicaiton.yml
-megabooks-3d7bb-firebase-adminsdk-jh3n0-bc41877612.json
+megabooksFirebase.json
 .github/workflows/gradle.yml
 src/test
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
