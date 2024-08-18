@@ -32,6 +32,7 @@ public class FirebaseConfig {
         }
     }
 
+
     @Bean
     public DatabaseReference firebaseDatabase() {
         return FirebaseDatabase.getInstance().getReference();
