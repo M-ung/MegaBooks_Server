@@ -15,11 +15,13 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 @RequiredArgsConstructor
 public class FirebaseServiceImpl implements FirebaseService {
-    private final DatabaseReference databaseReference;
+//    private final DatabaseReference databaseReference;
     private final FirebaseMapper firebaseMapper;
     @Override
     @Transactional
     public FirebaseResponseDTO.FirebaseFindSummaryDetailDTO findDetailSummary(String bookTitle, String summary) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
         CompletableFuture<FirebaseResponseDTO.FirebaseFindSummaryDetailDTO> future = new CompletableFuture<>();
         DatabaseReference summariesRef = databaseReference.child("summaries").child(bookTitle);
         Query query = summariesRef.orderByChild("summary").equalTo(summary);
