@@ -23,7 +23,6 @@ public class FirebaseServiceImpl implements FirebaseService {
     public FirebaseResponseDTO.FirebaseFindSummaryDetailDTO findDetailSummary(String bookTitle, String summary) {
         CompletableFuture<FirebaseResponseDTO.FirebaseFindSummaryDetailDTO> future = new CompletableFuture<>();
         DatabaseReference summariesRef = databaseReference.child("summaries").child(bookTitle);
-
         Query query = summariesRef.orderByChild("summary").equalTo(summary);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
