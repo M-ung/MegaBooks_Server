@@ -1,6 +1,7 @@
 package megabooks.megabooks.global.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import megabooks.megabooks.global.exception.book.BookContentNotFoundException;
 import megabooks.megabooks.global.exception.book.BookNotFoundException;
 import megabooks.megabooks.global.exception.order.OrderDuplicationException;
 import megabooks.megabooks.global.exception.user.UserEmailDuplicationException;
@@ -64,6 +65,16 @@ public class ExceptionCustomAdvice {
         return new ResponseEntity<>(
                 new ApiErrorResponse(
                         ErrorCode.NOT_FOUND_BOOK.getStatus(),
+                        ex.getMessage()),
+                HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BookContentNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleException(BookContentNotFoundException ex) {
+        log.debug(ex.getMessage(), ex);
+        return new ResponseEntity<>(
+                new ApiErrorResponse(
+                        ErrorCode.NOT_FOUND_BOOK_CONTENT.getStatus(),
                         ex.getMessage()),
                 HttpStatus.NOT_FOUND);
     }

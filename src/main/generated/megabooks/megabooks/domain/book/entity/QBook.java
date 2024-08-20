@@ -19,11 +19,7 @@ public class QBook extends EntityPathBase<Book> {
 
     public static final QBook book = new QBook("book");
 
-    public final megabooks.megabooks.global.entity.QBaseEntity _super = new megabooks.megabooks.global.entity.QBaseEntity(this);
-
     public final StringPath bookAuthor = createString("bookAuthor");
-
-    public final StringPath bookContent = createString("bookContent");
 
     public final DatePath<java.time.LocalDate> bookDate = createDate("bookDate", java.time.LocalDate.class);
 
@@ -43,9 +39,6 @@ public class QBook extends EntityPathBase<Book> {
 
     public final StringPath bookTitle = createString("bookTitle");
 
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> createdTime = _super.createdTime;
-
     public final NumberPath<Integer> downloads = createNumber("downloads", Integer.class);
 
     public final NumberPath<Integer> likes = createNumber("likes", Integer.class);
@@ -53,9 +46,6 @@ public class QBook extends EntityPathBase<Book> {
     public final NumberPath<Double> stars = createNumber("stars", Double.class);
 
     public final NumberPath<Integer> totalPage = createNumber("totalPage", Integer.class);
-
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;
 
     public QBook(String variable) {
         super(Book.class, forVariable(variable));

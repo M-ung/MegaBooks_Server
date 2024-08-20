@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Book extends BaseEntity {
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
@@ -19,14 +19,15 @@ public class Book extends BaseEntity {
     private String bookTitle;
     private String bookAuthor;
     private String bookPublisher;
-    private String bookContent;
     private int bookPrice;
     private int totalPage;
     private String bookImgUrl;
-    private BookStatus bookStatus;
 
     @Enumerated(value = EnumType.STRING)
+    private BookStatus bookStatus;
+    @Enumerated(value = EnumType.STRING)
     private BookGenre bookGenre;
+
     private double stars;
     private int likes;
     private LocalDate bookDate;
@@ -40,4 +41,6 @@ public class Book extends BaseEntity {
     public void plusLikes() {
         this.likes++;
     }
+
+    public void plusDownloads() { this.downloads++; }
 }

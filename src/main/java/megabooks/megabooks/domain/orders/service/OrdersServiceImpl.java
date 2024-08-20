@@ -44,6 +44,8 @@ public class OrdersServiceImpl implements OrdersService {
 
         myBookService.create(findUser, findBook); // 나의 책 생성
 
+        findBook.plusDownloads(); // 책 다운로드 수 증가
+
         return ordersMapper.toOrderFindDetailDTO(findUser, orderBook);
     }
 

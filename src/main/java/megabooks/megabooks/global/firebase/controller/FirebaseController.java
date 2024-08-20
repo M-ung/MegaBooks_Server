@@ -7,10 +7,7 @@ import megabooks.megabooks.global.firebase.dto.FirebaseResponseDTO;
 import megabooks.megabooks.global.firebase.service.FirebaseService;
 import megabooks.megabooks.global.reponse.CustomResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/member/firebase")
@@ -20,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class FirebaseController {
     private final FirebaseService firebaseService;
 
-    @GetMapping("/getSummary")
-    public CustomResponse<FirebaseResponseDTO.FirebaseFindSummaryDetailDTO> getSummary(@RequestParam("bookTitle") String bookTitle, @RequestParam("summary") String summary) {
-        return CustomResponse.SUCCESS(HttpStatus.OK.value(), firebaseService.findDetailSummary(bookTitle, summary));
+    @GetMapping("/findBookContentByBookId/{bookId}")
+    public CustomResponse<FirebaseResponseDTO.FirebaseFindBookContentDTO> findBookContentByBookId(@PathVariable("bookId") Long bookId) {
+        return CustomResponse.SUCCESS(HttpStatus.OK.value(), firebaseService.findBookContentByBookId(bookId));
     }
 }

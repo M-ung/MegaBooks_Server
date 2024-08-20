@@ -16,6 +16,7 @@ public enum ErrorCode {
     NOT_FOUND_USER(404,"찾을 수 없는 회원입니다."),
     NOT_FOUND_ORDER(404,"찾을 수 없는 주문입니다."),
     NOT_FOUND_BOOK(404,"찾을 수 없는 책입니다."),
+    NOT_FOUND_BOOK_CONTENT(404,"찾을 수 없는 책 내용입니다."),
     NOT_FOUND_USER_PROFILE(404,"찾을 수 없는 프로필입니다."),
     WRONG_TOKEN(401,  "잘못된 토큰입니다."),
     INVALID_PASSWORD_USER(401,  "비밀번호가 틀렸습니다."),
