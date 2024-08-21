@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/v1/member/user/login", "/api/v1/member/user/join").permitAll()
+                                .requestMatchers( "/api/v1/member/myBook/**").permitAll()
                                 // 스웨거
                                 .requestMatchers( "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                                 // GET (User)

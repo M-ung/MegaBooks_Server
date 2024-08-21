@@ -28,6 +28,6 @@ public class MyBook extends BaseEntity {
     private Book book;
 
     public void updateMyBookProcess(MyBookRequestDTO.MyBookProcessDTO myBookProcessDTO) {
-        this.myBookProcess = (myBookProcessDTO.getNowPage()/myBookProcessDTO.getTotalPage())*100;
+        this.myBookProcess = ((double) myBookProcessDTO.getNowPage() / myBookProcessDTO.getTotalPage()) * 100;
     }
 }

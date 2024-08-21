@@ -9,7 +9,6 @@ import megabooks.megabooks.domain.likes.dto.LikesResponseDTO;
 import megabooks.megabooks.domain.likes.service.LikesService;
 import megabooks.megabooks.global.reponse.CustomResponse;
 import megabooks.megabooks.global.security.util.SecurityUtil;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

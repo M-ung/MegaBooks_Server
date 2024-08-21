@@ -29,7 +29,6 @@ import static megabooks.megabooks.global.exception.ErrorCode.NOT_FOUND_MY_BOOK;
 public class MyBookServiceImpl implements MyBookService {
     private final MyBookRepository myBookRepository;
     private final MyBookMapper myBookMapper;
-    private final BookService bookService;
 
     @Override
     public List<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserId(Long userId, Pageable pageable) {
