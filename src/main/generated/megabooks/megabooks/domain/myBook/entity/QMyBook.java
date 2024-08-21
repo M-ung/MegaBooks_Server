@@ -31,7 +31,7 @@ public class QMyBook extends EntityPathBase<MyBook> {
 
     public final NumberPath<Long> myBookId = createNumber("myBookId", Long.class);
 
-    public final NumberPath<Integer> myBookProcess = createNumber("myBookProcess", Integer.class);
+    public final NumberPath<Double> myBookProcess = createNumber("myBookProcess", Double.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedTime = _super.updatedTime;

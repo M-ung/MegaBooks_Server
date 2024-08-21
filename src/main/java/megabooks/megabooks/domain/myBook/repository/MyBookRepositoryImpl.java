@@ -27,14 +27,13 @@ public class MyBookRepositoryImpl implements MyBookRepositoryCustom {
 
     @Override
     public List<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserIdWithPageable(Long userId, Pageable pageable) {
-        List<MyBookResponseDTO.MyBookFindOneDTO> result = queryFactory.select(Projections.constructor(MyBookResponseDTO.MyBookFindOneDTO.class,
+        return queryFactory.select(Projections.constructor(MyBookResponseDTO.MyBookFindOneDTO.class,
                         book.bookId,
                         myBook.myBookId,
                         book.bookTitle,
                         book.bookAuthor,
                         book.bookPublisher,
                         myBook.myBookProcess,
-                        book.totalPage,
                         book.bookImgUrl,
                         book.bookGenre,
                         book.stars
@@ -46,7 +45,5 @@ public class MyBookRepositoryImpl implements MyBookRepositoryCustom {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
-
-        return result;
     }
 }

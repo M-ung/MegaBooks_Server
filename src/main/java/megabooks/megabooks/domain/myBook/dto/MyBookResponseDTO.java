@@ -14,8 +14,7 @@ public class MyBookResponseDTO {
         private String bookTitle;
         private String bookAuthor;
         private String bookPublisher;
-        private int myBookProcess; // 현재까지 읽은 진행도
-        private int totalPage;
+        private int myBookProcess;
         private String bookImgUrl;
         private BookGenre bookGenre;
         private double stars;
