@@ -21,9 +21,6 @@ repositories {
     mavenCentral()
 }
 
-jar {
-    enabled = false
-}
 
 dependencies {
     // JPA
@@ -89,3 +86,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+//빌드 시 -plain.jar는 생성되지 않게 함.
+jar {
+    enabled = false
+}
