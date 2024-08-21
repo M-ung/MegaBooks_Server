@@ -14,7 +14,7 @@ public class MyBookResponseDTO {
         private String bookTitle;
         private String bookAuthor;
         private String bookPublisher;
-        private int myBookProcess;
+        private double myBookProcess;
         private String bookImgUrl;
         private BookGenre bookGenre;
         private double stars;

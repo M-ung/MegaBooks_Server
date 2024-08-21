@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static megabooks.megabooks.global.exception.ErrorCode.NOT_FOUND_BOOK;
 import static megabooks.megabooks.global.exception.ErrorCode.NOT_FOUND_MY_BOOK;
@@ -32,6 +33,7 @@ public class MyBookServiceImpl implements MyBookService {
 
     @Override
     public List<MyBookResponseDTO.MyBookFindOneDTO> findAllByUserId(Long userId, Pageable pageable) {
+        System.out.println("userId = " + userId);
         return myBookRepository.findAllByUserIdWithPageable(userId, pageable);
     }
 
