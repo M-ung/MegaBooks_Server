@@ -9,11 +9,12 @@ import java.util.List;
 @Component
 public class FirebaseMapper {
     private static final ModelMapper modelMapper = new ModelMapper();
-    public FirebaseResponseDTO.FirebaseFindSentenceDTO toFirebaseFindSentenceDTO(String sentence, String imageUrl, String audioUrl) {
+    public FirebaseResponseDTO.FirebaseFindSentenceDTO toFirebaseFindSentenceDTO(String sentence, String imageUrl, String audioUrl, Boolean isAir) {
         return FirebaseResponseDTO.FirebaseFindSentenceDTO.builder()
                 .sentence(sentence)
                 .imageUrl(imageUrl)
                 .audioUrl(audioUrl)
+                .isAir(isAir)
                 .build();
     }
 
