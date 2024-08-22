@@ -55,7 +55,7 @@
 ## 📌 아키텍처
 <img width="880" alt="스크린샷 2024-08-22 오후 1 21 54" src="https://github.com/user-attachments/assets/3f6e0620-a43e-4077-befb-ad7643e6697d">
 
-## 📌 API 명세서
+## 📌 스웨거 주소
 http://43.203.91.106:8080/swagger-ui/index.html#
 
 ## 📌 참고 자료
