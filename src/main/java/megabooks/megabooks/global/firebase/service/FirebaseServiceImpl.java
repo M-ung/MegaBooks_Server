@@ -45,8 +45,9 @@ public class FirebaseServiceImpl implements FirebaseService {
                         String sentence = sentenceSnapshot.child("sentence").getValue(String.class);
                         String imageUrl = sentenceSnapshot.child("image_url").getValue(String.class);
                         String audioUrl = sentenceSnapshot.child("audio_url").getValue(String.class);
+                        Boolean isAir = sentenceSnapshot.child("is_air").getValue(Boolean.class);
 
-                        sentenceDTOList.add(firebaseMapper.toFirebaseFindSentenceDTO(sentence, imageUrl, audioUrl));
+                        sentenceDTOList.add(firebaseMapper.toFirebaseFindSentenceDTO(sentence, imageUrl, audioUrl, isAir));
                     }
 
                     future.complete(firebaseMapper.toFirebaseFindBookContentDTO(bookId, findBookTitle, sentenceDTOList));

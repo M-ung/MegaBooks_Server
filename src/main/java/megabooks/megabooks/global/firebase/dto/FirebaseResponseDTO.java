@@ -20,5 +20,6 @@ public class FirebaseResponseDTO {
         private String sentence;
         private String imageUrl;
         private String audioUrl;
+        private Boolean isAir;
     }
 }

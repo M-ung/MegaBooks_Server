@@ -35,28 +35,6 @@ jobs:
           echo "${{ secrets.APPLICATION }}" >> ./application.yml
         shell: bash
 
-#      - name: make firebase.json
-#        run: |
-#
-#          cd ./src/main/resources
-#
-#          # firebase.json 파일 생성
-#          touch ./firebase.json
-#
-#          # GitHub-Actions 에서 설정한 값을 firebase.json 파일에 쓰기
-#          echo "${{ secrets.FIREBASE }}" >> ./firebase.json
-#        shell: bash
-
-#      - name: make firebase.json
-#        run: |
-#
-#          # firebase.json 파일 생성
-#          touch ./firebase.json
-#
-#          # GitHub-Actions 에서 설정한 값을 firebase.json 파일에 쓰기
-#          echo "${{ secrets.FIREBASE }}" >> ./firebase.json
-#        shell: bash
-
       - name: Check resources directory
         run: |
           ls -l src/main/resources
@@ -73,7 +51,7 @@ jobs:
           sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           sudo docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }} . 
           sudo docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-
+      ## docker build --platform linux/amd64 -t mungzogi/mung .
       ## docker compose up
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -87,3 +65,4 @@ jobs:
             sudo docker rmi ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
             sudo docker run -p 8080:8080 -d --net my-network --name=${{ secrets.DOCKER_REPO }} ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
+      ## sudo docker run -p 8080:8080 -d --net my-network --name=mung mungzogi/mung
