@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ "staging" ]
+    branches: [ "empty" ]
 
 permissions:
   contents: read
