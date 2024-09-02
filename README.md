@@ -35,8 +35,8 @@
 - `branch 규칙`
     - 각자의 깃 닉네임을 딴 branch 명을 사용한다.
     - 예시
-        - git checkout -b feature/이슈번호-기능
-        - git checkout -b feature/12-UserAPI
+        - git checkout -b feature/기능
+        - git checkout -b feature/user
 
 <br>
 
@@ -52,8 +52,8 @@
         - UserResponseDTO
         - PostRequestDTO
 
-## 📌 아키텍처
-<img width="880" alt="스크린샷 2024-08-22 오후 1 21 54" src="https://github.com/user-attachments/assets/3f6e0620-a43e-4077-befb-ad7643e6697d">
+## 📌 CI/CD 파이프라인 및 아키텍처
+<img width="661" alt="스크린샷 2024-09-02 오후 10 46 32" src="https://github.com/user-attachments/assets/9acca76c-6ba6-482a-b9ca-528bce707f36">
 
 ## 📌 스웨거 주소
 http://43.203.91.106:8080/swagger-ui/index.html#
