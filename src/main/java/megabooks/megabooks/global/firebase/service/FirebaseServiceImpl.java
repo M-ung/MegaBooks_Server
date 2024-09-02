@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import megabooks.megabooks.domain.book.entity.Book;
 import megabooks.megabooks.domain.book.service.BookService;
-import megabooks.megabooks.global.exception.ErrorCode;
 import megabooks.megabooks.global.exception.book.BookContentNotFoundException;
 import megabooks.megabooks.global.firebase.dto.FirebaseResponseDTO;
 import megabooks.megabooks.global.firebase.mapper.FirebaseMapper;
