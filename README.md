@@ -35,11 +35,15 @@
 
 <br>
 
-## 🎥 시연 영상
-![GIFMaker_me](https://github.com/user-attachments/assets/2a61f871-a1ca-402a-98a2-3643112e5b53)
+## 🎥 시연 영상(Youtube 링크 🔗)
+https://www.youtube.com/watch?v=gfNkmmNcwHU
+
+<br>
 
 ## 🕰️ 개발 기간
 * 24.02.15 - 2024.10.30
+
+<br>
 
 ## ⚙️ 개발 환경
 - `Java 17`
@@ -48,6 +52,8 @@
 - **Database** : MySQL
 - **ORM** : Hibernate (Spring Data JPA 사용)
 
+<br>
+
 ## 🧑‍🤝‍🧑 맴버구성
 <p>
     <a href="https://github.com/M-ung">
@@ -55,8 +61,12 @@
     </a>
 </p>
 
+<br>
+
 ## 📌 CI/CD 파이프라인 및 아키텍처
 <img width="661" alt="스크린샷 2024-09-02 오후 10 46 32" width="50%">
+
+<br>
 
 ## 📝 규칙
 - `커밋 컨벤션`
@@ -67,15 +77,12 @@
     - Refactor: 코드 리팩토링
     - Test: 테스트 코드, 리팩토링 테스트 코드 추가
     - Chore: 빌드 업무 수정, 패키지 매니저 수정
-<br>
 
 - `branch 규칙`
     - 각자의 깃 닉네임을 딴 branch 명을 사용한다.
     - 예시
         - git checkout -b feature/기능
         - git checkout -b feature/user
-
-<br>
 
 - `commit message 규칙`
     - 종류: 메시지
@@ -88,6 +95,8 @@
     - 예시
         - UserResponseDTO
         - PostRequestDTO
+
+<br>
 
 ## 📌 참고 자료
 - 도커 참고 자료
